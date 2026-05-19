@@ -1,0 +1,70 @@
+
+$(function()	{
+	var activeItem = new Array();
+
+	//셀렉트박스 div 멀티
+	const label = document.querySelectorAll('.label');
+	label.forEach(function(lb){
+		lb.addEventListener('click', e => {
+			let optionList = lb.nextElementSibling;
+			let optionItems = optionList.querySelectorAll('.option_item');
+
+			clickLabel(lb, optionItems);
+		})
+	});
+	const clickLabel = (lb, optionItems) => {
+		// ****************** 추가된 부분 START
+		// 내가 아닌 다른 select 닫기 
+		label.forEach(function(itemLb){
+			if(lb !== itemLb) {
+				itemLb.parentNode.classList.remove('active')
+			}
+		})
+		// ****************** 추가된 부분 END
+
+		if(lb.parentNode.classList.contains('active')) {
+			lb.parentNode.classList.remove('active');
+			optionItems.forEach((opt) => {
+				opt.removeEventListener('click', () => {
+					handleSelect(lb, opt);
+				})
+			})
+		} else {
+			lb.parentNode.classList.add('active');
+
+			var chk = false;
+			$.each(activeItem, function(_key, _val)	{
+				if(_val == lb)	{
+					chk = true;
+					return;
+				}
+			});
+			if(!chk)	{
+				optionItems.forEach((opt) => {
+					opt.addEventListener('click', () => {
+						handleSelect(lb, opt);
+					});
+				});
+				activeItem.push(lb);
+			}				
+		}
+	}
+	const handleSelect = (label, item) => {
+		label.innerHTML = item.textContent;
+		label.parentNode.classList.remove('active');
+		$(label).attr('value', $(item).attr('value'));
+		var execFunc = $(label).parent().attr('execFunc');
+		if(execFunc)	eval(execFunc);
+	}
+
+
+	const handleClose = e => {
+		// select 가 아닌경우 닫기 
+		if(!e.target.classList.contains('label') && !e.target.classList.contains('option_item')) {
+			label.forEach(function(lb){
+				lb.parentNode.classList.remove('active');
+			});
+		}
+	}
+	window.addEventListener('click', e => handleClose(e))
+});

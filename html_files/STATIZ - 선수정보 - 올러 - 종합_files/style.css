@@ -1,0 +1,2392 @@
+@import url(inter.css);
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url(reset.css);
+@import url(common.css?ver=0.2);
+@import url(uniform.css);
+@import url(statcast_g.css);
+@import url(tooltip.css);
+@import url(team_color.css);
+@import url(swiper-bundle.min.css);
+@font-face {
+    font-family: 'JalnanGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('../font/MontserratAlternates-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('../font/MontserratAlternates-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('../font/MontserratAlternates-Bold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+
+
+
+
+
+body {background:#f5f7f9;}
+.color_a {color: #3c8dbc !important;}
+img {max-width: 100%; }
+input::-ms-reveal,
+input::-ms-clear {
+    display : none;
+}
+
+/*드롭다운메뉴*/
+.select_div {position: relative; border-radius: .5rem; background:#fff;     border: solid .1rem #ddd;}
+.select_div .label {border:none; background:transparent; width: 100%; text-align: left; height:3rem; line-height:3rem; padding:0 3rem 0 1rem; cursor: pointer; font-size: 1.2rem;}
+.select_div .label::after {content:""; display: block; transition: all 0.6s ease; background:url(/images/select_arrow_h.svg) no-repeat center; background-size:1rem;  width:1rem; height:1rem; position: absolute; right:1rem; top:50%; margin-top:-.5rem; transform:rotate(0);}
+.select_div.active .label::after {transform:rotate(-180deg);}
+.select_div .option_list {display:none; cursor:default; position: absolute; left:0; top:3.2rem; border-radius: .5rem; background: #fff;  z-index: 10;  max-height: 23.8rem; overflow-y: auto; padding: .5rem; min-width:100%;     border: solid .1rem #ddd;}
+.select_div .option_list::-webkit-scrollbar {
+  width: 10px;
+}
+.select_div .option_list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.select_div .option_list::-webkit-scrollbar-thumb {
+  background-color: #eee;
+  border-radius: 20px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+}
+
+
+.select_div .option_list li.option_item{cursor:pointer;}
+.select_div .option_list li {width:100%; padding:1rem;  font-size: 1.2rem;}
+.select_div .option_list li:hover {background: #f6f7f9; border-radius: .5rem;}
+.select_div .option_list li + li {}
+.select_div.active .option_list {display:block;}
+
+.select_div .option_list li.title{width:100%;clear:both;margin:1rem 0 0 0;font-weight:bold; color: #e11956;}
+.select_div .option_list li.title:hover{}
+
+.select_div2 {position: relative; border-radius: .5rem; border: solid .1rem #ddd;color:#fff;}
+.select_div2 .label {border:none; background:transparent; width: 100%; text-align: left; height:3rem; line-height:3rem; padding:0 3rem 0 1rem; cursor: pointer; font-size: 1.2rem;color:#fff;}
+.select_div2 .label::after {content:""; display: block; transition: all 0.6s ease; background:url(/images/select_arrow_h.svg) no-repeat center; background-size:1rem;  width:1rem; height:1rem; position: absolute; right:1rem; top:50%; margin-top:-.5rem; transform:rotate(0);}
+.select_div2.active .label::after {transform:rotate(-180deg);}
+.select_div2 .option_list {display:none; cursor:default; position: absolute; left:0; top:3.2rem; border-radius: .5rem; background: #fff;  z-index: 10;  max-height: 23.8rem; overflow-y: auto; padding: .5rem; min-width:100%;     border: solid .1rem #ddd;}
+.select_div2 .option_list li.option_item{cursor:pointer;}
+.select_div2 .option_list li {width:100%; padding:1rem;  font-size: 1.2rem;}
+.select_div2 .option_list li:hover {background: #f6f7f9; border-radius: .5rem;}
+.select_div2 .option_list li + li {}
+.select_div2.active .option_list {display:block;}
+
+.select_div2 .option_list li.title{width:100%;clear:both;margin:1rem 0 0 0;font-weight:bold; color: #fff;}
+.select_div2 .option_list li.title:hover{background:#434343;}
+
+
+/*셀렉트박스 이미지*/
+.select_item {position: relative; border-radius: .5rem; background:#F3F3F3;}
+.select_item::after {content:""; display: block; font-size:12px; position: absolute; right:10px; top:50%; transform: translateY(-50%); }
+.select_item select {-webkit-appearance:none; /* for chrome */-moz-appearance:none; /*for firefox*/appearance:none; border:none; outline: none; background: transparent; height:3rem; line-height:3rem; padding:0 1rem; }
+.select_item select::-ms-expand{display:none;/*for IE10,11*/}
+.select_item select option { width:100%; background:##F3F3F3; border:none;}
+
+
+/*버튼*/
+.top_select_btn .btn01{position:relative; border-radius:.5rem; background:#434343; height:3rem; padding:0 1rem; cursor: pointer; margin-right:.5rem; border:none; }
+.top_select_btn .btn01.on{background: #C3C3C3; color: #fff; font-weight:bold;}
+.btn01{position:relative; border-radius:.5rem; background:#434343; height:3rem; padding:0 1rem; cursor: pointer; margin-right:.1rem; border:none; color: #fff;}
+.btn01.on {background:#C3C3C3; color:#fff;}
+
+
+/*검색영역*/
+.option_cont {position: relative; border-radius: .5rem; background: #ececec; padding:2rem 0; margin-top:1rem; display:none; width:100%;}
+.option_cont .tit {padding:0 2rem; font-weight: 600;  font-size:2rem; position: relative;}
+.option_cont::before {content: ""; display: block; width: 100%; height: .3rem; background: #e11956; position: absolute; left: 0; top:0;
+    -webkit-border-top-left-radius: .5rem;
+    -webkit-border-top-right-radius: .5rem;
+    -moz-border-radius-topleft: .5rem;
+    -moz-border-radius-topright: .5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;}
+
+.option_cont .op_box {padding:0 2rem; margin-left:-1rem; display: flex; flex-wrap: wrap;}
+.option_cont .op_box::after {content:""; display: block; clear:both;}
+.option_cont .op_box .item {display: flex; align-items: center;  margin-top:2rem; margin-left:2rem;}
+.option_cont .op_box .item span.txt {margin-right:1rem; line-height: 3rem;}
+.option_cont .op_box .item span.txt,
+.option_cont .op_box .item em {font-size: 1.2rem; }
+.option_cont .op_box .item > div {margin-right:1rem; }
+.option_cont .op_box .item .select_div {min-width:8rem;}
+.option_cont .op_box .item input[type="text"] {min-width:10rem;}
+.option_cont .op_box .item input {width:8rem; }
+.option_cont .search {text-align: right; padding:0 2rem; margin-top:2rem;}
+.option_cont .search button {border:none; outline:none; border-radius: .5rem; background: #434343; color:#fff; height:3rem; line-height:3rem; padding:0 3rem; position: relative; cursor: pointer; font-weight:600; font-size: 1.2rem;}
+.option_cont .span_txt {font-size: 1.2rem;  margin-left:1rem;}
+
+
+.op_box02 {display: flex; align-items: center; margin-top:1rem; flex-wrap: wrap;}
+.op_box02 .item {display: flex;  align-items: center; margin-bottom:2rem; gap: 1rem; flex-wrap: wrap;}
+.op_box02 .item > div {/* margin-left:1rem; */ }
+.op_box02 .item span.txt  {font-size: 1.2rem; }
+.op_box02 .item span.span_txt {font-size: 1.2rem; }
+
+
+/*시즌기록실 자동입력 텍스트*/
+.menuexpa { font-size: 1.2rem;  font-weight: 500; margin:1rem 0;}
+
+/*공지사항 텍스트*/
+.notice_txt {display:flex; align-items: center; font-size: 1.2rem;  line-height: 1.2; margin-bottom:2rem; font-weight: bold;}
+.notice_txt .noti {margin-right:1rem; }
+.notice_txt .flag {display:inline-block; padding:.5rem; border-radius: .5rem; font-size: 1.2rem; color: #fff;}
+.flag.noti {background:#008000; }
+
+
+/*텝스타일*/
+.tab_nav_area {border-radius: .5rem; overflow: hidden; margin-bottom:1rem;}
+.tab_nav_area ul {width:100%; background: #ececec; display: flex; flex-wrap: nowrap; overflow-x: auto;}
+.tab_nav_area ul::after {content:""; display:block; clear: both;}
+.tab_nav_area ul li { position: relative; flex: 0 0 auto;}
+.tab_nav_area ul li a {display:block; padding:1rem; font-size: 1.2rem;  text-align:center; }
+.tab_nav_area ul li:hover a::after{content:""; width:100%; height:.2rem; background: #e11956; position: absolute; top:0; left:0;}
+.tab_nav_area ul li.active a {color: #e11956; font-weight: 600;}
+.tab_nav_area ul li.active a::after {content:""; width:100%; height:.2rem; background: #e11956; position: absolute; top:0; left:0;}
+
+/*테이블스타일 - 스크롤 되어야하는 테이블*/
+.transverse_scroll.wscroll {width:fit-content; }
+.transverse_scroll.wscroll table {width:max-content;}
+
+.transverse_scroll.wscroll.cbox {width:100%; }
+.transverse_scroll.wscroll.cbox table {width:max-content;}
+
+
+.th_tit {display:block !important; color: #999; }
+.table_type01.fix_table {position: absolute; z-index: 10; box-shadow:none; }
+.table_type01 {border-radius: .5rem; position: relative;  background: #fff; overflow: auto;  min-height:4rem;}
+.table_type01 table {white-space: nowrap; width:100% ; border-spacing: 0;}
+.table_type01 table tr {}
+.table_type01 table th {background: #FBFBFB; color: #999;  font-size: 1.2rem; padding:1rem; vertical-align: middle; text-align: center;}
+.table_type01 table th.sorting{cursor:pointer;}
+.table_type01 table td {background:#fff; color:#000; font-size: 1.2rem; padding:.5rem .4rem; vertical-align: middle; text-align: center;  }
+.table_type01 table td a {color: #333; font-weight: 600;  display: block;}
+.table_type01 table tr:hover td {background-color: #f5f7f9 !important;}
+.table_type01 table th,
+.table_type01 table td {min-width:5rem; }
+
+.teams {display: flex; align-items: center;}
+.teams span {display:inline-flex; justify-content: center; align-items: center; padding: 0 .2rem; color:#000; text-align: center; max-width: 2.4rem; width: 100%; height: 2rem; line-height: 2rem;}
+
+/*일반테이블*/
+.table_type02 {border-radius: .5rem; position: relative;   overflow: auto; min-height:4rem; }
+.table_type02 + .table_type02 {margin-top:2rem;}
+.table_type02 table {width: 100%; white-space: nowrap; table-layout:auto; }
+.table_type02 table tr {width:100%;}
+.table_type02 table th {background: #ececec;  font-size: 1.2rem; padding:1rem; vertical-align: middle; text-align: center; min-width: 4rem; color: #999; }
+.table_type02 table td {background:#fff; color: #333; font-size: 1.2rem; padding:1rem; vertical-align: middle; text-align: center;}
+.table_type02 table td.no_list {text-align: center; height: 20rem; font-size: 1.3rem; }
+.table_type02 table td a {color:#000;}
+.table_type02 table td .board_txt {position: relative; display: flex;}
+.table_type02 table td .board_txt a {white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; font-size: 1.2rem; color:#000;  max-width: 55%; line-height: 1.3;}
+.table_type02 table td .board_txt a span {margin: 0 1rem 0 0; }
+.table_type02 table td .board_txt span {color:red !important; font-size: 1.2rem; margin-left:1rem;  line-height: 1.3;}
+.table_type02 table tr.total td {background:#434343 !important; color:#fff;}
+.table_type02 table td .stae_txt {font-size:1.2rem; color:#000;}
+.table_type02 table tr.notice td {background: #8d8d8d; color: #fff; }
+.table_type02 table tr.notice td a  {color: #fff;}
+
+.table_type03 { position: relative;   overflow-x: auto;  min-height:4rem;}
+.table_type03 table {width: 100%; white-space: nowrap; table-layout:auto;}
+.table_type03 table th {background: #EFEFEF;  font-size: 1.2rem; padding: 1rem; vertical-align: middle; text-align: center; min-width: 4rem; font-weight:bold; border-bottom:.1rem solid #E7E7E7;}
+.table_type03 table td:first-child {border-left: none;}
+.table_type03 table td {background:#fff; color:#000; font-size: 1.2rem; padding: 1rem; vertical-align: middle; text-align: center; position: relative; font-weight:normal; border-bottom:.1rem solid #F3F3F3; }
+.table_type03 table tr.total td {background:#434343 !important; color:#fff;}
+.table_type03 table td a {font-size: 1.2rem;  color:#333; font-weight: 600;  line-height: 1.4; display: inline-block; }
+.table_type03 table td a.team_a {display: flex; align-items: center; justify-content: center; gap: .5rem; min-width: 6rem;}
+.table_type03 table td.no_data {padding: 2rem 0; line-height: 1.4;}
+/*.table_type03 table tr:nth-child(even) td {background:#eee;}*/
+
+.table_type03 table td span.rank {display:inline-block; padding:.5rem 1rem; border-radius: 5rem;}
+.table_type03 table td span.team {color:#000; font-size:1.2rem; display: inline-block; line-height:1.4;}
+.table_type03 table td em.num {font-size:1.1rem; font-weight:600;}
+.table_type03 table td .score,
+.table_type03 table td strong {color:#000; font-weight:600;}
+.table_type03 table td .score p {margin-top:.3rem;}
+.table_type03 table td .score span {display: inline-block; border-radius: .5rem; font-size: 1rem; min-width: 2rem; min-height: 2rem; display: inline-flex; align-items: center; justify-content: center; color: #fff; }
+.table_type03 table td .score em {display: inline-block;font-size: 1rem; font-weight: 400;}
+.table_type03 table td:last-child .score {font-weight:600; }
+.table_type03 table td .legend_name {}
+.table_type03 table td .legend_name em {display:block; font-size:1.2rem; color:#000; margin-top:.3rem}
+.table_type03 table td .b_box {width:100%; height:100%; position: absolute; left:0; top:0; display: flex; align-items: center; justify-content: center; color: #fff;}
+.table_type03 table td .rank_teams a {display: block;}
+.table_type03 table td .rank_teams span {display:inline-block; border-radius: .5rem; font-size: 1.1rem; line-height:2.2rem; width:5rem; text-align: center; color: #fff;}
+.table_type03 table td .man_rank {display: flex; justify-content: space-between; }
+.table_type03 table td:nth-child(2) .man_rank{font-weight:500;}
+.table_type03 table td .man_rank a {display: inline-block; min-width:4rem; text-align: left;}
+.table_type03 table td .man_rank span {display: inline-block; margin-left:1rem; color:#000;}
+.table_type03 table td .txtbox {color:#000;}
+.table_type03 table td .txtbox em {display:block; font-size:1.2rem; color:#000; margin-top:.5rem;}
+
+.table_type03 table.td_left th {font-weight: 600; font-size: 1.3rem; padding:1rem .5rem; }
+.table_type03 table.td_left td {text-align: left;}
+.table_type03 table.td_left td .txt {color:#000; font-size: 1.2rem; line-height: 1.3;}
+.no_border table td {border: none;}
+.table_type03 table.layout_fixed {table-layout: fixed; }
+
+.table_type03 table tr:hover td {background: #f5f7f9;}
+
+
+/* 경기일정 */
+.pphotos {display: block; border: solid 2px #ccc; width: 70px; position: relative; overflow: hidden; border-radius: 50px; background: #fff; }
+.pphotos span {position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.pphotos::after {content: ""; display: block; padding-bottom: 100%;}
+.pphotos img {object-fit: cover; height: 100%;}
+
+
+/*
+.wcup_table.team table tr:first-child th:first-child,
+.table_type03 table tr:first-child th:first-child {border-left: none;}
+.wcup_table.team table th,
+.table_type03 table th {border-bottom: solid .1rem #fff; border-left: solid .1rem #fff;}
+*/
+
+/*테이블 스크롤 없이 줄바꿈*/
+.wrap_table table {white-space: unset !important;}
+
+
+.table_type02 .board_table {}
+.table_type02 .board_table th.day {width:15rem;}
+.table_type02 .board_table th.name {width:20rem;}
+.table_type02 .board_table th.count {width:10rem;}
+
+
+
+/*게시판 글쓰기*/
+.write_box {margin-bottom:1rem;}
+.write_box > li {margin-top:1rem}
+.write_box li textarea {height:20rem;}
+
+.board_btns {margin:2rem 0; display: flex; align-items: center; justify-content: center; gap: 10px;}
+.board_btns.align_right {justify-content: flex-end; }
+.board_btns .left,
+.board_btns .right {display: flex; gap: 10px;}
+
+/*로그박스*/
+
+.log_box {background:#fff; padding:1rem; }
+.log_box .log_div {font-size:1.2rem; color:#000; }
+.log_box .log_div + .log_div {margin-top:.5rem; }
+.log_box .log_div strong {font-size:1.2rem; color:#000; font-weight: 600;}
+.log_box .log_div span {font-size:1.2rem; color:#000; font-weight: 400;}
+
+
+/*게시판 view*/
+.view_all_box {background: #fff; padding: 2rem; }
+.view_top {display:flex; align-items: center; border-bottom: solid .1rem #ddd; padding-bottom:2rem;}
+.view_top .profile {margin-right:2rem;}
+.view_top .profile span {display: block; width:4rem; height:4rem; border-radius: 50%; overflow: hidden;}
+
+.view_top .borad_tit {}
+.view_top .borad_tit .txt {font-size: 1.6rem; margin-bottom:1.5rem; line-height: 1.3; font-weight: 600;}
+.view_top .borad_tit .txt span {display: inline-block; margin-right: .5rem; color: red; font-size: 1.5rem; }
+.view_top .borad_tit .info {font-size:1.2rem; display: flex; align-items: center;}
+.view_top .borad_tit .info a {color: #333; padding-left:1.7rem; position: relative; font-weight: 600;}
+.view_top .borad_tit .info a::before {content:""; display:block; width: 1.5rem; height: 1.5rem; background:url(/images/man.svg) no-repeat 0 0; background-size:100%; position: absolute; left:0; top:50%; transform: translateY(-50%); }
+.view_top .borad_tit .info span {padding-left:1.7rem; display: inline-block; position: relative; margin-left:1.5rem; }
+.view_top .borad_tit .info .days {}
+.view_top .borad_tit .info .days::before {content:""; display:block; width: 1.5rem; height: 1.5rem; background:url(/images/calendar.svg) no-repeat 0 0; background-size:100%; position: absolute; left:0; top:50%; transform: translateY(-50%);}
+.view_top .borad_tit .info .click {}
+.view_top .borad_tit .info .click::before {content:""; display:block; width: 1.5rem; height: 1.5rem; background:url(/images/view.svg) no-repeat 0 0; background-size:100%; position: absolute; left:0; top:50%; transform: translateY(-50%);}
+.view_top .borad_tit .info .click em {margin-left:.5rem;}
+.view_top .borad_tit .info .like {}
+.view_top .borad_tit .info .like::before {content:""; display:block; width: 1.5rem; height: 1.5rem; background:url(/images/like.svg) no-repeat 0 0; background-size:100%; position: absolute; left:0; top:50%; transform: translateY(-50%);}
+
+.view_con {padding:2rem 0 7rem 0; font-size: 1.4rem; min-height: 20rem; position: relative; margin-bottom: 3rem; line-height: 1.4; word-break: break-all;}
+.view_con img {max-width: 100%;}
+.view_con .post_recom {width:5.6rem; height:5.6rem;  position: absolute; left:50%; bottom:0; transform: translateX(-50%); display:flex; align-items: center; justify-content: center; border-radius: 50%; cursor:pointer; background: #ececec; }
+.view_con .post_recom span {display: block; text-align: center; font-size:1rem; padding-top:2rem; position: relative; min-width: 1.5rem;}
+.view_con .post_recom span::before {content:""; display:block; width: 1.5rem; height: 1.5rem; background:url(/images/like.svg) no-repeat center 0; background-size:100%; position: absolute; left:50%; top:0; transform: translateX(-50%); }
+.view_con .post_recom.on {border:solid .1rem #e11956; background: #e11956; }
+.view_con .post_recom.on span {color: #fff; font-weight: 600; }
+.view_con .post_recom.on span::before {content:""; display:block; width: 1.5rem; height: 1.5rem; background:url(/images/like_on.svg) no-repeat center 0; background-size:100%; position: absolute; left:50%; top:0; transform: translateX(-50%); }
+
+.view_con .download {display: inline-flex; align-items: center; color: #e11956; font-size: 1.5rem; font-weight: 600; gap: .5rem; }
+.view_con .download::before {content: ''; display: block; width: 2rem; height: 2rem; background:url(/images/clip_icon.svg) no-repeat center 0;}
+
+.re_tit {font-size: 1.4rem; color: #333; margin-bottom:2rem; font-weight:600; }
+.re_tit span {font-size: 1.4rem; font-weight:600;}
+
+.re_area {}
+.re_area .re_items {display:flex; flex-direction: column; position: relative; border-bottom:solid .1rem #ddd; padding:2rem 0;}
+.re_area .re_items:first-child {padding-top: 0; }
+.re_area .re_items:last-child {border-bottom: none; }
+.re_area .re_items .profile { margin-right:2rem; }
+.re_area .re_items .profile span {display: block; width:4rem; height:4rem; border-radius: 50%; overflow: hidden;}
+.re_area .re_items .box {}
+.re_area .re_items .box .name {font-size: 1.2rem;color: #333; margin-bottom:1rem; position: relative; }
+.re_area .re_items .box .name .tit01 {padding-left: 2rem; background: url(/images/man.svg) no-repeat 0 0; background-size: 1.5rem; font-weight: 600;  line-height: 1.5rem;}
+.re_area .re_items .box .name .days {position: absolute; right:0; top:0; font-size:1.2rem; }
+.re_area .re_items .box .txt {font-size: 1.2rem; color:#333; line-height: 1.3; word-break: break-all;}
+.view_con a,
+.re_area .re_items .box .txt a {color: #333;}
+.re_area .re_items.notice .box .name .tit01 {font-weight:600; background-color: #f4267c; padding:.5rem; border-radius: .3rem; display: inline-flex; align-items: center; justify-content: center; color: #fff; background-image:  none; }
+
+
+
+.user {text-align:right; padding-top:1rem;}
+.user a {display:inline-block; padding-left:1.8rem; font-size: 1.2rem; line-height: 1.5rem;}
+.user .change_btn {background:url(/images/settings_icon.svg) no-repeat 0 center; background-size: 1.4rem;}
+.user .del_btn {background:url(/images/del_icon.svg) no-repeat 0 center; background-size: 1.4rem; margin-left:1rem; }
+
+
+.write_area {margin-top:2rem; position: relative; display: flex; box-shadow: none; overflow:unset;}
+.write_area textarea {flex:1; }
+.write_area button {height: 6rem; border-radius: .5rem; background: #ececec; color: #999; width:6.8rem;  font-weight: 600; cursor: pointer; border:none; margin-left:.5rem;}
+.write_area button.cancel {margin-left:.5rem; width:4rem; background:#333;  }
+
+
+
+/*박스형 게시판*/
+.box_type_boared {width: 100%;  flex-wrap: wrap; display: flex;  justify-content: space-between;}
+/*.box_type_boared::after {content: ""; display: block; clear: both;}*/
+.box_type_boared .item_box {width:49%;  margin: 0 0 2rem 0; height: 100%;}
+/*.box_type_boared .item_box:nth-child(even) {float: right;}*/
+.box_type_boared .inner {padding:0; }
+.box_type_boared .inner + .inner {margin-top:2rem;}
+
+
+/*박스형 게시판 세로정렬*/
+.box_type_boared02 {width: 100%;}
+.box_type_boared02::after {content: ""; display: block; clear: both;}
+.box_type_boared02 .dan02 {width:49%; margin: 0 0 2rem 0; float:left;}
+.box_type_boared02 .dan02:nth-child(even) {float: right;}
+.box_type_boared02 .inner {padding:0; }
+.box_type_boared02 .inner + .inner {margin-top:2rem;}
+
+/*박스형 게시판 세로정렬*/
+.box_type_boared02 .dan03 { flex-wrap: wrap; display: flex; gap: 2%;}
+.box_type_boared02 .dan03 .item_box {width:32%; margin-bottom: 3rem;}
+/*.box_type_boared02 .dan03 .item_box:nth-child(3n + 2) {margin:0 3rem;}*/
+.box_type_boared02 .inner {padding:0; }
+.box_type_boared02 .inner + .inner {margin-top:2rem;}
+
+
+
+
+.flex_box {display:flex; justify-content: space-between;}
+.box_type_boared.flex_box .item_box {float:none;}
+.flex_box::after {display: none;}
+
+
+/**/
+.sh_box {}
+.sh_box .box_head {position: relative; font-size:1.4rem; padding:1rem; cursor: pointer; font-weight: 600; color: #fff; background:  #e11956;  }
+.sh_box .box_head span {color: #fff;}
+.sh_box .box_head::after{content:""; display: block; transition: all 0.6s ease; background:url(/images/select_arrow_h02.svg) no-repeat center; background-size:1rem;  width:1rem; height:1rem; position: absolute; right:1rem; top:50%; margin-top:-.5rem; transform:rotate(-180deg); }
+.sh_box .box_head .time {font-weight:100; font-size: 1.2rem; color: #fff;}
+.sh_box .box_cont { width:100%; height:auto;    background: #fff;}
+.sh_box.current .box_head::after {transform:rotate(0);}
+
+.t_graph {width:100%; height:1rem; background:#999; position: relative; border-radius: .3rem; overflow: hidden;}
+.t_graph span {position: absolute; left:0; top:0; height:1rem; animation:b_graph .5s forwards; }
+.t_point {}
+.t_point span {border-radius: .5rem; padding: 0.5rem 0.7rem; text-align: center; display: inline-block; font-size: 1.1rem;  color:#fff;}
+.t_point a {border-radius: .5rem; padding:0.5rem; text-align: center; display: inline-block; font-size: 1.1rem; color:#fff;}
+.t_point em {color:#000; margin-left: 0.5rem;}
+
+
+/**/
+.top_meum_box {display:flex; flex-wrap: wrap; align-items:center; padding-bottom:1rem; }
+
+.team_logo{width:6rem; height:6rem; border-radius:3rem; background-repeat:no-repeat; background-position:center center; background-size: contain; }
+.team_logo.no_css {background-color: transparent; border-radius: 0; }
+
+
+/*팀정보*/
+.team_list {position: relative; margin-right:2rem; }
+.team_list .t_items {display:flex; align-items: center; width: 36rem; margin-bottom:1rem; padding:1rem 1.5rem 1rem 2rem; border-radius: .5rem; position: relative; border: none !important; }
+.team_list .t_items::before {content: ""; display: none; width:.5rem; height:100%; background: #d9b991; position: absolute; left: 0; top:0;
+    -webkit-border-top-left-radius: .5rem;
+    -webkit-border-bottom-left-radius: .5rem;
+    -moz-border-radius-topleft: .5rem;
+    -moz-border-radius-bottomleft: .5rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;}
+.team_list .t_items:nth-child(even) {}
+.team_list .t_items .uniform {margin-right:1rem; width:6rem; height:6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 0; }
+.team_list .t_items .schedule_item {margin-right:1rem; width:6rem; height:6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; border:solid .2rem #e11956; position: relative; font-size:0;}
+.team_list .t_items .schedule_item::after {content:""; display: block; width: 2.5rem; height: 2.5rem; position: absolute; left:50%; top:50%; transform: translate(-50%, -50%); background: url(/images/icon04.svg) no-repeat center; background-size: cover;}
+.team_list .t_items .team_info {cursor: pointer; font-weight:600; }
+.team_list .t_items .team_info .t_name {font-size:1.7rem; font-weight:600; margin-bottom:1rem; color: #fff; }
+.team_list .t_items .team_info .t_name span {font-size:1.3rem; font-family: 'Inter'; display: inline-block;color: #fff; }
+.team_list .t_items .team_info .t_name .years {font-size: 1.2rem; font-weight:400; color: #fff;}
+.team_list .t_items .team_info .t_career span {display: inline-block; color: #fff; }
+.team_list .t_items .team_info .t_career {font-size: 1.2rem; margin-top:.5rem; color: #fff; }
+.team_list .t_items .team_info .t_career a {text-decoration: underline; font-family: 'Inter'; }
+.team_list .t_items .team_info .t_perfor {font-size: 1.2rem;  margin-top:.5rem; color: #fff;}
+.team_list .t_items .team_info .t_name .r_g {display:inline-block; font-size:1rem; text-align: center; padding:.5rem; border:solid .1rem #fff; border-radius: 1rem; margin-left: 1rem; box-shadow: 0 0.3rem 0.5rem #000; }
+.team_list .t_items .team_info .t_name .r_g em {display: block;}
+.team_list .t_items .uniform .item {margin:0; }
+.team_list .t_items .uniform.users {margin-right:1rem; width:6rem; height:6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; border:solid .2rem #d9b991; position: relative; }
+
+.team_list.teamInfo {display: flex;  flex-flow: wrap; justify-content: space-between;  align-items: center;}
+.team_list.teamInfo .t_items {width:49%; }
+.team_list .t_items *{}
+
+/*날짜선택*/
+.days_box {display: inline-flex; align-items:center; margin-bottom:2rem; border-radius: .5rem; overflow:hidden; }
+.days_box >div a {line-height:1; padding: .9rem 1.3rem .9rem 1.3rem; cursor:pointer; font-size:1.2rem; display: block; }
+.days_box .prev a {padding-left: 2rem; background: #ececec url(/images/prev_btn.svg) no-repeat left center; background-size:2rem;}
+.days_box .today a {background: #e11956; color: #fff; font-weight:600; font-size:1.3rem;  }
+.days_box .next a {padding-right: 2rem; background: #ececec url(/images/next_btn.svg) no-repeat right center; background-size:2rem;}
+
+
+.select_ul {position: absolute; right:0; top:1rem;}
+.select_ul button {border:none; background:url(/images/select_arrow_h02.svg) no-repeat center; background-size:1rem;  width:1rem; height:1rem; position: absolute; right:1rem; top:50%; margin-top:-.5rem; transform:rotate(0); font-size:0; padding:1rem; width:3rem; height: 3rem; text-indent: -9999em; cursor: pointer;}
+.select_ul.type01 button {; background:url(/images/select_arrow_h.svg) no-repeat center;}
+.current .select_ul button {box-shadow: inset 0 3px 5px rgb(0 0 0 / 30%); border-radius: .5rem;}
+.select_ul .select_con {position: absolute; right:1rem; top:3rem; display:none; border-radius: .5rem; background: #e1e1e1; z-index: 20; padding:1rem;  width:32rem; }
+.select_ul .select_con label {text-shadow:none;font-weight:bold;font-size:1.4rem;width:100%;display:inline-block;margin:.3rem 0;}
+.select_ul .select_con ul {cursor:pointer;}
+.select_ul .select_con ul li {width:100%; padding:1rem;  font-size: 1.2rem; color: #999;text-shadow:none;}
+.select_ul .select_con ul li *{text-shadow:none;}
+.select_ul .select_con ul li:hover {background:#eee; border-radius: .5rem; color: #333;}
+
+.select_ul .select_con ul.profile {display: block;}
+.select_ul .select_con ul.profile li {display: flex; align-items: center; width:100%; height: 100%; line-height: 1; font-size:1.2rem; padding:0; }
+.select_ul .select_con ul.profile li:hover {background:transparent; }
+.select_ul .select_con ul.profile li + li {margin-top:.5rem; }
+.select_ul .select_con ul.profile li span {display: block; border-radius: .5rem; background:#999; padding:.5rem; width:8rem; text-align: center; /*box-shadow: 0 0.3rem 0.5rem #000;*/}
+.select_ul .select_con ul.profile li em {display: block; margin-left:1rem; flex: 1; line-height:1.2;}
+
+
+
+
+/*최근일정 -달력*/
+.calendar_table {white-space: nowrap; width: 100%;}
+.calendar_table th {}
+.calendar_table td { width:calc(100% / 7); position: relative; }
+.calendar_table.type01 tr td + td::before {content:''; display: block; width: .1rem; height: 100%; background: #F3F3F3; position: absolute; left: 0; top: 0;}
+.calendar_table td .calendar_item {position: relative; z-index: 10; padding-top: 3rem; }
+.calendar_table td .calendar_item .day {position: absolute; left:.5rem; top:.5rem; color:#000; font-size: 1.1rem;}
+.calendar_table td .calendar_item .place {position: absolute; right:.5rem; top:.5rem; color:#000; font-size: 1.1rem;display: flex; align-items: center; gap: 0.5rem;}
+.calendar_table td .calendar_item .score01 {color:#fff; font-size:1.2rem; font-weight:400; padding: .2rem .3rem .2rem .3rem; display: inline-block; border-radius: 0.2rem;}
+.calendar_table td .calendar_item .point { color:#000; font-size: 1.1rem;}
+.calendar_table td.today::after {content:""; display: block; width:100%; height:100%; position:absolute; left:0; top:0; z-index:0; border:solid .3rem #e11956; box-sizing:border-box;}
+
+.calendar_point {display: flex; align-items: center; justify-content: center; gap: .5rem; margin-bottom: 1rem; }
+.calendar_point {}
+
+
+
+/*이전경기결과*/
+.game_result {padding:1rem;}
+.game_result ul {}
+.game_result ul + ul {margin-top:.5rem;}
+.game_result ul::after {content: ""; display: block; clear: both;}
+.game_result ul li {width:50%; float:left; display:flex; align-items: center;}
+.game_result ul li span {border-radius: .3rem; padding:.3rem .5rem; font-size: 1.2rem; min-width: 2.2rem; text-align: center; margin-right: .5rem; color: #fff;}
+.game_result ul li a {font-size: 1.2rem; color:#3c8dbc;  margin-right: .5rem;}
+.game_result ul.win li span {background:#FF8585;}
+.game_result ul.win li em {font-size: 1rem;}
+.game_result ul.lose li span {background:#79AAFF;}
+.game_result ul.lose li em {font-size: 1rem;}
+.game_result ul.save li span {background:#7A7A7A;}
+.game_result ul.save li em {font-size: 1rem;}
+
+
+/*다음경기일정*/
+
+.game_schedule {display:flex; align-items: center; justify-content: center; background: #fff; padding:2rem; gap: 2rem;}
+.game_schedule .vs {font-size: 1.2rem; text-align: center; padding:0 1rem;}
+.game_schedule .vs .day {}
+.game_schedule .vs span {padding:.5rem 1rem; border-radius: .5rem;display: inline-block; margin: 1rem 0; border-radius: .5rem; }
+.game_schedule .vs .time {}
+.game_schedule .teams {display: unset;}
+.game_schedule .teams .logo {width:7rem; height:7rem; border-radius: 50%; border:solid .1rem #fff; display: flex; align-items: center; justify-content: center; margin:0 auto;}
+.game_schedule .teams span {display:block; color: #333; max-width: 100%; }
+.game_schedule .teams .t_name {text-align: center; font-size: 1.2rem; margin-top: 1rem; }
+.game_schedule .teams .t_name span,
+.game_schedule .teams .t_name em {font-size: 1.2rem;}
+.game_schedule .teams .t_name a { color:#3c8dbc;}
+
+.game_schedule.result {justify-content: space-between; background: transparent; padding:1rem 2rem;}
+.game_schedule .score {text-align: center;}
+.game_schedule .score .num {font-size:2.5rem; font-weight: 600; color: #fff;}
+.game_schedule .score span {font-weight: 600;  color: #fff;}
+.game_schedule .score .txt {font-size:1.4rem; font-weight: 600; margin-top:.5rem; color: #fff;}
+
+.game_schedule .uniform {justify-content: center;}
+
+
+/*주전*/
+.player_position {max-width: 40rem; margin:0 auto; position: relative; }
+.player_position .player_m {display: inline-block; padding:.5rem .7rem;  border-radius: .5rem; position: absolute; font-size:1.1rem; border:solid .2rem #000;  line-height: 1.3; color: #fff;}
+.player_position .player_m a {font-size:1.1rem; font-weight:600; text-align: center; display: block; color: #fff;}
+.player_position .player_m a + a {margin-top:.2rem;}
+.player_position .player_m span {display:block;  color:#fff; margin-top:.2rem;}
+.player_position .txt {position: absolute; right:0; bottom:1rem; color:#fff; font-size:1.1rem; font-weight: 400;}
+.player_position .player_m.rf {right:4rem; top:5.5rem; }
+.player_position .player_m.cf {left:50%; top:4rem; transform: translateX(-50%); }
+.player_position .player_m.lf {left:4rem; top:5.5rem; }
+.player_position .player_m.tb {left: 14%; top: 47%;}
+.player_position .player_m.ss {left: 29%; top: 30%;}
+.player_position .player_m.sb {right: 29%; top: 30%; }
+.player_position .player_m.fb {right: 14%; top: 47%;}
+.player_position .player_m.sp {left:50%; top:49%; transform: translateX(-50%); }
+.player_position .player_m.c {left:50%; bottom:3rem; transform: translateX(-50%); }
+.player_position .player_m.dh {right:4rem; bottom:3rem; }
+.player_position .player_m.rp {left:4rem; bottom: 3rem;}
+
+.player_position.type01 {max-width:40rem; text-align: center;}
+.player_position.type01 .player_m.outfielder {left:50%; top:3rem; transform: translateX(-50%); width:18rem; background: #0030DB;}
+.player_position.type01 .player_m.infielder {right:0; top:13rem; width:17rem; background: #0030DB;}
+.player_position.type01 .player_m.pitcher {left:0; top:16rem; width:17rem; background: #0030DB;}
+.player_position.type01 .player_m.catche {left:50%; bottom:2rem; transform: translateX(-50%); width:15rem; background: #0030DB;}
+.player_position.type01 .player_m.coach {right: 0; bottom:2rem; width:10rem; background: #0030DB;}
+
+.player_position.type01 .player_m::after {content:''; display: block; font-size: 1rem; position: absolute; left: 50%; top: -2.6rem; transform: translateX(-50%); background: #000; padding: 0 .5rem;  border-top-left-radius: 0.5rem;  border-top-right-radius: 0.5rem; height: 25px; line-height: 25px;}
+.player_position.type01 .player_m.coach::after {content:'코칭스태프';}
+.player_position.type01 .player_m.outfielder::after {content:'외야수';}
+.player_position.type01 .player_m.infielder::after {content:'내야수'; }
+.player_position.type01 .player_m.pitcher::after {content:'투수';}
+.player_position.type01 .player_m.catche::after {content:'포수';}
+
+
+
+
+/*팀정보 메뉴*/
+
+.team_smune {margin-bottom:1rem; overflow: auto;     margin-right: 2rem;}
+.team_smune ul { display: flex; flex-wrap: nowrap; overflow-x: auto;}
+.team_smune ul li {border-radius:0.5rem !important;  overflow: hidden; flex: 0 0 auto; margin-bottom:.5rem; min-width:6rem; }
+.team_smune ul li + li {margin-left:1rem;}
+.team_smune ul li a {display:block; font-weight: 600; position: relative; padding:3.9rem 0 1rem 0; background-color: #e1e1e1; color: #999; text-align: center; border-radius:0.5rem !important;}
+.team_smune ul li.on a {background-color: #e11956; color: #fff;}
+.team_smune ul li a::after {content:""; display: block; width: 2.2rem; height: 2.2rem; position: absolute; left:50%; top:1rem; transform: translateX(-50%);}
+.team_smune ul li a.p_all::after {background: url(/images/all.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_schedule::after {background: url(/images/day_icon.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_position::after {background: url(/images/people.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_solt::after {background: url(/images/sort.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_num::after {background: url(/images/number.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_won::after {background: url(/images/pay.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_coach::after {background: url(/images/coach.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_score::after {background: url(/images/score.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_record::after {background: url(/images/icon_write.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_stadium::after {background: url(/images/stadium.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_rookie::after {background: url(/images/icon07_02.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_trade::after {background: url(/images/trade.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_prize::after {background: url(/images/competition.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_graph::after {background: url(/images/graph.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_condition::after {background: url(/images/condition.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_match::after {background: url(/images/teams.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_cubes::after {background: url(/images/cubes.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_analytics::after {background: url(/images/analytics.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_stat::after {background: url(/images/icon09_02.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_days::after {background: url(/images/days.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_years::after {background: url(/images/years.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_vs::after {background: url(/images/vs.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_olympics::after {background: url(/images/olympics.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_pre::after {background: url(/images/pre_round.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_agame::after {background: url(/images/asian_game.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_crown::after {background: url(/images/crown.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_mitts::after {background: url(/images/mitts.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_school01::after {background: url(/images/idcard.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_school02::after {background: url(/images/university.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_allstar::after {background: url(/images/icon08_02.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_post::after {background: url(/images/icon05_02.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_coach_man::after {background: url(/images/coach_man.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_preview::after {background: url(/images/preview.svg) no-repeat center; background-size: 100%;}
+.team_smune ul li a.p_history::after {background: url(/images/history.svg) no-repeat center; background-size: 100%;}
+
+
+
+
+
+
+
+
+/*바그래프*/
+
+.bar_graphy_box {}
+.bar_graphy_box .item {width:100%; position: relative; height:1rem; background: #f4f4f4; border-radius: .3rem; overflow: hidden;}
+.bar_graphy_box .item + .item {margin-top:.5rem; }
+.bar_graphy_box .item span {display: block; height:1rem; position: absolute; left: 0; top:0; animation:b_graph .5s forwards; }
+.bar_graphy_box .item .figure_bar01 {background:#d9b991;}
+.bar_graphy_box .item .figure_bar02 {background:#434343;}
+@keyframes b_graph {
+    0%{ width:0;}
+    100%{}
+}
+
+
+
+/*메인*/
+
+/*경기일정*/
+.g_schedule {background:#fff; display: flex; align-items: center; justify-content: space-between; padding:1rem 2rem; }
+
+.g_schedule .vsbox {display: flex; align-items: center;}
+.g_schedule .vsbox p {font-size: 1.1rem; font-weight:600; width:5rem; text-align: center; border-radius: 5px;  line-height:2.2rem; color: #fff; display: flex; align-items: center; justify-content: space-around;}
+.g_schedule .vsbox span {font-size: 1.2rem; padding:0 1rem; color:#000;}
+.g_schedule .v_info {display:flex; align-items: center;}
+.g_schedule .v_info .time {font-size: 1.2rem; color:#000;}
+.g_schedule .v_info a  {display: flex; margin-left: 1rem; line-height: 1; align-items: center; gap: 0.5rem;}
+
+
+.main_list {background:#fff;}
+.main_list ul {}
+.main_list ul li { display: flex; align-items: center; justify-content: space-between; padding:1rem;}
+.main_list ul li a {display: block; flex:1; color:#000; font-size: 1.2rem; margin-right:1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.main_list ul li span {display: block; color:#000; font-size:1.2rem;}
+.main_list ul li:hover {background: #f5f7f9;}
+.main_list .btns {display: flex; justify-content: end; padding:1rem;}
+
+.w_inner {background:#fff; padding:2rem;}
+
+
+/*경기일정*/
+.cw100 {max-width: 110rem !important; width: 100% !important;}
+.calendar_area {}
+.calendar_area table {width: 100%; table-layout:auto ;}
+.calendar_area table th {font-size:1.4rem; font-weight: 600; color:#000; padding:.5rem 1rem; background: #f9f9f9; border:solid .1rem #ddd;}
+.calendar_area table td {position: relative; padding:2rem 1rem 1rem; border:solid .1rem #ddd; width: calc(100% / 7); background:#fff; }
+.calendar_area table td .inner {width: 100%; min-height: 3rem; display: flex; align-items: center; justify-content: center; position: relative; }
+/*.calendar_area table td .inner::After{content: ""; display: block; padding-bottom: 100%; }*/
+.calendar_area table tr:nth-child(2n) td {background:#f9f9f9;}
+.calendar_area table td span.day {position: absolute; left:.5rem; top:.5rem; color:#000; font-size: 1.2rem; z-index: 10;}
+.calendar_area table td.today::after {content:""; display: block; width:100%; height:100%; position:absolute; left:0; top:0; z-index:0; border:solid .3rem #d9b991; box-sizing:border-box;}
+.calendar_area table td .games {width: 100%; display: block; }
+.calendar_area table td .games ul {position: relative; z-index: 10;}
+.calendar_area table td .games ul li + li {margin-top: .5rem;}
+.calendar_area table td .games ul li a {display: flex; align-items: center; justify-content: space-between; text-align: center; position: relative;}
+/*
+.calendar_area table td .games ul li a::after {content: ':'; display: block; position: absolute; font-size: 12px; color: #000; font-weight: 600; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+*/
+.calendar_area table td .games ul li span {display:block;}
+.calendar_area table td .games ul li span.team {border-radius: .5rem; line-height: 2rem; font-size:1.2rem; width:4rem;  background:#eee;}
+.calendar_area table td .games ul li span.score {font-size:1.2rem; line-height: 2rem; color:#000; font-weight:600;  width:2.5rem; }
+.calendar_area table td .games ul li span.score.lead{color:#FF0000;}
+.calendar_area table td .games ul li span.stadium {width:4rem; font-size:1rem; padding: .3rem .5rem; color:#000; font-weight:600;}
+
+
+/* 캘린더 날씨관련 */
+.calendar_area table td .games ul li span.weather  {width:5rem; height:2rem; position: relative; z-index: 100;}
+.calendar_area table td .games ul li span.rain  {background: url(/images/rain.svg) no-repeat center; background-size: 3rem; font-size:0;}
+.calendar_area table td .games ul li span.dust  {background: url(/images/dust.svg) no-repeat center; background-size: 3rem; font-size:0;}
+.calendar_area table td .games ul li span.mourn  {background: url(/images/mourn_icon.svg?ver=0.1) no-repeat center; background-size: 2rem; font-size:0;}
+
+
+
+
+
+.btn_box {padding:0 1rem 1rem;}
+.btn_box a {display: inline-block;}
+.btn_box a + a {margin-left: .5rem;}
+
+.callout_box {border-radius: .5rem; overflow: hidden; max-width:35rem; width:100%; margin-bottom:1rem; margin-right: 2rem;}
+
+
+/*회원가입*/
+
+.join_box {max-width:50rem; width:100%; margin:0 auto;}
+.join_box .item_box {background: #fff;}
+.join_box .item_box .inner {}
+.join_box ul {margin-top:2rem;}
+.join_box ul li {border-radius: .5rem; position: relative;  transition: .4s; border: solid .1rem #ddd; margin-top:4rem; }
+.join_box ul li + li {margin-top:4rem;}
+.join_box ul li label {display:block; opacity: 0; animation: item .4s forwards; color:#333; font-size: 1.2rem; line-height: 3.5rem; font-weight: 700;}
+.join_box ul li input:focus {border-bottom:none}
+.join_box ul li.on label {display: block; opacity: 1; background:transparent; }
+.join_box ul li.on label span {font-size:1rem; margin-left:1rem; font-weight:normal; }
+.join_box ul li.on label em {color: red; }
+.join_box ul li.on {margin-top:4rem; transition: .4s;}
+.join_box button {width:100%; margin-top:2rem;}
+.join_box ul li.name::after {content:""; display: block; width:2rem; height:2rem; background:url(/images/name.svg) no-repeat center; background-size:cover; position: absolute; right:1rem; top:50%; transform: translateY(-50%);}
+.join_box ul li.email::after {content:""; display: block; width:2rem; height:2rem; background:url(/images/email.svg) no-repeat center; background-size:cover; position: absolute; right:1rem; top:50%; transform: translateY(-50%);}
+.join_box ul li.pass::after {content:""; display: block; width:2rem; height:2rem; background:url(/images/password.svg) no-repeat center; background-size:cover; position: absolute; right:1rem; top:50%; transform: translateY(-50%);}
+
+.join_box ul li input::placeholder {color: #abb4bd;}
+.join_box ul li input::-webkit-input-placeholder{color: #abb4bd;}
+.join_box ul li input:-ms-input-placeholder{color: #abb4bd;}
+
+
+
+.snslogin_area {margin-top: 2rem; }
+.snslogin_area .sns_tit {text-align: center; position: relative; z-index: 10;}
+.snslogin_area .sns_tit::after {content:''; width: 100%; height: .1rem; background: #ddd; position: absolute; left: 0; top: 50%; z-index: 1;}
+.snslogin_area .sns_tit p { font-size: 1.4rem; color: #fff;  display: inline-flex; padding: 1rem 2rem; background: linear-gradient(107deg, #e11956 48%, #ff62ac 100%); position: relative; z-index: 100;}
+.snslogin_area ul.sns_lists {}
+.snslogin_area ul.sns_lists li {}
+.snslogin_area ul.sns_lists li a {display: flex; align-items: center; text-align: center; padding: .7rem 1rem; border-radius: 0.5rem; line-height: 1.8rem;}
+.snslogin_area ul.sns_lists li a em {flex: 1; font-size: 1.2rem; font-weight: 600; }
+.snslogin_area ul.sns_lists li a::before {content:''; display: block; width: 1.8rem; height: 1.8rem; margin:0 0 0 3rem;}
+.snslogin_area ul.sns_lists li a.kakao {background-color: #FEE500;}
+.snslogin_area ul.sns_lists li a.naver {background-color: #03c75a;}
+.snslogin_area ul.sns_lists li a.facebook {background-color: #1877F2;}
+.snslogin_area ul.sns_lists li a.kakao em {color: #000;}
+.snslogin_area ul.sns_lists li a.naver em,
+.snslogin_area ul.sns_lists li a.facebook em {color: #fff;}
+.snslogin_area ul.sns_lists li a.kakao::before {background:url(/images/sns_kakao.png) no-repeat center; background-size: cover; }
+.snslogin_area ul.sns_lists li a.naver::before {background:url(/images/sns_naver.png) no-repeat center; background-size: cover;}
+.snslogin_area ul.sns_lists li a.facebook::before {background:url(/images/sns_facebook.png) no-repeat center; background-size: cover;}
+
+
+.join_link {margin-top:2rem; text-align: right; display:flex; justify-content: space-between; align-items: center;}
+.join_link a {font-size: 1.2rem; font-weight: 400; color: #333;}
+.join_btn {display:block; text-align:center; margin-top:2rem; padding:0 3rem; height:3.6rem; line-height:3.6rem; background: #e11956; color: #fff; }
+
+.agree_box {}
+.agree_box a {font-size: 1.2rem; }
+
+
+@keyframes item{
+    0%{
+        opacity: 0;
+        position: absolute; left:0; top:0;
+    }
+    100% {
+        opacity: 1;
+        position: absolute; left:0; top:-3rem;
+        display:block;
+    }
+}
+
+
+/*22.12.16 추가*/
+.join_cp { max-width: 100rem; width: 100%; margin: 0 auto; text-align: center; position: relative; overflow: hidden; padding: 10rem 0}
+.join_cp .tit01 {font-size:3rem; font-weight: 900; margin-bottom:2rem; }
+.join_cp .txt01 {font-size: 2rem; line-height: 1.5;}
+.join_cp .txt01 span {font-weight: 600; }
+.join_cp .txt02 {font-size: 1.2rem; margin: 4rem 0;}
+.join_cp .txt02 span {font-weight: 600; color:#e11956;}
+
+
+.ball_icon {width: 10rem; height: 10rem; position: absolute; border-radius: 50%; background: url(/images/baseball_icon.svg?ver=0.1) no-repeat 0 0; background-size: 100%; left:-3rem; top:-3rem; animation: ball 3s linear infinite, squashing 3s linear infinite; z-index: -1;}
+.ball_icon:nth-child(2) {animation-delay: .2s; opacity: .6;}
+
+@keyframes ball {
+    16%, 48%, 78% {
+        top:25rem; animation-timing-function: ease-out;
+    }
+    32% {
+        top:10rem; animation-timing-function: ease-in;
+    }
+    62% {
+        top:15rem; animation-timing-function: ease-in;
+    }
+    90% {
+        top:22rem; animation-timing-function: ease-in;
+    }
+    100% {
+        top:27rem; left:100%;
+        animation-timing-function: ease-out;
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+/*등번호*/
+
+.back_number_area {background:#fff; padding:1rem;}
+.uniform {display: flex; flex-wrap: wrap; gap:2rem;}
+.uniform + .uniform  { margin-top: 2rem;}
+.uniform .item {position: relative; text-align: center;}
+.uniform .item span {display:block; font-size: 1.2rem; color:#000; margin-top:1rem; font-weight: 600;}
+.uniform .item span.days {font-size:1.2rem; margin-top:0; }
+.uniform .item span.number {font-family: 'AppleSDGothicNeo '; font-weight: 900; padding-top: 0.2rem;}
+.uniform .item .name {width:6rem; height:6rem; position: relative; overflow: hidden; margin: 0 auto; border-radius: 50%; }
+.uniform .item .name::after {content: ""; display: block; width:100%; height:1rem; position: absolute; left:0; bottom:0;}
+.uniform .item .name em {font-size: 1.3rem; display:block; width:100%; text-align: center; position: absolute; left:0; top: 50%; transform: translateY(-75%); font-family: 'inter'; font-weight: 600; }
+.uniform .item .name em.tma {font-size: 1.8rem; position: absolute; left:0; top: 50%; transform: translateY(-65%); }
+.uniform .item .name em.tname {font-size: 1.3rem; top: 50%;}
+.uniform .item a {font-size:1.4rem; color:#3c8dbc; font-weight: 400; margin-top:1rem; display: inline-block; }
+.uniform .home .name {}
+.uniform .away .name {}
+
+.select_group {display: flex; align-items: center; overflow: auto;}
+.select_group .select_item {margin-left:1rem; margin-bottom:1rem;}
+
+/*코칭*/
+
+.coach_more {position: relative;padding:.5rem;}
+.coach_more .txt { color:#000; padding-right:3rem;}
+.coach_more .more_box {display:none; width:100%; }
+.coach_more.on .more_box {display:block;  margin-top:1rem;}
+.coach_more .more_box p { color:#000; margin-top:.5rem; line-height: 1.3; font-size:1.2rem;}
+.coach_more button {border:none; outline: none; width:2rem; height:2rem; background: url(/images/more_btn.svg) no-repeat center; background-size: cover; font-size: 0; cursor: pointer; position: absolute; right:.5rem; top:0;}
+
+
+/*상세분석 박스*/
+.box_item_3dan {display:flex; flex-wrap: wrap; gap: 1%;}
+.box_item_3dan .item_con {width:24%; margin-bottom:2rem; border-radius: .5rem; position: relative; background:#fff; overflow: hidden;}
+.box_item_3dan .item_con .h_tit {position: relative; font-size:1.4rem; padding: 1rem 2rem; cursor: pointer; font-weight: 600; background: #e11956; color: #fff;}
+.box_item_3dan .item_con .h_cont {width:100%; height:100%; padding:1rem 2rem;}
+
+.zone_area { display:flex; flex-wrap: wrap;  background:#ffffff; margin:0 1rem; }
+.zone_area .item {position:relative; width: calc(100% / 5);  }
+.zone_area .item::after {content: ""; display: block; padding-bottom: 100%;}
+.zone_area .item .box {width:100%; height:100%; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; justify-content: center; text-align: center;}
+.zone_area .item .box::before {content: ""; display: block;  position: absolute; left:0; top:0; width:100%; height:100%; box-sizing: border-box; border-top: solid .1rem #ddd; border-left: solid .1rem #ddd;}
+.zone_area .item .box strong {display: block; font-size:1.4rem; width: 100%; }
+.zone_area .item .box span {display: block; font-size:1rem; width: 100%; margin-top:.4rem; }
+
+.zone_area .item:nth-child(1) .box::before,
+.zone_area .item:nth-child(2) .box::before,
+.zone_area .item:nth-child(3) .box::before,
+.zone_area .item:nth-child(4) .box::before,
+.zone_area .item:nth-child(5) .box::before {border-top:none;}
+
+.zone_area .item:nth-child(1) .box::before,
+.zone_area .item:nth-child(6) .box::before,
+.zone_area .item:nth-child(11) .box::before,
+.zone_area .item:nth-child(16) .box::before,
+.zone_area .item:nth-child(21) .box::before {border-left:none;}
+
+.zone_area .item:nth-child(7) .box::before,
+.zone_area .item:nth-child(8) .box::before,
+.zone_area .item:nth-child(9) .box::before,
+.zone_area .item:nth-child(12) .box::before,
+.zone_area .item:nth-child(13) .box::before,
+.zone_area .item:nth-child(14) .box::before,
+.zone_area .item:nth-child(17) .box::before,
+.zone_area .item:nth-child(18) .box::before,
+.zone_area .item:nth-child(19) .box::before { width:100%; height:100%; position: absolute; left: 0; top:0; z-index: 10; border-top: solid .2rem #000; border-left: solid .2rem #000;}
+
+
+.zone_area .item:nth-child(10) .box::before,
+.zone_area .item:nth-child(15) .box::before,
+.zone_area .item:nth-child(20) .box::before {border-left:solid .2rem #000;}
+
+.zone_area .item:nth-child(22) .box::before,
+.zone_area .item:nth-child(23) .box::before,
+.zone_area .item:nth-child(24) .box::before {border-top:solid .2rem #000;}
+
+
+/*야구 용어집 및 설명자*/
+
+.term_area {}
+.term_area ul {display:flex; flex-wrap: wrap; gap: 1rem;}
+.term_area ul li {}
+.term_area ul li a {display:block; }
+
+.term_cont {margin-top:0;}
+.term_cont .h1_tit {font-size:1.6rem; font-weight:600; border-bottom:solid .1rem #d9b991; padding:1.5rem; }
+.term_cont .h2_tit {font-size:1.4rem; font-weight:600; padding:1.5rem; color:#79AAFF; }
+.term_cont .txtbox {padding:0 1.5rem; }
+.term_cont .txtbox .tit {font-size:1.4rem; font-weight: 600; margin-bottom:1rem; position: relative; display: inline-block; padding:.8rem;}
+.term_cont .txtbox .tit::before, .term_cont .txtbox .tit::after {content: ''; position: absolute; display: inline-block; width: 1rem; height: 1rem;}
+.term_cont .txtbox .tit::before {top: 0px;left: 0px; border-top: .1rem solid #f44336; border-left: .1rem solid #f44336;}
+.term_cont .txtbox .tit::after {right: 0px;bottom: 0px; border-right: .1rem solid #f44336; border-bottom: .1rem solid #f44336;}
+.term_cont .txtbox .t_cont {margin-bottom:1.5rem;}
+.term_cont .txtbox .t_cont p {font-size: 1.3rem; line-height: 1.4;}
+.term_cont .txtbox .t_cont p + p {margin-top:1rem;}
+
+
+
+
+/****************** 선수정보 ***************************/
+.player_info_header {display: grid;  grid-template-columns: repeat(auto-fit,minmax(30rem,1fr)); grid-gap: 10px; margin-bottom:2rem; }
+.player_info_header .bio {border:solid .1rem #ddd; background: #fff; overflow: hidden; border-radius: 0.5rem; min-height: 55rem;}
+.player_info_header .bio .profile_img01 {overflow: hidden;}
+.player_info_header .bio .profile_img01 img {width:100%; }
+.player_info_header .bio .profile_img02 {width:7rem; max-height: 8rem; overflow: hidden; border-radius: 1.2rem; margin: -3rem auto 0  auto; border: solid 0.1rem transparent; box-shadow: 0px 0 .5rem #111; position: relative; z-index:10; display: flex; align-items: flex-start; justify-content: center; background: #fff;}
+.player_info_header .bio .p_info {}
+.player_info_header .bio .p_info .name {text-align: center; font-size:1.6rem; margin-top:1rem; font-weight: 600; color:#000;}
+.player_info_header .bio .p_info .con {display: flex; align-items: center; justify-content: center; margin-top:1rem;}
+.player_info_header .bio .p_info .con span {font-size:1.2rem;  padding:0 1rem; position: relative; color:#000; font-weight: 600;}
+.player_info_header .bio .p_info .con span::before {content:''; display:block; width:.1rem; height:1.2rem; background: #ddd; position: absolute; left: 0; top:0;}
+.player_info_header .bio .p_info .con span:first-child::before {display: none;}
+.player_info_header .bio .man_info {padding:2rem 2rem 1rem 2rem; }
+.player_info_header .bio .man_info li {font-size:1.2rem; margin-bottom:1rem;  color:#000; position: relative; padding-left: 6rem; line-height: 1.3; min-height: 1.7rem; }
+.player_info_header .bio .man_info li span {position: absolute; left: 0; top: 0;}
+
+.player_info_header .chart_box {border:solid .1rem #ddd; background: #fff;  border-radius: 0.5rem;}
+
+.player_info_header .chart_box.black_box { background: url(/images/bg_ground.jpg) repeat 0 0;}
+.player_info_header .chart_box.black_box .tit {color: #fff; background:#111; -webkit-border-top-left-radius: 0.5rem;
+-webkit-border-top-right-radius: 0.5rem;
+-moz-border-radius-topleft: 0.5rem;
+-moz-border-radius-topright: 0.5rem;
+border-top-left-radius: 0.5rem;
+border-top-right-radius: 0.5rem;}
+.player_info_header .chart_box.black_box .statcast_box .items .inner {position:relative; z-index:10;}
+.player_info_header .chart_box.black_box .statcast_box .items { background-color: transparent;}
+/*
+.player_info_header .chart_box.black_box .statcast_box .items .inner::after {content:'';  display:block; background:#ddd; position: absolute; left:0; top:0; width:500px; height: 500px; border-radius: 50%; z-index:-1;}
+.player_info_header .chart_box.black_box .statcast_box .items {background:#111;}
+.player_info_header .chart_box.black_box .statcast_box .items .tit_box ul li {color:#fff;}
+.player_info_header .chart_box.black_box .statcast_box .items .inner {background:#62b98f; }
+*/
+
+
+/* 투수 */
+.statcast_box .grap_box {padding:1rem;}
+
+.pace {display: grid;  grid-template-columns: repeat(auto-fit,minmax(20rem,1fr)); grid-gap: 10px; /*display:flex; gap:1rem; margin-bottom:2rem; */}
+.relies_box {margin-bottom:2rem; }
+.relies_box .relies {font-size:1.4rem; margin-top:1rem; display: flex; }
+.relies_box .relies p { margin-right:2rem; }
+.relies_box .relies span + span {margin-left:1rem; }
+
+/* 선수정보 그래프 */
+.chart_box_area {margin:2rem 0;}
+.chart_box_area .g_tit {font-size:2rem; text-align:center; color: #333; font-weight:600; margin-bottom:1rem; }
+.chart_box_area canvas{width:100%; min-height:200px; background: #fff; padding: 2rem 1rem 1rem 1rem; border: solid .1rem #ddd; border-radius: 0.5rem; overflow: hidden;}
+
+.graph_box {padding:2rem; border-top:solid .1rem #fff;}
+
+
+/*스태트캐스트 피치*/
+
+
+.statcast_box {}
+.statcast_box .tit {text-align: center;font-size:1.8rem; font-weight: 700; color:#000; padding:1rem; }
+.statcast_box .items {background: #fff; display: flex; align-items: center; justify-content: space-around;}
+.statcast_box .items .inner {padding:3rem 1rem 1rem 1rem; position: relative;  }
+
+.statcast_box .items .tit_box {padding: 0 1rem; width: 10rem;}
+.statcast_box .items .tit_box p { font-size:1.3rem; color:#000; margin-bottom:1rem;}
+.statcast_box .items .tit_box ul { display: flex; flex-direction: column; background: #333; padding: 15px 10px; border-radius: 0.5rem; box-shadow: 0 0 1rem #000;}
+.statcast_box .items .tit_box ul li {position: relative; font-size:1rem; color:#fff; padding-left:1.5rem; margin-bottom:1rem; width: 100%; font-weight: 600; }
+.statcast_box .items .tit_box ul li span {position: absolute; left:0; top:50%; transform: translateY(-50%); border-radius: 50%; width:1rem; height: 1rem; z-index: 1; box-shadow: .1rem .2rem .2rem rgb(0, 0, 0, .5);}
+
+.course {}
+.course span {position: absolute; border-radius: 50%; width:1rem; height: 1rem; transition: .3s; box-shadow: .1rem .1rem .1rem rgb(0, 0, 0, .5); opacity: .7;}
+.course span em.tip {display: none; padding:.5rem;  border-radius: .5rem; box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35); background: #333; color: #fff; line-height: 1.3; position:absolute; left: 50%; bottom:1.5rem	; transform: translateX(-50%)}
+.course span em.tip::before {content: '▼'; color:#333; font-size:1rem; line-height:1;  position: absolute; bottom:-.7rem; left: 50%; transform: translateX(-50%);text-transform: none;}
+.course span:hover em.tip {display:inline-block; }
+.course span:hover {z-index:100; opacity: 1; border:solid .1rem #000; background: rgb(225, 25, 86) !important; }
+
+
+
+
+.bt101000000 .ball_tit {color: #D22D49; }
+.bt102000000 .ball_tit {color: #BF0000; }
+.bt103000000 .ball_tit {color: #FFA500; }
+.bt104000000 .ball_tit {color: #FFE716; }
+.bt105000000 .ball_tit {color: #1DBE3A; }
+.bt106000000 .ball_tit {color: #785EF0; }
+.bt108000000 .ball_tit {color: #2080D0; }
+.bt109000000 .ball_tit {color: #808000; }
+.bt110000000 .ball_tit {color: #40A0A0; }
+.bt111000000 .ball_tit {color: #ff62ac; }
+.bt112000000 .ball_tit {color: #B6B6B6; }
+
+.bt101000000 .course span {background: #D22D49; opacity: 0.3; border: solid .1rem rgb(210 45 73 / 20%); } /* 투심 */
+.bt102000000 .course span {background: #BF0000; opacity: 0.3; border: solid .1rem rgb(191 0 0 / 20%); } /* 포심 */
+.bt103000000 .course span {background: #FFA500; opacity: 0.3; border: solid .1rem rgb(255 165 0 / 20%); } /* 커터 */
+.bt104000000 .course span {background: #FFE716; opacity: 0.3; border: solid .1rem rgb(255 231 22 / 20%); } /* 커브 */
+.bt105000000 .course span {background: #1DBE3A; opacity: 0.3; border: solid .1rem rgb(29 190 58 / 20%); } /* 슬라이더 */
+.bt106000000 .course span {background: #785EF0; opacity: 0.3; border: solid .1rem rgb(120 94 240 / 20%); } /* 체인지업 */
+.bt108000000 .course span {background: #2080D0; opacity: 0.3; border: solid .1rem rgb(32 128 208 / 20%); } /* 싱커 */
+.bt109000000 .course span {background: #808000; opacity: 0.3; border: solid .1rem rgb(128 128 0 / 20%); } /* 구종없음 */
+.bt110000000 .course span {background: #40A0A0; opacity: 0.3; border: solid .1rem rgb(64 160 160 / 20%); } /* 포크볼 */
+.bt111000000 .course span {background: #ff62ac; opacity: 0.3; border: solid .1rem rgb(64 160 160 / 20%); } /* 너클볼 */
+.bt112000000 .course span {background: #B6B6B6; opacity: 0.3; border: solid .1rem rgb(182 182 182 / 20%); } /* 기타 */
+
+
+
+
+.slider span {background: rgb(29 190 58 / 70%);}
+.curve span {background: rgb(255 231 22 / 70%);}
+.sinker span {background: rgb(0 209 237 / 70%);}
+.cutter span {background: rgb(255 165 0 / 70%);}
+.changeup span {background: rgb(120 94 240 / 70%);}
+
+
+.single span {background: rgb(120 213 0 / 70%); border: solid .1rem  rgb(120 213 0 / 90%);}
+.double span {background: rgb(0 255 255 / 70%); border: solid .1rem  rgb(0 255 255 / 90%);}
+.triple span {background: rgb(204 0 255 / 70%); border: solid .1rem  rgb(204  0 255/ 90%);}
+.home_run span {background: rgb(237 20 61 / 70%); border: solid .1rem  rgb(237 20 61 / 90%);}
+
+
+
+/*스탯위키*/
+
+.wiki_top_menu {margin-bottom:2rem; }
+.wiki_top_menu ul {display:flex; justify-content: end;}
+.wiki_top_menu ul li {margin-left:1rem; }
+
+.wiki_area {}
+
+.edit_area {padding:1rem; background: #fff;   border-radius:.5rem; border: solid .1rem #ddd; margin-bottom: 2rem; }
+.edit_area .items {}
+.edit_area .items .wiki_header {position: relative;}
+.edit_area .items .wiki_header h3 {font-size:2rem; padding:2rem 0; margin-bottom:2rem; border-bottom: solid .1rem #ddd; }
+.edit_area .items .wiki_header	a {display:inline-block; position:absolute; right:0; bottom:2rem; background: #e11956; color:#fff; padding:0.5rem 1rem; border-radius:.3rem; }
+
+.edit_area .items	.wiki_cont {padding-bottom: 2rem; }
+.edit_area .items	.wiki_cont p {font-size:1.2rem; line-height:1.2;}
+
+.history_list {padding:2rem 1rem; }
+.history_list li {font-size:1.2rem; }
+.history_list li a {color:#d9b991;}
+.history_list li + li {margin-top:1rem; }
+
+.wiki_textarea {background: transparent; resize: none; height:200px; font-size:1.2rem; }
+
+
+
+/* WAR Special */
+.war_option_area {display:flex; margin-bottom: 2rem; }
+.war_option_area .item  {margin: 0 1rem 1rem 0; display: flex; align-items: center;}
+.war_option_area .item span {font-size: 1.2rem; margin-right: 1rem; line-height: 3rem;}
+.war_option_area .days_box {margin: 0 1rem 1rem 0;}
+.war_option_area .tab_nav_area {margin: 0 1rem 1rem 0; }
+.war_option_area .btn01 {margin: 0  1rem 1rem 0;}
+
+
+.fBox {display: flex; flex-wrap: wrap; color: #333;}
+.fBox a + a {margin-left: .4rem;}
+
+/* 청소년보호정책 */
+.service_area {background: #fff; padding: 2rem; position: relative; overflow: hidden;}
+.service_area .txt {font-size: 1.3rem; line-height: 1.4; }
+.service_area .txt p {margin-bottom:.5rem; line-height: 1.4; }
+.service_area .txt + .txt {margin-top: 2rem;}
+.service_area .pBox  {display: flex; gap: 1rem; flex-wrap: wrap;}
+.service_area .pBox .ptxt {}
+
+
+.banner {background: #fff; overflow: hidden; border-radius: 1rem; display: none; }
+.banner img {max-width: 100%;}
+
+
+/* 2차지명 */
+
+.draft_list {display: flex; flex-wrap: wrap;}
+.draft_list a {display: block; width: 100%;}
+.draft_list a + a {margin-top: .5rem; }
+.draft_list a em {color: #333; margin-right: .5rem; }
+
+
+/*********** 경기일정 240327 **********/
+.new_calendar_area {max-width: 70rem; margin: 0 auto; }
+.new_calendar_area .new_calendar {padding: 2rem; border-radius: 2rem; background: #fff;}
+.new_calendar_area .new_calendar .calendar_nav {display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+.new_calendar_area .new_calendar .calendar_nav .prev {background: url(/images/prev_arrow.svg) no-repeat center; width: 3rem; height: 3rem; background-size: 2rem; font-size: 0; cursor: pointer;}
+.new_calendar_area .new_calendar .calendar_nav .next {background: url(/images/next_arrow.svg) no-repeat center; width: 3rem; height: 3rem; background-size: 2rem; font-size: 0; cursor: pointer;}
+.new_calendar_area .new_calendar .calendar_nav .tit {font-size: 2rem; font-weight: 900; font-family: 'AppleSDGothicNeo '; }
+
+
+.new_calendar_area .new_calendar .week_tit { display: flex; background: linear-gradient(135deg, rgba(225, 25, 86, 1) 0%, rgba(223, 48, 153, 1) 100%); border-radius: .5rem; }
+.new_calendar_area .new_calendar .week_tit .item { display: flex; align-items: center; justify-content: center;  flex: 1; text-align: center; text-transform: uppercase; font-size: 1.5rem; font-weight: 900; font-family: 'AppleSDGothicNeo '; padding: 1.5rem 0; color: #fff;}
+
+.new_calendar_area .new_calendar .new_days_box {display: flex; flex-wrap: wrap; border-radius: 0;}
+.new_calendar_area .new_calendar .new_days_box .item {position: relative; display: flex; align-items: center; justify-content: center; width: calc(100% / 7); min-height: 3.6rem; font-size: 1.5rem; font-weight: 600;     padding: 1rem;}
+.new_calendar_area .new_calendar .new_days_box .item::after {content: ""; display: block; padding-bottom: 80%;}
+.new_calendar_area .new_calendar .new_days_box .item .inner {width: calc(100% - 0.4rem); height: calc(100% - 0.4rem); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; }
+.new_calendar_area .new_calendar .new_days_box .item .inner.ing {background: rgb(225 25 86 / 10%) url(/images/ball_icon.svg) no-repeat center;  width: 70%; height: 70%; background-size: 3rem; font-size: 0; border-radius: 1rem;  cursor: pointer; }
+.new_calendar_area .new_calendar .new_days_box .item span {position: absolute; left: .5rem; top: .5rem; z-index: 10; font-size: 1.2rem; line-height: 1; color: #333; font-family: 'AppleSDGothicNeo '; font-weight: 700;}
+
+.new_calendar_area .new_calendar .new_days_box .item:nth-child(n+1):nth-child(-n+7) {background: #;}
+.new_calendar_area .new_calendar .new_days_box .item:nth-child(n+8):nth-child(-n+14) {background: #;}
+.new_calendar_area .new_calendar .new_days_box .item:nth-child(n+15):nth-child(-n+21) {background: #;}
+.new_calendar_area .new_calendar .new_days_box .item:nth-child(n+22):nth-child(-n+28) {background: #;}
+.new_calendar_area .new_calendar .new_days_box .item:nth-child(n+29):nth-child(-n+35) {background: #;}
+
+.modal_box {display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #fff; z-index: 310; padding: 2rem; border-radius: 1.2rem; width: 24rem; }
+.schedule_box {}
+.schedule_box .day_tit {font-size: 1.6rem; font-weight: 900; font-family: 'AppleSDGothicNeo '; margin-bottom: 2rem; text-align: center;  }
+.schedule_box span.close {position: absolute; right: 1rem; top: 1rem; display: block; width: 2.4rem; height: 2.4rem; background: url(/images/all_menu_close.svg) no-repeat center; background-size: 2.4rem; font-size: 0; cursor: pointer; }
+.schedule_box ul.games {}
+.schedule_box ul.games li {}
+.schedule_box ul.games li + li {margin-top: 1rem; }
+.schedule_box ul.games li a {display: flex; align-items: center; justify-content: space-between; text-align: center; position: relative;}
+.schedule_box ul.games li span {display:block;}
+.schedule_box ul.games li span.team {border-radius: .5rem; line-height: 2rem; font-size:1.2rem; width: 3.5rem; }
+.schedule_box ul.games li span.score {font-size:1.2rem; line-height: 2rem; color:#000; font-weight:600;  width:2.5rem; font-size: 1.6rem;}
+.schedule_box ul.games li span.score.lead{color:#FF0000;}
+.schedule_box ul.games li span.stadium {width:4rem; font-size:1.4rem; padding: .3rem .5rem; color:#000; font-weight:600;}
+.schedule_box ul.games li span.weather  {width:5rem; height:2rem; position: relative; z-index: 100;}
+.schedule_box ul.games li span.rain  {background: url(/images/rain.svg) no-repeat center; background-size: 3rem; font-size:0;}
+.schedule_box ul.games li span.dust  {background: url(/images/dust.svg) no-repeat center; background-size: 3rem; font-size:0;}
+
+
+.game_schedule_m {display: none;}
+
+
+/* 240521 광고영역 */
+.ad_area {width: 100%; position: relative; z-index: 10;}
+.ad_area::after {content:''; display: block; width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: #EBEDF0; }
+.ad_area .inner {max-width: 45rem; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; gap: 1.4rem; z-index: 10; position: relative;}
+.ad_area .inner .tbox {font-family: ''; flex: 1; display: flex; flex-direction: column;}
+.ad_area .inner .tbox .tit {font-size: 1.6rem; font-weight: 600;  line-height: 1.38; font-family:"Pretendard Variable"; letter-spacing: -.1rem; color: #222; text-align: left; word-break: keep-all;}
+.ad_area .inner .tbox .txt {display: block ;font-size: 1.4rem; font-weight: 400; line-height: 1.36; color: #999; font-family:"Pretendard Variable";padding-top:0.1rem; text-align: left;}
+.ad_area .inner .img {display: flex; align-items: center; justify-content: center; width: 14.6rem; height: 7.6rem; border-radius: .8rem; overflow: hidden;}
+.ad_area .img img {border-radius: .8rem; object-fit: cover;}
+
+.ad_area .inner .tbox a {display: block; font-size: 1.2rem; color: #E11956; font-weight: 600; border: solid .1rem #E11956; border-radius: .4rem; padding: 0; margin-top: .6rem; line-height: 2.6rem; ; width: 6.6rem; text-align: center; font-family: 'Pretendard Variable';}
+
+
+
+
+
+/* 게시판 동영상 반응형 */
+
+.board_video {max-width: 75rem; }
+.board_video .v_box {position: relative; padding-bottom: 56.25%; height: 0;}
+.board_video .v_box iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+
+
+
+
+/* 청소년보호정책 */
+.service_area .txt {font-size: 1.2rem; line-height: 1.4; }
+.service_area .txt + .txt {margin-top: 1.5rem;}
+
+
+/* WAR Special */
+.war_option_area {display:flex; margin-bottom: 2rem; }
+.war_option_area .item  {margin: 0 1rem 1rem 0; display: flex; align-items: center;}
+.war_option_area .item span {font-size: 1.2rem;margin: 0 1rem 0 0; line-height: 3rem;}
+.war_option_area .days_box {margin: 0 0 1rem 0;}
+.war_option_area .tab_nav_area {margin: 0 1rem 0 0; }
+.war_option_area .btn01 {margin-right: 1rem; margin-bottom:1rem;}
+
+
+.snslogin_area {margin-top: 1rem; }
+.snslogin_area ul.sns_lists {margin-top: 1rem; }
+.snslogin_area ul.sns_lists li a::before {content:''; display: block; width: 1.8rem; height: 1.8rem; margin:0 0 0 1.5rem;}
+
+
+.g_schedule .v_info a  {line-height: 2.2rem; height: 2.2rem; }
+
+
+/*********** 경기일정 240327 **********/
+.new_calendar_area .new_calendar .new_days_box .item::after {content: ""; display: block; padding-bottom: 100%;}
+.new_calendar_area .new_calendar .new_days_box .item .inner.ing {background: rgb(225 25 86 / 10%) url(/images/ball_icon.svg) no-repeat center;  width: 80%; height: 80%; background-size: 2rem; font-size: 0; border-radius: 1rem;  cursor: pointer; }
+.new_calendar_area .new_calendar .new_days_box .item span {position: absolute; left: .5rem; top: .5rem;  font-size: 1.2rem; line-height: 1; color: #333; font-family: 'AppleSDGothicNeo '; font-weight: 700;}
+
+.new_calendar_area .new_calendar .week_tit {margin-bottom: 1rem}
+.new_calendar_area .new_calendar .week_tit .item {font-size: 1.3rem; font-weight: 600; padding: 1rem 0; color: #fff;}
+
+/*
+.ad_area .inner {padding: 1rem 2rem; }
+.ad_area .inner .img {width: 11.4rem; height: 6rem;  }
+*/
+}
+
+/*********** 240711 **********/
+.agree_txtarea {word-break: keep-all;}
+.agree_txtarea .box_con {margin-bottom:3rem; word-break: keep-all; overflow-x: auto; width: 100%; }
+.agree_txtarea h4 {font-size:1.4rem; color:#000; line-height:1.8rem; margin-bottom:1rem; font-weight: 400; font-family: 'AppleSDGothicNeo';}
+.agree_txtarea .txt {font-size:1.3rem; color:#000; line-height:1.6rem;  font-weight:400; font-family: 'AppleSDGothicNeo';}
+.agree_txtarea .txt + .txt {margin-top: 1rem;}
+.agree_txtarea .txt div {font-size:1.2rem;color:#000; line-height:1.6rem; margin-left:.5rem;   }
+.agree_txtarea .txt .p_li {margin-top:1rem;}
+.agree_txtarea .txt .p_li li {font-size:1.2rem; line-height:1.4rem; color:#000; position:relative; padding-left:1rem; margin-left:1rem;margin-top:.5rem;}
+.agree_txtarea .txt .p_li li::before {content:"•"; display:block; font-size:1.2rem;line-height:1.4rem; color:#000; position:absolute; left:0; top:0;}
+.agree_txtarea .txt .p_li li a {color:#000;}
+.privacy_table {margin-bottom:1rem; width:100%; table-layout: fixed;}
+.privacy_table th {font-size:1.3rem; line-height:1.6rem; padding:.9rem; border:solid .1rem #ececec; background:#ececec; color: #999; }
+.privacy_table td {font-size:1.3rem; line-height:1.6rem; padding:.9rem;border:solid .1rem #ececec; text-align:center; vertical-align:middle; font-weight: 400; font-family: 'AppleSDGothicNeo'; text-align: left; vertical-align: top; color: #000; }
+
+
+/*********** 240715 **********/
+
+.player_info_header .bio.type01 {border: none; background: transparent; }
+.player_info_header .bio.type01 .in_box {border-radius: 0.5rem; background: #fff; border: solid .1rem #ddd;}
+.player_info_header .bio .profile_img01 {padding: 2rem 0; background: #111; }
+
+.new_area {padding: 1rem 2rem; border-radius: 0.5rem; background: #fff; border: solid .1rem #ddd; margin-top: 1rem; }
+.new_area .n_tit {font-size: 1.6rem; font-weight: 700; letter-spacing: -.05rem; line-height: 1.38; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-bottom: 1rem; position: relative;    padding-right: 7rem;}
+.new_area .n_tit span {}
+.new_area .n_tit a {display: block; font-size: 1.2rem; position: absolute; right: 0; top: 50%; transform: translateY(-50%); padding-right: 1.6rem; cursor: pointer; }
+.new_area .n_tit a::after {content:''; display: block; width: 1.4rem; height: 1.4rem;  background: url(/images/right04.svg) no-repeat center; background-size: 100%; position: absolute; right: 0; top: 50%; transform: translateY(-52%);}
+.new_area .new_list {}
+.new_area .new_list li {}
+.new_area .new_list li + li {margin-top: 1rem; }
+.new_area .new_list li .tit {width: 100%; font-size: 1.5rem; font-weight: 700; letter-spacing: -.05rem; line-height: 1.38; color: #000; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+.new_area .new_list li a {display: flex; align-items: center; flex-wrap: wrap;}
+.new_area .new_list li .photo {height: 5.8rem; margin-right: 1.2rem; width: 8.6rem; display: flex; align-items: center;}
+.new_area .new_list li .photo span {display: block; border-radius: .8rem; overflow: hidden; }
+.new_area .new_list li .ltxt_box { flex: 1;}
+.new_area .new_list li .txt {overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1;  -webkit-box-orient: vertical;font-size: 1.4rem; line-height: 2rem; font-weight: 500; }
+.new_area .new_list li .info {width: 100%; display: flex; align-items: center; margin-top: 1rem; }
+.new_area .new_list li .info span { color: #999; display: block; font-size: 1.2rem; font-weight: 500;  position: relative; }
+.new_area .new_list li .info span + span { margin-left: .8rem; padding-left: .8rem; }
+.new_area .new_list li .info span + span::before {content:''; display: block; width: .1rem; height: 1rem; background: #999; position: absolute; left: 0; top: 50%; transform: translateY(-50%);}
+.new_area .new_list li.no_item {}
+.new_area .new_list li.no_item a {background-color: #e1e1e1; color: #999; font-size: 1.6rem; text-align: center; padding: 1.5rem 1rem; border-radius: .8rem; font-weight: 600; line-height: 1.6; justify-content: center;}
+.new_area .new_list li.no_item a.go_news {display: flex; align-items: center; justify-content: center; font-size: 1.4rem; background: #e12456; color: #fff; font-weight: 600; padding: 1.5rem 1rem; border-radius: .8rem; }
+.new_area .new_list li.no_item a.go_news::After {content:''; display: block; width: 2rem; height: 2rem; background: url(/images/right05.svg) no-repeat center; background-size: 100%; }
+
+
+
+
+
+/*********** 240717 **********/
+
+/* 신고하기 팝업 */
+.report_box {}
+.report_box .item {padding: 1.1rem 0; }
+.report_box .item label {display: flex; align-items: center; font-size: 1.4rem;  font-weight: 600; gap: 1rem; cursor: pointer; }
+.report_box .item label input[type="radio"] {-webkit-appearance: none; -moz-appearance: none;  appearance: none; width: 2rem;  height: 2rem;  border-radius: 50%; border:solid .1rem #33333B; transition: .2s all linear; cursor: pointer; margin: 0; display: block;}
+.report_box .item label input[type="radio"]:checked {border:solid .6rem #33333B; }
+.report_txt {font-size: 1.2rem;  font-weight: 500; color: #a7a7ae; line-height: 1.44rem; letter-spacing: -.02rem; margin-top: 1rem; background:rgb(0 0 0 / 38%); border-radius: .8rem; padding: 1.5rem; text-align: center; margin-bottom: 1rem;}
+.report_txt02 {font-size: 1.2rem;  font-weight: 500; color: #fff; line-height: 1.44rem; letter-spacing: -.02rem; margin-top: 1rem; background:rgb(0 0 0 / 38%); border-radius: .8rem; padding: 1.5rem; text-align: center; margin-bottom: 1rem;}
+
+
+/* 광고영역 */
+
+.add_content {background: #EDF0F3; position: relative;  height: 10.4rem; }
+.add_content::before {content:'팬을 위한 스포츠 플랫폼'; display: block; width: 100%; font-size: 0; color: #999; letter-spacing: -.05rem; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 0; background: url(/images/common/img_da_nodata.svg) no-repeat center; height: 100%; }
+.add_content .inner {width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.add_content .con_inner {width: 100%; display: flex; align-items: center; justify-content: center; height: 10.4rem;}
+.ad_area .inner {width: 100%; max-width: 75rem;}
+.ad_area {cursor: pointer;display: none; position: relative; z-index: 100; width: 100%;}
+.div_ad {display: none;justify-content: center; background:#EDF0F3; position: relative; z-index: 100; width: 100%;}
+.ad_area .img {align-items: center; display: flex; height: 100%;}
+
+
+
+/***************************************************** 2025추가 승부예측 *******************************************************/
+/* 날짜 */
+.calendar_date {margin: 3rem 0; }
+.calendar_date .calendar_inner {display: flex; align-items: center; justify-content: center; gap: 2rem; }
+.calendar_date .calendar_inner > button {border: solid .1rem #eaeaea; background: #fff; font-size: 1.2rem; font-weight: 600; padding: 0 1rem; height: 3rem; line-height: 1;  border-radius: 10rem; cursor: pointer; }
+.calendar_date .calendar_inner .date_latest {}
+.calendar_date .calendar_inner .day_box {display: inline-flex; align-items: center; padding: 0 3rem; position: relative; }
+.calendar_date .calendar_inner .day_box .time {padding: 0 1rem; }
+.calendar_date .calendar_inner .day_box .time span {font-size: 2.5rem; font-weight: 600; display: block; height: 3rem; line-height: 1; }
+.calendar_date .calendar_inner .day_box button {border: none; font-size: 0; width: 3rem; height: 3rem; cursor: pointer; }
+.calendar_date .calendar_inner .day_box .day_prev {background: url(/images/common/left_icon.svg) no-repeat center; background-size: 3rem; position: absolute; left: 0; top: 0;}
+.calendar_date .calendar_inner .day_box .day_next {background: url(/images/common/right_icon.svg) no-repeat center; background-size: 3rem; position: absolute; right: 0; top: 0;}
+.datepicker_box {}
+.datepicker_box button {border: none; font-size: 0; width: 3rem; height: 3rem; background: url(/images/common/calendar_icon.svg) no-repeat center; background-size: 3rem;}
+
+/* 스코어박스 */
+.game_list_box {padding-bottom: 2rem;  }
+.game_list_box .item {width: calc(100% / 5);  box-sizing: border-box; }
+.game_list_box .item a {padding: .9rem; display: block; background: #fff; border: .1rem solid #f0f0f0; border-radius: .8rem; margin: 0 0.5rem;}
+.game_list_box .item.on a {border: .1rem solid #d82453; background: rgb(216 36 83 / 6%);}
+.game_list_box .item .g_info {display: flex; justify-content: space-between; margin-bottom: .7rem; }
+.game_list_box .item .g_info span {font-size: 1.2rem; line-height: 1.6rem;}
+.game_list_box .item .g_info em {background-color: #bbb; border-radius: 4px; color: #fff; font-size: 1rem; font-weight: 500; height: 1.6rem; line-height: 1.6rem; min-width: 3.4rem; padding: 0 .4rem; display: none; }
+
+.game_list_box .item ul {}
+.game_list_box .item ul li {}
+.game_list_box .item ul li + li {margin-top: 1rem; }
+.game_list_box .item .t_info {display: flex; justify-content: space-between; align-items: center;}
+.game_list_box .item .t_info .tname {display: flex; align-items: center; gap: .4rem; flex: 1; font-size: 1.4rem; font-weight: 600;  }
+.game_list_box .item .t_info .tname .box {position: relative; width: 2.4rem; height: 2.4rem;}
+.game_list_box .item .t_info .tname .box::after {content: ""; display: block; padding-bottom: 100%;}
+.game_list_box .item .t_info .tname .box span {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.game_list_box .item .t_info em { font-size: 1.4rem; font-weight: 600; }
+.game_list_box .item .p_graph {background-image: linear-gradient(90deg, rgba(201, 201, 201, 1) 0%, rgba(241, 234, 234, 1) 95%); border-radius: .3rem; margin-top: .3rem; }
+.game_list_box .item .p_graph.win {background-image: linear-gradient(270deg, #f08caa, #d82453 50%);}
+.game_list_box .item .p_graph span {display: inline-block; font-size: 1rem; color: #fff; padding: .2rem .5rem;  }
+
+.game_list_box .swiper-pagination {bottom: 0; left: 0; width: 100%}
+
+
+/* 승부예측 */
+.new_tit {margin-bottom: 4rem; color: #333; font-size: 2rem; font-weight: 700;}
+.new_tit span {color: #d82453; }
+.live_game_area {margin-bottom: 4rem; overflow: hidden; }
+
+.match_item {margin-bottom: 4rem;}
+.match_item .tit {color: #333; font-size: 2rem; font-weight: 700; margin-bottom: 2rem; }
+.match_item .sub_tit {font-size: 1.6rem; font-weight: 700; margin-bottom: 1.2rem; display: flex; align-items: center; }
+
+.predict_graph {margin-bottom:4rem; }
+.predict_graph .predict {display: flex; width: 100%; border-radius: .5rem; overflow: hidden; }
+.predict_graph .predict .p_item {display: flex; }
+.predict_graph .predict .p_item span {color: #fff; display: inline-block; font-size: 1.6rem; font-weight: 700; height: 3.4rem; line-height: 3.4rem; padding: 0 1rem; white-space: nowrap;}
+.predict_graph .left,
+.team_name .left {justify-content: start;}
+.predict_graph .right,
+.team_name .right {justify-content: flex-end;}
+
+.predict_graph .left.win {background-image: linear-gradient(270deg, #f08caa, #d82453 50%);}
+.predict_graph .left.lose {background-image: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(201,201,201,1) 30%);}
+.predict_graph .right.win {background-image: linear-gradient(90deg, #f08caa, #d82453 50%);}
+.predict_graph .right.lose {background-image: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(201,201,201,1) 30%);}
+
+
+
+.team_name {display: flex; width: 100%; margin-top: 2rem; }
+.team_name .team_item {display: flex; align-items: center; gap: .5rem; width: 50%; font-size: 1.4rem; font-weight: 600; }
+.team_name .team_item .box {position: relative; width: 3rem; }
+.team_name .team_item .box::after {content: ""; display: block; padding-bottom: 100%;}
+.team_name .team_item .box span {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;}
+.team_name .team_item .box span img {width: 100%; }
+
+
+.tool_box {position: relative; margin-left: .2rem; cursor: pointer; flex: 1;}
+.tool_box .btn {display: block; width: 2rem; height: 2rem; font-size: 0; background: url(/images/tool_icon.svg) no-repeat center; }
+.tool_box .tool_con {display: none; position: absolute; left: 1rem; top: 0; z-index: 10; background: #fff; padding: 1rem 2rem 1rem 1rem; border: .1rem solid #f0f0f0; border-radius: 8px; box-shadow: 0 .6rem 1.8rem 0 rgba(0, 0, 0, .08); font-size: 1.2rem; line-height: 1.3;  max-width: 30rem; font-weight: 500; }
+.tool_box.active .tool_con {display: block; }
+.tool_box .tool_con .close {display: block; width: 2rem; height: 2rem; font-size: 0; background: url(/images/icon_close.svg) no-repeat center; background-size:1.4rem; position: absolute; right: .5rem; top: 1rem;}
+.predict_text {background: #fff7fa; border: .1rem solid #ffd7e2; border-radius: .8rem; color: #222; margin-top: .6rem; padding: 1rem 1.2rem; font-size: 1.3rem; line-height: 1.3; }
+
+
+.comparison_area {display: flex; gap: 2rem; }
+
+.comparison_box {margin-bottom: 3rem; flex: 1; }
+.comparison_con {background: #fff; padding: 2rem 0; border-radius: .8rem; box-shadow: 0px 0 .5rem #c9c9c9; position: relative; overflow: hidden; }
+.comparison_con .away {width: 43rem; height: 100%; position: absolute; left: -10rem; top: 50%; transform: translateY(-50%); opacity: .2; }
+.comparison_con .home {width: 43rem; height: 100%; position: absolute; right: -10rem; top: 50%; transform: translateY(-50%); opacity: .2;}
+
+.comparison_con .new_box {display: flex;}
+.comparison_con .new_box .player_box {flex-direction: column; gap: 1rem !important; }
+
+
+
+.comparison_box .tit {font-size: 1.8rem; font-weight: 700; line-height: 2.4rem; padding: 0 0 1.6rem;}
+.comparison_box .tit span {color: #999; font-size: 1.2rem; font-weight: 400; line-height: 1.33; padding-top: .8rem; display: block; }
+.comparison_box .inner {}
+.comparison_box .inner .player_box {display: flex; align-items: center; justify-content: center; gap: 8rem;}
+.comparison_box .inner .player_box .item {}
+.player_box .p_info {position: relative;}
+.player_box .p_info .p_inner {width:7rem; max-height: 8rem; overflow: hidden; border-radius: 2rem; margin: 0  auto; border: solid 0.1rem transparent; box-shadow: 0px 0 .2rem #c9c9c9; position: relative; z-index:10; display: flex; align-items: flex-start; justify-content: center; background: #fff;}
+.player_box .p_info .team_logo {position: absolute; right: -1rem; bottom: 2rem;  width: 3rem; height: 3rem; z-index: 10; }
+.player_box .p_info .team_logo::after {content: ""; display: block; padding-bottom: 100%;}
+.player_box .p_info .team_logo .logo_inner {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.player_box .p_info .name {font-size: 1.2rem; font-weight: 600; line-height: 1.33; text-align: center; margin: .2rem 0;}
+
+
+.comparison_box .inner .record_box {padding-bottom: 1.2rem;}
+.comparison_box .inner .record_box ul {align-items: center; display: flex; height: 28px; justify-content: center; text-align: center;}
+.comparison_box .inner .record_box ul li {font-weight: 500;}
+.comparison_box .inner .record_box ul li.value {font-size: 1.4rem; line-height: 1.43; width: 10.8rem;}
+.comparison_box .inner .record_box ul li.label {color: #999; font-size: 1.2rem; line-height: 2; width: 10.6rem;}
+.comparison_box .inner .record_box ul li.value.win {color: #e11956;}
+
+
+.team_season {background: #fff; padding: 2rem 0; border-radius: .8rem;  box-shadow: 0px 0 .5rem #c9c9c9;}
+.team_season .team_logo {position: relative; width: 3.6rem; height: 3.6rem; margin: 0 .8rem;}
+.team_season .team_logo::after {content: ""; display: block; padding-bottom: 100%;}
+.team_season .team_logo .logo_inner {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+
+.team_season ul {display: flex; align-items: center; justify-content: center;}
+.team_season ul~ul {margin-top: 2rem; }
+.team_season ul li {align-items: center; display: flex; height: 28px; justify-content: center; text-align: center; gap: .5rem; }
+.team_season ul li.label.vs {background: url(/images/icon_vs.svg) no-repeat 50%; flex: 0 0 11rem; height: 2.4rem; font-size: 0; }
+.team_season ul li.label {color: #999; font-size: 1.4rem; line-height: 2; width: 13.6rem;}
+.team_season ul li.value.win {color: #e11956;}
+.team_season ul li.away,
+.team_season ul li.home {font-size: 1.4rem; font-weight: 600; line-height: 1.43;}
+.team_season ul li .rank {color: #999;}
+.team_season ul li .rank.win {color: #f08caa;}
+
+.team_season ul li .t_name {display: flex; align-items: center; gap: 1rem; font-size: 1.7rem; font-weight: 600; line-height: 1.38;  }
+.team_season ul li .t_name em {color: #e11956; font-size: 1.3rem; font-weight: 500; line-height: 1.33;}
+
+.recent_game {border-radius: .8rem;  margin: .6rem 0 2rem; padding: 1.6rem 0; background: #fff; box-shadow: 0px 0 .5rem #c9c9c9;}
+.recent_game .team_logo {position: relative; width: 6rem; height: 6rem; margin: 0 .8rem;}
+.recent_game .team_logo::after {content: ""; display: block; padding-bottom: 100%;}
+.recent_game .team_logo .logo_inner {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.recent_game .team_logo .logo_inner .s_logo {width: 4.5rem; height: 4.5rem; }
+.recent_game ul {display: flex; align-items: center; justify-content: center; gap: 3rem; }
+.recent_game ul li {}
+.recent_game ul li .score {text-align: center; }
+.recent_game ul li .score span {font-size: 1.6rem; color: #bbb; font-weight: 700; line-height: 2rem;}
+.recent_game ul li .score span.win {color: #222;}
+.recent_game ul li .score em {font-size: 1.6rem; color: #bbb; font-weight: 700; line-height: 2rem;}
+.recent_game ul li .day {color: #bbb; font-size: 1.43rem; font-weight: 500; line-height: 1.6rem; text-align: center;}
+
+
+
+.hitter_item + .hitter_item  {padding-top: 1.6rem;  }
+.hitter_item .player_box {gap: 2rem !important; }
+.hitter_item .player_box .vs { background: url(/images/icon_vs.svg) no-repeat 50%; height: 2.4rem; font-size: 0; width: 10rem; }
+.hitter_item .n_point {}
+.hitter_item .n_point li {display: flex;     justify-content: center;}
+.hitter_item .n_point li + li {margin-top: 1rem; }
+.hitter_item .n_point li span { font-size: 1.3rem; font-weight: 500; line-height: 1.33;}
+.hitter_item .n_point li em { font-size: 1.3rem; font-weight: 500; line-height: 1.33; margin-left: .4rem; }
+
+
+.bg_away {width: 40%; height: 100%; position: fixed; left: -12%; top: 50%; transform: translateY(-50%); opacity: .1; z-index: -1;}
+.bg_home {width: 40%; height: 100%; position: fixed; right: -12%; top: 50%; transform: translateY(-50%); opacity: .1; z-index: -1;}
+
+.bg_away.ax,
+.bg_home.ax {position: fixed; top: 50%; transform: translateY(-50%);}
+
+
+/* 맞대결 타자순위 new */
+
+.battle_area {display: flex; align-items: center; justify-content: center; gap: 10rem; }
+.battle_area .item {}
+.battle_area .item .logo_box {display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;  }
+.battle_area .item .logo_box::before {content:''; display: block;  background: url(/images/icon_vs.svg) no-repeat center; width: 6rem; height: 6rem; background-size: 3rem;}
+.battle_area .item .logo_box .log {position: relative; width: 6rem; height: 6rem;}
+.battle_area .item .logo_box .log span {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;}
+.battle_area .item .logo_box .log::after {content: ""; display: block; padding-bottom: 100%;}
+
+.battle_area .item .b_inner {}
+.battle_area .item .b_inner + .b_inner {margin-top: 2rem; }
+.battle_area .item .b_inner a {display: flex; gap: 1rem; align-items: center; justify-content: space-between; width: 100%; }
+.battle_area .item .b_inner .photo {width: 7rem; max-height: 8rem; overflow: hidden; border-radius: 2rem; border: solid 0.1rem transparent; box-shadow: 0px 0 .2rem #c9c9c9; position: relative; z-index: 10; background: #fff; display: block; }
+.battle_area .item .b_inner:nth-last-child(-n+2) .photo {display: none; }
+.battle_area .item .b_inner .p_info {}
+.battle_area .item .b_inner .p_info .p_box {display: flex; align-items: center; gap: 1rem; }
+.battle_area .item .b_inner .p_info .p_box .name {font-size: 1.8rem; font-weight: 600; display: flex; align-items: center; gap: .5rem; justify-content: space-between;}
+.battle_area .item .b_inner .p_info .p_box .name span {font-size: 1.8rem; font-weight: 600; display: flex; align-items: center; color: #e11956; }
+.battle_area .item .b_inner .p_info .p_box .name span::after {content: '위'; font-size: 1.8rem; font-weight: 600; color: #e11956;}
+.battle_area .item .b_inner .p_info .p_box .ops {font-size: 1.8rem; font-weight: 600; display: flex; align-items: center; color: #333; gap: .5rem; }
+.battle_area .item .b_inner .p_info .p_box .ops::before {content: 'OPS :'; font-size: 1.8rem; font-weight: 600; color: #333;}
+.battle_area .item .b_inner .p_info .my_point { font-size: 1.6rem; font-weight: 600; color: #333; display: flex; align-items: center; justify-content: end; gap: .5rem; margin-top: .6rem;  }
+.battle_area .item .b_inner .p_info .my_point::before {content: '내프야P :'; font-size: 1.6rem; font-weight: 600; color: #333;}
+
+
+.battle_area .item .b_inner:nth-last-child(-n+2) .p_info {width: 100%; }
+.battle_area .item .b_inner:nth-last-child(-n+2) .p_info .p_box {width: 100%; justify-content: space-between;}
+
+.battle_area .item .b_inner:nth-last-child(3) .p_info .my_point,
+.battle_area .item .b_inner:nth-last-child(3) .p_info .p_box .ops {justify-content: space-between;}
+.battle_area .item .b_inner:nth-last-child(3) .p_info .p_box {display: flex; align-items: center; gap: 1rem; flex-direction: column;}
+.battle_area .item .b_inner:nth-last-child(3) .p_info .p_box .name {width: 100%;}
+
+
+.team_logo.cc {display: flex; align-items: center; width: 12rem;  }
+.team_logo.cc .logo_inner {width: 6rem; }
+.team_logo.cc::before {content:''; display: block;  background: url(/images/icon_vs.svg) no-repeat center; width: 6rem; height: 6rem; background-size: 3rem;}
+
+
+/* 이벤트팝업 */
+
+.event_poparea {position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 800; display: flex; align-items: center; justify-content: center; gap: 5rem; width: 100%; height: 100%; }
+.event_poparea::after {content:''; display: block; width: 100%; height: 100%; background: rgb(0 0 0 / 50%); position: absolute; left: 0; top: 0; z-index: -1;}
+.event_poparea .event_item {background: #fff;  width: 34rem; border-radius: 1rem; overflow: hidden; display: none; }
+.event_item .event_img {position: relative;}
+.event_item .close_btn {width: 3rem;  height:3rem; cursor: pointer; font-size:0;  position: absolute; right: 1rem; top: 1rem;  z-index: 20; border-radius: 50%; border: none;}
+.event_item[name="popup1"] .close_btn {background: url(/images/close_menu.svg) no-repeat center; background-size: 100%; }
+.event_item[name="popup2"] .close_btn {background: url(/images/close_menu.svg) no-repeat center; background-size: 100%; }
+.event_item[name="popup3"] .close_btn {background: url(/images/close_menu.svg) no-repeat center; background-size: 100%; }
+.event_item .event_img a {display: block; }
+
+.today_box {font-size: 1.4rem; color: #fff; padding: 1rem 1rem .6rem 1rem; }
+.today_box.color_000 {color: #000; }
+.today_box input[type=checkbox] {display:none;}
+.today_box input[type=checkbox] + label {cursor: pointer; padding:0 5rem 0 0; background: url(/images/check_off.svg) no-repeat 0 0; background-size: 2rem; display: block; height: 2rem;  padding: 0 0 0 3rem; font-size: 1.4rem}
+.today_box input[type=checkbox]:checked + label {background: url(/images/check_on.svg) no-repeat 0 0; background-size: 2rem; height: 2rem;}
+
+
+
+/* 대학 승부예측 */
+
+.u_tit {font-size: 3.4rem; font-weight: 600; text-align: center; padding: 3rem 0 5rem 0; }
+
+.u_container {display: flex; justify-content: space-between; width: 100%; gap: 2.4rem; flex-wrap: wrap; }
+.u_container .u_left_box {width: 84.5rem; }
+.u_container .u_right_box {width: 41rem;  flex: 1;}
+
+
+.new_day_box {margin-bottom: 2.5rem; }
+.new_day_box .d_inner {display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.new_day_box .d_inner a {display: block; font-size: 1.4rem; color: #767676; line-height: 4rem; font-weight: 600; }
+.new_day_box .d_inner .day_tbox {display: flex; align-items: center; }
+.new_day_box .d_inner .day_tbox span.btn {display: block; width: 4rem; height: 4rem; font-size: 0; cursor: pointer;}
+.new_day_box .d_inner .day_tbox span.txt {display: block; font-size: 1.8rem; font-weight: 600; padding: 0 1rem; line-height: 4rem; }
+.new_day_box .d_inner .day_tbox span.day_prev {background: url(/images/left_u_icon.svg) no-repeat center;}
+.new_day_box .d_inner .day_tbox span.day_next {background: url(/images/right_u_icon.svg) no-repeat center;}
+.new_day_box .d_inner .day_tbox span.day_prev {background: url(/images/left_u_icon.svg) no-repeat center;}
+.new_day_box .d_inner .calendar_box {position: relative; display: inline-block;}
+.new_day_box .d_inner .calendar_box  #calendarBtn {border: none; background: url(/images/calendar_icon.png) no-repeat center; display: block; width: 4rem; height: 4rem; cursor: pointer;  }
+.new_day_box .d_inner .calendar_box  #datePicker {position: absolute; inset: 0; opacity: 0; pointer-events: none;}
+
+
+.game_list {margin-bottom: 6rem; }
+.game_list .items {border-top-left-radius: .6rem; border-top-right-radius: .6rem; overflow: hidden; }
+.game_list .items + .items {margin-top: 1.2rem; }
+.game_list .items .game_tit {background: #fff; text-align: center; font-size: 18px; font-weight: 600; height: 34px; padding-top: 8px;}
+.game_list .items .u_graph_area {position: relative; height: 9.6rem; }
+.game_list .items .u_graph_area .u_graph_box {display: flex; align-items: center; position: absolute; left: 0; top: 0; width: 100%; height: 9.6rem; z-index: 1;}
+.game_list .items .u_graph_area .u_graph_box .graph_bar {height: 9.6rem;}
+.game_list .items .u_graph_area .team_info {display: flex; align-items: center; justify-content: space-between; position: absolute; left: 0; top: 50%; width: 100%; transform: translateY(-50%);  z-index: 2;}
+.game_list .items .u_graph_area .team_info .team_box {display: flex; align-items: center; justify-content: space-between; width: 18.8rem; padding: 0 1.5rem; height: 9.6rem; }
+.game_list .items .u_graph_area .team_info .team_box .t_logo {display: flex; align-items: center; justify-content: center; width: 6.4rem; height: 6.4rem; }
+.game_list .items .u_graph_area .team_info .team_box .choice_box {min-width: 9.4rem; text-align: center; }
+.game_list .items .u_graph_area .team_info .team_box .choice_box span {font-family: 'Montserrat Alternates'; font-size: 4rem; font-weight: 600; color: #fff;}
+.game_list .items .u_graph_area .team_info .team_box .choice_box em {font-family: 'Montserrat Alternates'; font-size: 1.8rem; font-weight: 400; color: #fff;}
+
+.game_list .items .u_graph_area .team_info .vs_info {display: none; align-items: center; justify-content: center; gap: 1.5rem; }
+.game_list .items .u_graph_area .team_info .vs_info span {font-family: 'Montserrat Alternates'; font-size: 5rem; font-weight: 600; color: #fff; }
+.game_list .items .u_graph_area .team_info .vs_info em {width: 2.1rem; height: 2rem; background: url(/images/vs_icon.svg) no-repeat 0 0; }
+
+
+/* 경기진행중 */
+.game_list .items.g_ing {}
+.game_list .items.g_ing .u_graph_area .team_info .vs_info {display: flex; }
+
+/* 경기종료 */
+.game_list .items.g_end {}
+.game_list .items.g_end .u_graph_area .team_info .vs_info {display: flex; }
+.game_list .items.g_end .u_graph_area .team_info .team_box.win .choice_box span,
+.game_list .items.g_end .u_graph_area .team_info .team_box.win .choice_box em {color: #FFEF00;}
+.game_list .items.g_end .u_graph_area .team_info .vs_info span.win {color: #FFEF00;}
+.game_list .items.g_end .u_graph_area .u_graph_box .graph_bar.lose {background: #B9B9B9;}
+.game_list .items.g_end .u_graph_area .team_info .team_box.lose {background: #B9B9B9;}
+
+/* 경기취소 */
+.game_list .items.g_cancel {height: 13rem; position: relative; }
+.game_list .items.g_cancel::before {content: '경기취소'; display: block; font-size: 2rem; font-weight: 600; color: #fff; position: absolute; left: 0; top: 50%; transform: translateY(-50%);  z-index: 12; width: 100%; text-align: center; }
+.game_list .items.g_cancel::after {content: ''; display: block; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); position: absolute; left: 0; top: 0; z-index: 10; }
+.game_list .items.g_cancel .u_graph_area {background: #B9B9B9;}
+.game_list .items.g_cancel .u_graph_area .u_graph_box {display: none; }
+.game_list .items.g_cancel .u_graph_area .team_info .team_box .choice_box {display: none; }
+.game_list .items.g_cancel .u_graph_area .team_info .team_box.away {background: #B9B9B9;}
+.game_list .items.g_cancel .u_graph_area .team_info .team_box.home {background: #B9B9B9; justify-content: end;}
+
+
+.ut_1001 {background: #005BAC;}
+.ut_2002 {background: #E30222;}
+.ut_3001 {background: #042445;}
+.ut_5002 {background: #C30037;}
+.ut_6002 {background: #0C1431;}
+.ut_7002 {background: #EA5016;}
+.ut_9002 {background: #CF0022;}
+.ut_10001 {background: #870020;}
+.ut_11001 {background: #002C69;}
+.ut_12001 {background: #231916;}
+
+
+.u_comment {padding: 2.4rem 2.8rem 5rem 2.8rem; background: #fff; border-radius: .6rem;}
+.u_comment .tit {display: flex; align-items: center; margin-bottom: 1.7rem; }
+.u_comment .tit::before {content: ''; display: block;width: 2.6rem; height: 2.3rem; background: url(/images/comment_icon.svg) no-repeat 0 0;}
+.u_comment .tit span {font-size: 1.8rem; font-weight: 600; margin-left: 1rem;  }
+.u_comment .tit a {font-size: 0; width: 2.6rem; height: 2.3rem; background: url(/images/reset_icon.svg) no-repeat center;}
+
+.u_comment .message_box {display: flex; justify-content: space-between; background: #F5F7F9; padding: 1.4rem 1.8rem; border-radius: .6rem; overflow: hidden; }
+.u_comment .message_box textarea {flex: 1; background: transparent; height: 8rem; padding: 0; }
+.u_comment .message_box .u_btn_box {display: flex; align-items: end; gap: 1rem; }
+.u_comment .message_box .u_btn_box .count_num {font-size: 1.6rem; color: #969696; }
+.u_comment .message_box .u_btn_box .count_num em {font-size: 1.6rem; color: #969696;}
+.u_comment .message_box .u_btn_box button {font-size: 1.6rem; border: none; background: #e11956; color: #fff; border-radius: .5rem; padding: .7rem 3rem; cursor: pointer; }
+
+.u_comment_list {}
+.u_comment_list .item {border-bottom: solid .1rem #D4D4D4; margin-top: 3.6rem; }
+.u_comment_list .item .user_info {display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.4rem; }
+.u_comment_list .item .user_info span {font-size: 1.4rem; display: flex; align-items: center; gap: .4rem; }
+.u_comment_list .item .user_info span::before {content: ''; display: block;width: 1.3rem; height: 1.2rem; background: url(/images/s_icon.svg) no-repeat 0 0;}
+.u_comment_list .item .user_info .a_box {display: flex; align-items: center; gap:  .5rem; }
+.u_comment_list .item .user_info a {font-size: 1.4rem; display: flex; align-items: center; gap: .4rem; color: #969696; }
+.u_comment_list .item .user_info a::before {content: ''; display: block;width: 1.8rem; height: 1.8rem; background: url(/images/report_icon.svg) no-repeat 0 0;}
+.u_comment_list .item .txt {font-size: 1.6rem; line-height: 2rem; padding-bottom: 1.9rem;  }
+.u_comment_list .u_inner .list_item .no_txt {font-size: 1.8rem; text-align: center; height: 20rem; display: flex; align-items: center; justify-content: center; background: #F5F7F9; margin-top: 2rem;}
+
+.u_comment_list .more_btn {display: flex; align-items: center; justify-content: center; margin-top: 3rem;}
+.u_comment_list .more_btn button {background: transparent; font-size: 1.8rem; font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.u_comment_list .more_btn button::after {content: ''; display: block; width: 3rem; height: 3rem; background: url(/images/common/left_icon.svg) no-repeat center; transform: rotate(270deg);}
+
+.u_right_box {margin-top: 6.5rem; }
+.u_right_box .r_box {padding: 2.4rem 1.8rem 1rem 1.8rem; border: solid .1rem #E9E9E9; background: #fff; border-radius: .6rem; overflow: hidden; }
+.u_right_box .r_box .item {}
+.u_right_box .r_box .item .u_tit02 {font-size: 1.8rem; font-weight: 600; position: relative; padding-left: 3.3rem; line-height: 2.3rem;  }
+.u_right_box .r_box .item .u_tit02::before {content: ''; display: block; width: 2.3rem; height: 2.3rem; background: url(/images/u_point_01.svg) no-repeat center; position: absolute; left: 0; top: .1rem; }
+.u_right_box .r_box .item .nom {text-align: center; padding: 4rem 0;}
+.u_right_box .r_box .item .nom span {font-size: 6rem; font-family: 'Montserrat Alternates'; font-weight: 600; color: #E11956;}
+.u_right_box .r_box .item .nom em {font-size: 3rem; font-family: 'Montserrat Alternates'; font-weight: 600; color: #E11956;}
+.u_right_box .r_box .bt_box {display: flex; align-items: center; justify-content: space-between; border-top: solid .1rem #C1BDBD; padding: 1.2rem 0; }
+.u_right_box .r_box .bt_box span {font-size: 1.4rem; color: #969696;  }
+
+.right_rank_box {margin-top: 3.4rem; }
+.right_rank_box .rank_tit {display: flex; align-items: center; justify-content: space-between; padding: 0 2rem 0 2.4rem; margin-bottom: 2.4rem; }
+.right_rank_box .rank_tit a {font-size: 1.8rem; font-weight: 600; color: #2C2C2C; position: relative; line-height: 3.1rem; padding-left: 3.6rem; }
+.right_rank_box .rank_tit a::before {content: ''; display: block; width: 2.6rem; height: 3.1rem; background: url(/images/u_point_02.svg) no-repeat center; position: absolute; left: 0; top: 0; }
+.right_rank_box .rank_tit span {font-size: 1.4rem; color: #969696; }
+.right_rank_box .item + .item {margin-top: 3rem; }
+.right_rank_box .item .r_tit {font-size: 1.4rem; color: #2C2C2C; font-weight: 600; position: relative; padding-left: 1rem;  margin: 0 0 1rem 1rem; }
+.right_rank_box .item .r_tit::before {content: ''; display: block; width: .5rem; height: .5rem; background: #2C2C2C; border-radius: 5rem; position: absolute; left: 0; top: .4rem;   }
+.right_rank_box .item .r_table {border-radius: .6rem; overflow: hidden;}
+.right_rank_box .item .r_table table {background: #fff; width: 100%; }
+.right_rank_box .item .r_table table th {background: #E11956; font-size: 1.6rem; color: #fff; padding: 1.2rem 0; font-weight: 400; }
+.right_rank_box .item .r_table table td {text-align: center; font-size: 1.6rem; color: #2C2C2C; padding: 1.2rem 0;}
+.right_rank_box .item .r_table table td .n_name {white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10rem; }
+.right_rank_box .item .r_table table tr.first td {background: #FFEFF4; }
+.right_rank_box .item .r_table table tr.first td.no01 {color: #FF0000; }
+
+
+
+/* 대학 승부예측 랭킹 */
+.rank_table_box {display: flex; align-items: center; justify-content: end; margin-bottom: 1rem; }
+.rank_table_box .tit {font-size: 2rem; font-weight: 600; }
+.rank_table_box .select_div {min-width: 11rem; overflow: hidden; position: relative;}
+.rank_table_box .select_div::after {content: ''; display: block; width: 1rem; height: 1rem; background: url(/images/select_arrow_h.svg) no-repeat center; background-size: 1rem; position: absolute; right: 1rem; top: 50%; margin-top: -.5rem;}
+.rank_table_box .select_div select::-ms-expand {display: none;}
+.rank_table_box .select_div select {-o-appearance: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; border: none; width: 100%; padding: .5rem 1rem;}
+.rank_table_box .select_div select:focus {border: none; }
+
+.rank_area {}
+.rank_area .rank_list {border-radius: .6rem; overflow: hidden; border: solid .1rem #ddd; }
+.rank_area .rank_list table {width: 100%; background: #fff; }
+.rank_area .rank_list table th {text-align: center;  background: #E11956; padding: 1.9rem 0; }
+.rank_area .rank_list table th > div {font-size: 1.6rem; color: #fff;}
+.rank_area .rank_list table th .arrow {display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.rank_area .rank_list table th .arrow::after {content: ''; display: block; width: 2.4rem; height: 2.4rem; background: url(/images/arrow_icon.svg) no-repeat center;}
+.rank_area .rank_list table th.no {width: 14rem;}
+.rank_area .rank_list table th.team {}
+.rank_area .rank_list table th.hit {width: 14rem;}
+.rank_area .rank_list table th.hand {width: 14rem;}
+.rank_area .rank_list table th.all_kill {width: 14rem;}
+.rank_area .rank_list table td {border-bottom: solid .1rem #ddd; text-align: center; vertical-align: middle;}
+.rank_area .rank_list table td .no_tit {font-size: 1.6rem; font-weight: 500; height: 6.9rem; display: flex; align-items: center; justify-content: center; position: relative; }
+.rank_area .rank_list table td .team_tit {text-align: left; }
+.rank_area .rank_list table td .team_tit span {display: block; font-size: 1.6rem; font-weight: 600;}
+.rank_area .rank_list table td .team_tit em {display: block; font-size: 1.6rem; font-weight: 400; margin-top: 1rem; }
+.rank_area .rank_list table td .hit_tit {font-size: 1.6rem;}
+.rank_area .rank_list table td .hand_tit {font-size: 1.6rem;}
+.rank_area .rank_list table td .all_tit {font-size: 1.6rem;}
+.rank_area .rank_list table tr.my_rank td {background: #EFEFEF; }
+.rank_area .rank_list table tr:last-child td {border: none; }
+
+.rank_area .rank_list table tr.first td .no_tit::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; background: url(/images/rank_01.svg) no-repeat center;     background-size: contain; position: absolute; left: 3rem; top: 50%; margin-top: -1.2rem;  }
+.rank_area .rank_list table tr.second td .no_tit::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; background: url(/images/rank_02.svg) no-repeat center;     background-size: contain; position: absolute; left: 3rem; top: 50%; margin-top: -1.2rem; }
+.rank_area .rank_list table tr.third td .no_tit::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; background: url(/images/rank_03.svg) no-repeat center;     background-size: contain; position: absolute; left: 3rem; top: 50%; margin-top: -1.2rem; }
+
+.rank_area .rank_list table tr.first td .no_tit,
+.rank_area .rank_list table tr.first td .hit_tit,
+.rank_area .rank_list table tr.first td .hand_tit,
+.rank_area .rank_list table tr.first td .all_tit {color: #FF0000; }
+.all_kill_tit {position: relative; display: flex; align-items: center; justify-content: center; }
+.all_kill_tit span {font-size: 0; cursor: pointer; }
+
+.allkill_notice {display: flex; align-items: center; justify-content: end; position: relative; margin-bottom: 2rem; }
+.allkill_notice .item { }
+.allkill_notice .item .btn {font-size: 1.6rem; color: #2C2C2C; display: flex; align-items: center; cursor: pointer;}
+.allkill_notice .item .btn::after {content: ''; display: block; width: 2.4rem; height: 2.4rem; background: url(/images/noti_icon.svg) no-repeat center; background-size: 2rem;}
+.allkill_notice .item .txt {display: none; position: absolute; right: 0; top: 0; background: #fff; padding: 1rem; border-radius: .6rem; font-size: 1.4rem; line-height: 1.3; z-index: 10; max-width: 30rem; box-shadow: 0 0 1rem rgb(136 136 136 / 38%);  }
+.allkill_notice .item:hover .txt {display: block; }
+
+
+/* 대학별 상세페이지 */
+
+.detail_area {overflow: hidden; padding-top: 1.8rem }
+.uteam_area {display: flex; gap: 8rem; margin-bottom: 3.5rem; }
+.uteam_area .uteam_info {width: 49rem;}
+.uteam_area .uteam_info02 {width: 62.4rem; border-radius: 12px; border: .1rem solid #DDD; background: #FFF; padding: 4rem 5rem 3rem 5rem; }
+.uteam_area .uteam_info .uteam_info_inner {display: flex; align-items: center; gap: 3rem; margin-bottom: 5rem; }
+.uteam_area .uteam_info .uteam_info_inner .ranking {width: 10.2rem; height: 10.2rem; border-radius: 1.2rem; background: linear-gradient(142deg, #FE72D8 5.88%, #E11957 88.2%); display: flex; align-items: center; justify-content: center; font-size: 4.2rem; font-weight: 600; color: #fff; position: relative; }
+.uteam_area .uteam_info .uteam_info_inner .ranking.rank_01::before {content: ''; display: block; width: 5.2rem; height: 4.8rem; background: url(/images/rank_01.svg) no-repeat center; background-size: contain; position: absolute; right: -2rem; bottom: -1rem;}
+.uteam_area .uteam_info .uteam_info_inner .ranking.rank_02::before {content: ''; display: block; width: 5.2rem; height: 4.8rem; background: url(/images/rank_02.svg) no-repeat center; background-size: contain; position: absolute; right: -2rem; bottom: -1rem;}
+.uteam_area .uteam_info .uteam_info_inner .ranking.rank_03::before {content: ''; display: block; width: 5.2rem; height: 4.8rem; background: url(/images/rank_03.svg) no-repeat center; background-size: contain; position: absolute; right: -2rem; bottom: -2rem;}
+.uteam_area .uteam_info .uteam_info_inner .ut_name {text-align: left;}
+.uteam_area .uteam_info .uteam_info_inner .ut_name em {display: block; font-size: 1.6rem; line-height: 1; }
+.uteam_area .uteam_info .uteam_info_inner .ut_name span {display: block; font-size: 2rem; line-height: 1; font-weight: 600; margin-top: 1rem; }
+.uteam_area .uteam_info .t_txt_area {}
+.uteam_area .uteam_info .t_txt_area .t_txt {font-size: 1.6rem; line-height: 1.4; display: inline-flex; text-align: left; align-items: center; justify-content: center; word-break: break-word; overflow-wrap: anywhere;}
+.uteam_area .uteam_info .t_txt_area .more-btn-wrap {display: flex; margin-top: 2.5rem;}
+.uteam_area .uteam_info .t_txt_area .more-btn {border: none; background: transparent; font-size: 1.6rem; cursor: pointer; font-weight: 600; padding: 0; }
+.uteam_area .uteam_info .t_txt.is-clamped{ display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;}
+
+.uteam_info02 {}
+.uteam_info02 .tit {font-size: 2rem; color: #454545; font-weight: 600; text-align: center; margin-bottom: 1.1rem; }
+.uteam_info02 .tit span {font-weight: 500;}
+.uteam_info02 .rank_tit {margin-bottom: 2rem; }
+.uteam_info02 .rank_tit span {display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; gap: 1rem; }
+.uteam_info02 .rank_tit.rank_01 span::before {content: ''; display: block; width: 2.4rem; height: 2.1rem; background: url(/images/rank_01.svg) no-repeat center; background-size: contain;}
+.uteam_info02 .rank_tit.rank_02 span::before {content: ''; display: block; width: 2.4rem; height: 2.1rem; background: url(/images/rank_02.svg) no-repeat center; background-size: contain;}
+.uteam_info02 .rank_tit.rank_03 span::before {content: ''; display: block; width: 2.4rem; height: 2.1rem; background: url(/images/rank_03.svg) no-repeat center; background-size: contain;}
+
+
+.uteam_info02 .predict {display: flex; border-radius: 1.2rem; overflow: hidden; background: #D9D9D9; margin-bottom: 3.4rem;  }
+.uteam_info02 .predict .p_item {display: flex; border-radius: 1.2rem; }
+.uteam_info02 .predict .p_item span {color: #fff; display: inline-block; font-size: 1.4rem; font-weight: 600; height: 3.4rem; line-height: 3.4rem; padding: 0 1rem; white-space: nowrap;}
+.uteam_info02 .predict .left.win {background-image: linear-gradient(116deg, #FE72D8 27.43%, #E11957 86.5%);}
+.uteam_info02 .predict .left.lose span {color: #454545;}
+.uteam_info02 .predict .right.win {background-image: linear-gradient(116deg, #FE72D8 27.43%, #E11957 86.5%);}
+.uteam_info02 .predict .right.lose span {color: #454545;}
+.uteam_info02 .predict .p_item.left {justify-content: start;}
+.uteam_info02 .predict .p_item.right {justify-content: flex-end;}
+
+.my_predict {}
+.my_predict .item {display: flex; align-items: center; justify-content: space-between; position: relative; }
+.my_predict .item::after {content: ''; display: block; width: 100%; height: .1rem; background: url(/images/line_bg.png) repeat-x 0 0; position: absolute; left: 0; top: 50%; transform: translateY(-50%);}
+.my_predict .item + .item {margin-top: 2.5rem; }
+.my_predict .item .txt01 {background: #fff; z-index: 10; width: 13rem;}
+.my_predict .item .txt01 span {font-size: 1.6rem; color: #414141; display: flex; align-items: center; gap: 1rem;  }
+.my_predict .item .txt01.type01 span::before {content: ''; display: block; width: 1.9rem; height: 1.9rem; background: url(/images/predict_icon01.svg) no-repeat center; background-size: contain;}
+.my_predict .item .txt01.type02 span::before {content: ''; display: block; width: 1.9rem; height: 1.9rem; background: url(/images/predict_icon02.svg) no-repeat center; background-size: contain;}
+.my_predict .item .txt01.type03 span::before {content: ''; display: block; width: 1.9rem; height: 1.9rem; background: url(/images/predict_icon03.svg) no-repeat center; background-size: contain;}
+.my_predict .item .txt01.type03 span::after {content: ''; display: block; width: 1.9rem; height: 1.9rem; background: url(/images/noti_icon02.svg) no-repeat center; background-size: contain; position: absolute; left: 9.7rem; top: .2rem; }
+.my_predict .item .txt01.type03 .s_txt {display: none; position: absolute; left: 0; bottom: 0; background: #fff; padding: 1rem; border-radius: .6rem; font-size: 1.4rem; line-height: 1.3; z-index: 10; max-width: 30rem; box-shadow: 0 0 1rem rgb(136 136 136 / 38%); z-index: 10;  }
+.my_predict .item .txt01.type03:hover .s_txt {display: block; }
+
+.my_predict .item .txt02 {font-size: 1.8rem; color: #414141; background: #fff; z-index: 10; width: 9rem; text-align: right; }
+.my_predict .item .txt02 span {font-size: 1.8rem; color: #414141; font-weight: 600;}
+
+
+.new_tit02 {font-size: 2.2rem; font-weight: 600; color: #454545; margin-bottom: 2.2rem; }
+.new_tit02 em {color: #F00;}
+.new_tit02 span {color: #F00;}
+
+.t_box01 {border-radius: 1.2rem; padding: 3rem 1.2rem; background: #fff; box-shadow: 0 0 1rem rgb(136 136 136 / 38%); margin-bottom: 4.6rem; text-align: center; }
+.t_box01 .pick_items {width: 100%; overflow: hidden;}
+.t_box01 .pick_items .swiper-wrapper {align-items: stretch;}
+.t_box01 .pick_items  .swiper-slide {height: auto;  box-sizing: border-box;}
+.t_box01 .pick_items .item {display: flex; align-items: center; justify-content: center; gap: 1.4rem; width: 100%;}
+.t_box01 .pick_items .item .pteam {width: 6rem; position: relative; flex: 0 0 6rem;}
+.t_box01 .pick_items .item .pteam::After {content: ''; display: block; padding-bottom: 100%;}
+.t_box01 .pick_items .item .pteam.pick span {opacity: 1;}
+.t_box01 .pick_items .item .pteam span {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: .2;}
+.t_box01 .pick_items .item .vs {font-size: 1.4rem; font-weight: 600; flex: 0 0 auto;}
+.t_box01 .pick_items .pick_no_txt {font-size: 1.8rem; }
+
+
+.uchart_area {display: flex;  flex-wrap: wrap; gap: 3rem; margin-bottom: 6rem; }
+.uchart_area .box02 {display: flex;  flex-wrap: wrap; gap: 2rem; width: 100%;}
+.uchart_item {border: .1rem solid #ddd; border-radius: 1.2rem; padding: 2.5rem 1.2rem;  background: #fff; box-shadow: 0 0 1rem rgb(136 136 136 / 38%); width: calc((100% - 2rem) / 2);}
+.uchart_item .title {font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; line-height: 1.9rem;}
+.uchart_item .title span {color: #FF0000;  line-height: 1.9rem;}
+.uchart_item .title.icon01 span,
+.uchart_item .title.icon02 span {display: block; padding-left: 2.5rem; padding-right: .5rem; position: relative; }
+.uchart_item .title.icon01 span::before {content: ''; display: block; width: 1.9rem; height: 1.9rem; background: url(/images/star_icon.svg) no-repeat center; background-size: 1.3rem; position: absolute; left: 0; top: .1rem;}
+.uchart_item .title.icon02 span::before {content: ''; display: block; width: 1.9rem; height: 1.9rem; background: url(/images/predict_icon01.svg) no-repeat center; background-size: contain; position: absolute; left: 0; top: .1rem;}
+.uchart_item .chart_box {height: 20rem; }
+
+.result_ubox {}
+.result_ubox .tit {font-size: 2rem; font-weight: 700;}
+.result_ubox .tit span {display: block; padding-left: 2.5rem; position: relative;}
+.result_ubox .tit span::before {content: ''; display: block; width: 1.9rem; height: 1.9rem; background: url(/images/u_point_01.svg) no-repeat center; background-size: contain; position: absolute; left: 0; top: .1rem;}
+
+
+.result_guide {display: flex; align-items: center; justify-content: center;}
+.result_guide .inner {display: inline-flex; align-items: center; justify-content: center; gap: 5rem; border-radius: 1.2rem; background: #FFF; padding: 1.6rem 8rem; }
+.result_guide .item {font-size: 1.8rem; line-height: 2.5rem; color: #E11956;}
+.result_guide .item em {font-weight: 600; color: #E11956;}
+.result_guide .item.type01,
+.result_guide .item.type01 em {color: #686868;}
+.result_guide .item.type02 {display: flex; align-items: center; gap: .7rem; color: #E11956;}
+.result_guide .item.type02::before {content: ''; display: block; width: 2.5rem; height: 2.5rem; background: url(/images/ak_icon.svg) no-repeat center; background-size: contain;}
+.result_guide .item.type02 em {color: #E11956;}
+
+.result_list {padding-top: 5.5rem; display: flex; flex-wrap: wrap; gap: 5rem 2rem; width: 100%; }
+.result_list .item {width: calc((100% - 4rem) / 3); position: relative; }
+.result_list .item .inner {border-radius: 1.2rem; overflow: hidden; background: #fff; border: .1rem solid #C5C5C5; height: 100%;  }
+.result_list .item .tit {font-size: 2rem; font-weight: 600; color: #fff; line-height: 4rem; text-align: center; background: #C5C5C5;  padding-top: 1.8rem;}
+.result_list .item .in_item {display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2.6rem; }
+.result_list .item .in_item + .in_item {border-top: dashed .1rem #ddd;}
+.result_list .item .in_item .txt {width: 8rem; text-align: center; font-size: 1.6rem; color: #A4A4A4;}
+.result_list .item .in_item .txt span,
+.result_list .item .in_item .txt em {color: #A4A4A4;}
+.result_list .item .in_item .score_info {display: flex; align-items: center; gap: .6rem; }
+.result_list .item .in_item .score_info .team {display: flex; align-items: center;}
+.result_list .item .in_item .score_info .team span {width: 4.2rem; height: 4.2rem; display: flex; align-items: center; justify-content: center; opacity: 0.2;}
+.result_list .item .in_item .score_info .team em {display: block; width: 5rem; font-family: 'Montserrat Alternates'; font-size: 3.2rem; font-weight: 600; text-align: center; color: #A4A4A4;}
+.result_list .item .in_item .score_info .vs {width: 2.1rem; height: 2rem; background: url(/images/vs_icon.svg) no-repeat 0 0; background-size: cover; font-size: 0; }
+.result_list .item:nth-child(even) .inner {border: .1rem solid #999; }
+.result_list .item:nth-child(even) .tit {background: #999;}
+.result_list .item.all_kill .inner {border: .1rem solid #E11956; }
+.result_list .item.all_kill .tit {background: #E11956;}
+.result_list .item.all_kill::before {content: ''; display: block; width: 4.1rem; height: 4.1rem; background: url(/images/ak_icon.svg) no-repeat 0 0; position: absolute; left: 50%; top: -2rem; transform: translateX(-50%); }
+
+/*예측성공시*/
+.result_list .item .in_item.success_ing {}
+.result_list .item .in_item.success_ing .txt span,
+.result_list .item .in_item.success_ing .txt em {color: #E11956;}
+.result_list .item .in_item .score_info .team.win span {opacity: 1;}
+.result_list .item .in_item .score_info .team.win em {color: #E11956;}
+
+
+/*경기취소*/
+.result_list .item .in_item.cancel {justify-content: center; position: relative; }
+.result_list .item .in_item.cancel::before {content: ''; display: block; position: absolute; left: 0; top: 0; background: rgb(0 0 0 / 80%); width: 100%; height: 100%; }
+.result_list .item .in_item.cancel::after {content: '경기취소'; font-size: 1.7rem; font-weight: 600; display: flex; align-items: center; justify-content: center; position: absolute; left: 0; top: 0; color: #fff; width: 100%; height: 100%;}
+.result_list .item .in_item.cancel .txt {display: none; }
+.result_list .item .in_item.cancel .score_info .team em {display: none; }
+.result_list .item .in_item.cancel .score_info {gap: 6rem;}
+
+/* floating 메뉴 */
+.floating_wrap {position: fixed; right: 1rem; top: 50%; transform: translateY(-50%); z-index: 10;}
+.floating_wrap button {border: none; background: url(/images/f_menu_icon.svg) no-repeat 0 0; width: 6.8rem; height: 6.3rem; background-size: contain; font-size: 0; cursor: pointer;   }
+.floating_wrap ul {display: none; width: 8rem; position: absolute; left: -9rem; top: 50%; transform: translateY(-50%);}
+.floating_wrap ul.show {display: block;}
+.floating_wrap ul li + li {margin-top: .2rem; }
+.floating_wrap ul li a {display: flex; align-items: center; justify-content: center; gap: 1rem; border-radius: .6rem; background: #E1E1E1; color: #9B9B9B; font-size: 1.2rem; font-weight: 600; padding: .3rem 0;}
+.floating_wrap ul li.type01 a::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; background: url(/images/f_menu01.svg) no-repeat center;}
+.floating_wrap ul li.type02 a::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; background: url(/images/f_menu02.svg) no-repeat center;}
+.floating_wrap ul li.type03 a::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; background: url(/images/f_menu03.svg) no-repeat center;}
+.floating_wrap ul li.active a,
+.floating_wrap ul li a:hover {background: #D81355; color: #fff; }
+.floating_wrap ul li.type01.active a::before,
+.floating_wrap ul li.type01 a:hover::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; background: url(/images/f_menu01_on.svg) no-repeat center;}
+.floating_wrap ul li.type02.active a::before,
+.floating_wrap ul li.type02 a:hover::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; background: url(/images/f_menu02_on.svg) no-repeat center;}
+.floating_wrap ul li.type03.active a::before,
+.floating_wrap ul li.type03 a:hover::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; background: url(/images/f_menu03_on.svg) no-repeat center;}
+
+
+/* chartjs 스크롤 */
+.chart-scroll-container {width: 100%; overflow-x: auto; overflow-y: hidden;}
+.chart-inner {height: 30rem; min-width: 100%;}
+
+
+@media screen and (max-width:1023px) {
+body{font-family:"Apple SD Gothic Neo","ROBOTO", "NotoSans", sans-serif;}
+.box_item_3dan .item_con {width:32%;}
+.zone_area .item .box strong {display: block; font-size: 1.2rem; width: 100%; }
+.zone_area .item .box span {display: block; font-size:1rem; width: 100%; margin-top:.4rem; }
+
+
+/*경기일정*/
+.game_schedule_m {display: block;  width: 80%; height: 80%; background: url(/images/ball_icon.svg) no-repeat center; background-size: 3rem; border-radius: 1rem; cursor: pointer; font-size: 0; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.calendar_area table td .inner .games {display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #fff; padding: 2rem; width: 70%; z-index: 900; border-radius: 0.5rem; transition: all 0.3s ease;}
+.calendar_area table td .inner.on .games {display: block; }
+
+
+}
+
+
+@media screen and (max-width:750px) {
+	.ad_area .inner .img {width: 12.4rem; height: 6.5rem; padding: 0 !important;}
+	.ad_area .img img {border-radius: .8rem; overflow: hidden; height: 6.8rem; object-fit: cover;}
+}
+
+/*
+@media screen and (min-width: 450px) {
+	.ad_area .inner .tbox a {display: inline-flex; font-family: ''; font-size: 1.2rem; color: #E11956; font-weight: 600; border: solid .1rem #E11956; border-radius: .4rem; padding: .5rem .8rem; margin-top: 1rem;}
+}
+*/
+@media screen and (max-width: 449px) {
+	.ad_area .inner .tbox a {display: none; }
+}
+
+
+
+
+
+/******************************** 모바일 세로 ********************************/
+@media screen and (max-width:750px) {
+
+
+.player_info_header .bio {min-height: auto; }
+
+.sh_box .box_head {position: relative; font-size: 1.2rem; padding:1.5rem 1rem; cursor: pointer; font-weight: 600;}
+.t_point span {border-radius: .5rem; padding:0.5rem; text-align: center; display: inline-block; font-size:1.2rem; min-height: 2.6rem; min-width: 2.6rem;}
+
+.select_div.active.start01 .option_list {left:-9rem; transform:translateX(); }
+.select_div.active.end01 .option_list {left:unset; right:-9rem; }
+.select_div.active.whole01 .option_list {left:unset; right:0; }
+
+
+.table_type01 table {}
+.table_type01 table th,
+.table_type01 table td {min-width:5rem; }
+
+/*일반테이블*/
+.table_type02 {border-radius: .5rem;  position: relative;  overflow: auto;}
+.table_type02 table {width: 100%; white-space: nowrap;}
+.table_type02 table tr {width:100%;}
+.table_type02 table th {font-size:1.2rem; padding:1rem; vertical-align: middle; text-align: center; min-width: 4rem;}
+.table_type02 table td {background:#fff; color:#000; font-size:1.2rem; padding:1rem; vertical-align: middle; text-align: center; }
+.table_type02 table td .board_txt {position: relative; display: flex;}
+.table_type02 table td .board_txt a {white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; font-size: 1.2rem; color:#000; max-width: 20rem;}
+.table_type02 table td .board_txt span {color:red; font-size: 1.2rem; margin-left:1rem; }
+
+.table_type03 { position: relative;  overflow: auto;}
+.table_type03 table {width: 100%; white-space: nowrap;}
+.table_type03 table th {font-size:1.2rem; padding:1rem .3rem; vertical-align: middle; text-align: center; min-width: 4rem; }
+.table_type03 table td {background:#fff; color:#000; font-size:1.2rem; padding: .5rem; vertical-align: middle; text-align: center; position: relative; line-height: 1.4;}
+.table_type03 table td a {font-size:1.2rem;}
+.table_type03 table td span.rank {display:inline-block; padding:.5rem 1rem; border-radius: 5rem;}
+.table_type03 table td .score,
+.table_type03 table td strong {color:#000; font-weight:600;}
+.table_type03 table td .score p {margin-top:.3rem;}
+.table_type03 table td .score span {/*display: inline-block; border-radius: 1rem; padding:.3rem; */ font-size: 1rem;}
+.table_type03 table td:last-child .score {font-weight:600; }
+.table_type03 table td .legend_name {}
+.table_type03 table td .legend_name em {display:block; font-size:1.2rem; color:#000; margin-top:.3rem}
+.table_type03 table td .b_box {width:100%; height:100%; position: absolute; left:0; top:0; display: flex; align-items: center; justify-content: center;}
+.table_type03 table td .rank_teams a {display: block;}
+.table_type03 table td .rank_teams span {display:inline-block; border-radius: .5rem; font-size: 1.2rem; padding:.5rem 0; width:5rem; line-height: 1;}
+.table_type03 table td .man_rank {display: flex; justify-content: space-between; margin:0 0;}
+.table_type03 table td:nth-child(2) .man_rank{font-weight:500;}
+.table_type03 table td .man_rank a {display: inline-block; min-width:4rem; text-align: left;}
+.table_type03 table td .man_rank span {display: inline-block; margin-left:1rem; color:#000;}
+.table_type03 table td .txtbox {color:#000;}
+.table_type03 table td .txtbox em {display:block; font-size:1.2rem; color:#000; margin-top:.5rem;}
+
+/*박스형 게시판*/
+.box_type_boared .item_box {width:100%;  margin: 0 0 2rem 0; float:none;}
+
+/*박스형 게시판 세로정렬*/
+.box_type_boared02 .dan02 {width:100%; margin: 0 0 2rem 0; float:none;}
+
+/*박스형 게시판 세로정렬*/
+.box_type_boared02 .dan03 .item_box {width:100%; margin-bottom: 1.5rem; }
+
+
+
+/*경기일정*/
+.g_schedule {background:#fff; display: flex; align-items: center; justify-content: space-between; padding:.5rem 1rem;}
+
+
+
+/*팀정보*/
+.team_list {position: relative; width:100%; margin-right: 0; }
+.team_list .t_items {display:flex; align-items: center; width:100%; margin-bottom:2rem; padding:1rem 1.5rem; border-radius: .5rem; position: relative;}
+.team_list .t_items .team_info .t_name {font-size: 1.6rem; }
+.team_list .t_items .team_info .t_name span {font-size:1.2rem}
+.team_list .t_items .team_info .t_name .years {font-size:1rem; font-weight:400; }
+.team_list .t_items .team_info .t_career {font-size:1.2rem; margin-top:1rem;}
+.team_list .t_items .team_info .t_perfor {font-size:1.2rem;  margin-top:1rem;}
+
+.team_list.teamInfo {display: flex;  flex-flow: wrap; justify-content: space-between;  align-items: center;}
+.team_list.teamInfo .t_items {width:100%; }
+
+.team_smune {margin-right:0; width:100%;}
+
+
+/* 선수정보 그래프 */
+.chart_box_area {margin:2rem 0;}
+.chart_box_area .g_tit {font-size:1.5rem; text-align:center; font-weight:600; margin-bottom:1rem; }
+
+.chart_box_area canvas{width:100%;}
+
+
+
+/*이전경기결과*/
+.game_result ul li a {font-size: 1.2rem; }
+
+/*최근일정 -달력*/
+.calendar_table td .calendar_item .day {font-size: 1rem;}
+.calendar_table td .calendar_item .place {font-size: 1rem;}
+.calendar_table td .calendar_item .point {font-size: 1rem;}
+.calendar_table td .calendar_item .score01 {font-size: 1.1rem;}
+
+
+/*게시판 view*/
+.view_top .borad_tit .txt {font-size:1.2rem; margin-bottom:.5rem; line-height: 1.3;}
+.re_area .re_items {padding:1rem 0 1.5rem 0;}
+.re_area .re_items .box .name {font-size:1.2rem; margin-bottom:.5rem; }
+.re_area .re_items .box .txt {font-size:1.2rem; line-height: 1.3;}
+
+.write_area {margin-top:1rem; position: relative;}
+
+
+/*검색영역*/
+
+.option_cont .op_box {padding:0 2rem; margin-left:-1rem;}
+.option_cont .op_box::after {content:""; display: block; clear:both;}
+.option_cont .op_box .item {display: flex; align-items: center; float:left; margin-top:1rem; margin-left:1rem; flex-wrap: wrap;}
+.option_cont .op_box .item span.txt,
+.option_cont .op_box .item em {font-size:1.2rem; }
+.option_cont .op_box .item > div {margin-right:.5rem; }
+.option_cont .op_box .item .mt {margin-top:.5rem;}
+.option_cont .op_box .item .select_div {min-width:7rem;}
+.option_cont .op_box .item input[type="text"] {min-width:10rem;}
+.option_cont .op_box .item input {width:7rem; }
+.option_cont .search {text-align: right; padding:0 2rem; margin-top:2rem;}
+.option_cont .search button {border:none; outline:none; border-radius: .5rem;  height:3rem; line-height:3rem; padding:0 3rem; position: relative; cursor: pointer; font-weight:600; font-size: 1.2rem; }
+.option_cont .span_txt {font-size: 1.2rem;  margin-left:1rem;}
+
+
+/*상세분석 박스*/
+.box_item_3dan {display:flex; flex-wrap: wrap; justify-content: space-between;}
+.box_item_3dan .item_con {width:100%; margin-bottom:2rem; border-radius: .5rem; position: relative; background:#1e1e1e; overflow: hidden; }
+.box_item_3dan .item_con .h_tit {position: relative; font-size:1.6rem; padding:1.7rem 2rem; cursor: pointer; font-weight: 600;  }
+.box_item_3dan .item_con .h_cont {width:100%; height: auto; padding:1rem 2rem;}
+
+.zone_area {display:flex; flex-wrap: wrap; background:#fff; margin:0 1rem;}
+.zone_area .item {position:relative; display: flex; align-items: center; justify-content: center; width: calc(100% / 5);}
+.zone_area .item::after {content: ""; display: block; padding-bottom: 100%;}
+.zone_area .item .box {width:100%; height:100%; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); font-size: 1.2rem; color:#000; font-weight: 700; display: flex; align-items: center; justify-content: center; text-align: center;}
+.zone_area .item .box::before {content: ""; display: block;  position: absolute; left:0; top:0; width:100%; height:100%; box-sizing: border-box;}
+.zone_area .item .box strong {display: block; font-size: 1.2rem; width: 100%; color:#000;}
+.zone_area .item .box span {display: block; font-size:1rem; width: 100%; color:#000; margin-top:.4rem; }
+
+.callout_box {margin-right:0; max-width:100%;}
+
+/* 유니폼 */
+.back_number_area {background:#fff; padding:1rem;}
+.uniform {display: flex; flex-wrap: wrap; gap:0rem;}
+.back_number_area .uniform .item {position: relative; text-align: center; width: calc(100% / 4); margin-top: 1.5rem;}
+
+
+/*22.12.16 추가*/
+.join_cp { max-width: 100rem; width: 100%; margin: 0 auto; text-align: center; position: relative; overflow: hidden; padding: 10rem 0}
+.join_cp .tit01 {font-size:2rem; font-weight: 900; margin-bottom:2rem; }
+.join_cp .txt01 {font-size: 1.4rem; line-height: 1.5;}
+.join_cp .txt01 span {font-weight: 600; }
+.join_cp .txt02 {font-size: 1.2rem; margin: 3rem 0; line-height: 1.4;}
+.join_cp .txt02 span {font-weight: 600; color:#e11956;}
+
+
+.ball_icon {width: 5rem; height: 5rem; position: absolute; border-radius: 50%; background: url(/images/baseball_icon.svg) no-repeat 0 0; background-size: 100%; left:-3rem; top:-3rem; animation: ball 3.5s linear infinite, squashing 3.5s linear infinite; z-index: -1;}
+.ball_icon:nth-child(2) {animation-delay: .4s; opacity: .6;}
+
+
+.new_area .new_list li.no_item {font-size: 1.4rem; }
+
+
+@keyframes ball {
+    16%, 48%, 78% {
+        top:25rem; animation-timing-function: ease-out;
+    }
+    32% {
+        top:10rem; animation-timing-function: ease-in;
+    }
+    62% {
+        top:15rem; animation-timing-function: ease-in;
+    }
+    90% {
+        top:22rem; animation-timing-function: ease-in;
+    }
+    100% {
+        top:27rem; left:100%;
+        animation-timing-function: ease-out;
+        transform: rotate(360deg);
+    }
+}
+
+
+/* 광고영역 */
+
+.add_content {background: #EDF0F3; position: relative; display: flex; align-items: center; justify-content: center; height: 8.6rem; }
+.add_content::before {content:'팬을 위한 스포츠 플랫폼'; display: block; width: 100%; font-size: 0; color: #999; letter-spacing: -.05rem; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 0; background: url(/images/common/img_da_nodata.svg) no-repeat center; height: 100%; }
+.add_content .inner {max-width: 45rem; width: 100%; display: flex; align-items: center; justify-content: center; height: 8.6rem;  }
+.add_content .con_inner {height: 8.6rem;  }
+
+
+
+.game_list_box .item {width: calc(100% / 3);  box-sizing: border-box; }
+
+
+
+.comparison_area {flex-direction: column;}
+.bg_away,
+.bg_home {display: none;}
+.recent_game .team_logo {width: 4rem; height: 4rem;}
+.recent_game ul {gap: 1rem;}
+.recent_game ul li .score span {font-size: 1.4rem;}
+.recent_game ul li .score em {font-size: 1.4rem; }
+.recent_game ul li .day { font-size: 1.2rem;}
+
+
+/* 선발투수 비교 */
+.comparison_con .away {display: none; }
+.comparison_con .home {display: none; }
+
+
+/* VS 맞대결 타자 순위 */
+.comparison_con {display: flex; justify-content: space-around;}
+.comparison_box .inner .player_box.hitter {flex-direction: column; gap: 0;}
+.comparison_box .inner .player_box.hitter .item {}
+.comparison_box .inner .player_box.hitter a {display: block; }
+.comparison_box .inner .player_box.hitter a + a {margin-top: 1rem; }
+
+.player_box .p_info {position: relative;}
+.player_box .p_info .p_inner {width:7rem; max-height: 8rem; overflow: hidden; border-radius: 2rem; margin: 0  auto; border: solid 0.1rem transparent; box-shadow: 0px 0 .2rem #c9c9c9; position: relative; z-index:10; display: flex; align-items: flex-start; justify-content: center; background: #fff; margin-bottom: 1rem; }
+.player_box .p_info .team_logo {position: absolute; right: -1rem; bottom: 2rem;  width: 3rem; height: 3rem; z-index: 10; }
+.player_box .p_info .team_logo::after {content: ""; display: block; padding-bottom: 100%;}
+.player_box .p_info .team_logo .logo_inner {position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.player_box .p_info .name {font-size: 1.2rem; font-weight: 600; line-height: 1.33; text-align: center; margin: 0;}
+
+.team_logo.cc {display: flex; align-items: center; width: 12rem; justify-content: center; gap: .5rem;  }
+.team_logo.cc .logo_inner {width: 5rem; }
+.team_logo.cc::before {content:''; display: block;  background: url(/images/icon_vs.svg) no-repeat center; width: 3rem; height: 3rem; background-size: 2rem;}
+
+
+
+
+
+/* 대학 승부예측 */
+/*
+.university_cont {display: flex; gap: 1rem; flex-direction: column;}
+.university_cont .univ_con {flex: 1; }
+*/
+
+.u_tit {font-size: 1.7rem; font-weight: 600; text-align: center; padding: 1.5rem 0 2.5rem 0;}
+
+.u_container {flex-direction: column; padding: 1rem; }
+.u_container .u_left_box {width: 100%; flex: 1; }
+.u_container .u_right_box {width: 100%; }
+
+.new_day_box {margin-bottom: .5rem; }
+
+.game_list {margin-bottom: 3rem; }
+.game_list .items + .items {margin-top: .6rem; }
+.game_list .items .game_tit {background: #fff; text-align: center; font-size: 14px; font-weight: 600; height: 30px; padding-top: 8px;}
+.game_list .items .u_graph_area {position: relative; height: 4.8rem; }
+.game_list .items .u_graph_area .u_graph_box {display: flex; align-items: center; position: absolute; left: 0; top: 0; width: 100%; height: 4.8rem; z-index: 1;}
+.game_list .items .u_graph_area .u_graph_box .graph_bar {height: 4.8rem;}
+.game_list .items .u_graph_area .team_info .team_box {width: 10rem; padding: 0 .5rem; height: 4.8rem; }
+.game_list .items .u_graph_area .team_info .team_box .t_logo {width: 3.2rem; height: 3.2rem; }
+.game_list .items .u_graph_area .team_info .team_box .choice_box {min-width: 5rem; text-align: center; }
+.game_list .items .u_graph_area .team_info .team_box .choice_box span {font-size: 2rem;}
+.game_list .items .u_graph_area .team_info .team_box .choice_box em {font-size: 1.2rem;}
+
+.game_list .items .u_graph_area .team_info .vs_info {gap: 1rem; }
+.game_list .items .u_graph_area .team_info .vs_info span {font-size: 2rem; font-weight: 600; color: #fff; }
+.game_list .items .u_graph_area .team_info .vs_info em {width: 1.5rem; height: 1.6rem; background: url(/images/vs_icon.svg) no-repeat 0 0; background-size: contain; }
+
+
+
+/* 경기진행중 */
+.game_list .items.g_ing {}
+.game_list .items.g_ing .u_graph_area .team_info .vs_info {display: flex; }
+
+/* 경기종료 */
+.game_list .items.g_end {}
+.game_list .items.g_end .u_graph_area .team_info .vs_info {display: flex; }
+.game_list .items.g_end .u_graph_area .team_info .team_box.win .choice_box span,
+.game_list .items.g_end .u_graph_area .team_info .team_box.win .choice_box em {color: #FFEF00;}
+.game_list .items.g_end .u_graph_area .team_info .vs_info span.win {color: #FFEF00;}
+.game_list .items.g_end .u_graph_area .u_graph_box .graph_bar.lose {background: #B9B9B9;}
+.game_list .items.g_end .u_graph_area .team_info .team_box.lose {background: #B9B9B9;}
+
+/* 경기취소 */
+.game_list .items.g_cancel {height: 7.8rem; position: relative; }
+.game_list .items.g_cancel::before {content: '경기취소'; display: block; font-size: 1.6rem; font-weight: 600; color: #fff; position: absolute; left: 0; top: 50%; transform: translateY(-50%);  z-index: 12; width: 100%; text-align: center; }
+
+
+
+.u_comment {padding: 1.2rem 1.4rem 2.5rem 1.4rem; background: #fff; border-radius: .6rem;}
+.u_comment .tit {display: flex; align-items: center; margin-bottom: 1.7rem; }
+.u_comment .tit span {font-size: 1.6rem; }
+
+.u_comment .message_box {display: flex; justify-content: space-between; background: #F5F7F9; padding: .7rem .9rem; border-radius: .6rem; overflow: hidden; }
+.u_comment .message_box textarea {flex: 1; background: transparent; height: 6rem; padding: 0; }
+.u_comment .message_box .u_btn_box {display: flex; align-items: end; gap: 1rem; }
+.u_comment .message_box .u_btn_box .count_num {font-size: 1.4rem;}
+.u_comment .message_box .u_btn_box .count_num em {font-size: 1.4rem;}
+.u_comment .message_box .u_btn_box button {font-size: 1.4rem; padding: .7rem 1.5rem; cursor: pointer; }
+
+.u_comment_list {}
+.u_comment_list .item {margin-top: 1.8rem; }
+.u_comment_list .item .user_info {margin-bottom: 1rem; }
+.u_comment_list .item .user_info span {font-size: 1.4rem; }
+.u_comment_list .item .user_info .a_box {display: flex; align-items: center; gap:  .5rem; }
+.u_comment_list .item .user_info a {font-size: 1.4rem; }
+.u_comment_list .item .user_info a::before {content: ''; display: block;width: 1.8rem; height: 1.8rem; background: url(/images/report_icon.svg) no-repeat 0 0;}
+.u_comment_list .item .txt {font-size: 1.4rem; line-height: 1.8rem; padding-bottom: 1rem;  }
+.u_comment_list .more_btn {margin-top: 1.5rem;}
+.u_comment_list .more_btn button {background: transparent; font-size: 1.6rem; }
+.u_comment_list .u_inner .list_item .no_txt {font-size: 1.6rem; text-align: center; height: 10rem;}
+
+.u_right_box {margin-top: 0; }
+.u_right_box .r_box {padding: 2rem 1rem .5rem 1rem; }
+.u_right_box .r_box .item {}
+.u_right_box .r_box .item .u_tit02 {font-size: 1.6rem; font-weight: 600; position: relative; padding-left: 3.3rem; line-height: 2.3rem;}
+.u_right_box .r_box .item .nom {text-align: center; padding: 2rem 0;}
+.u_right_box .r_box .item .nom span {font-size: 4rem;}
+.u_right_box .r_box .item .nom em {font-size: 2rem;}
+.u_right_box .r_box .bt_box {display: flex; align-items: center; justify-content: space-between; border-top: solid .1rem #C1BDBD; padding: 1.2rem 0; }
+.u_right_box .r_box .bt_box span {font-size: 1.4rem; color: #969696;  }
+
+.right_rank_box {margin-top: 1.7rem; }
+.right_rank_box .rank_tit {padding: 0 1rem 0 1.2rem; margin-bottom: 1.2rem; }
+.right_rank_box .rank_tit a {font-size: 1.6rem; font-weight: 600; color: #2C2C2C; position: relative; line-height: 3.1rem; padding-left: 3.6rem; }
+.right_rank_box .rank_tit a::before {content: ''; display: block; width: 2.6rem; height: 3.1rem; background: url(/images/u_point_02.svg) no-repeat center; position: absolute; left: 0; top: 0; }
+.right_rank_box .rank_tit span {font-size: 1.4rem; color: #969696; }
+.right_rank_box .item + .item {margin-top: 2rem; }
+
+.right_rank_box .item .r_table {border-radius: .6rem; overflow: hidden;}
+.right_rank_box .item .r_table table {background: #fff; width: 100%; }
+.right_rank_box .item .r_table table th {background: #E11956; font-size: 1.4rem; color: #fff; padding: .6rem 0; font-weight: 400; }
+.right_rank_box .item .r_table table td {text-align: center; font-size: 1.4rem; color: #2C2C2C; padding: .6rem 0;}
+.right_rank_box .item .r_table table tr.first td {background: #FFEFF4; }
+.right_rank_box .item .r_table table tr.first td.no01 {color: #FF0000; }
+
+
+
+
+
+/* 대학 승부예측 랭킹 */
+.rank_table_box {display: flex; align-items: center; justify-content: end; margin-bottom: 1rem; }
+
+.rank_area {}
+.rank_area .rank_list {border-radius: .6rem; border: solid .1rem #ddd; overflow: auto; scroll-snap-type: both mandatory;}
+.rank_area .rank_list table {width: 50rem; background: #fff; white-space: nowrap; table-layout: auto; }
+.rank_area .rank_list table th {text-align: center;  background: #E11956; padding: 1rem 0; }
+.rank_area .rank_list table th > div {font-size: 1.4rem; color: #fff;}
+.rank_area .rank_list table th.no {width: 9rem;}
+.rank_area .rank_list table th.team {width: 15rem;}
+.rank_area .rank_list table th.hit {width: 9rem;}
+.rank_area .rank_list table th.hand {width: 9rem;}
+.rank_area .rank_list table th.all_kill {width: 9rem;}
+.rank_area .rank_list table td {border-bottom: solid .1rem #ddd; text-align: center; vertical-align: middle;}
+.rank_area .rank_list table td .no_tit {font-size: 1.4rem; font-weight: 500; height: 4.5rem; display: flex; align-items: center; justify-content: center; position: relative; }
+.rank_area .rank_list table td .team_tit {text-align: left; }
+.rank_area .rank_list table td .team_tit span {display: block; font-size: 1.4rem; font-weight: 600;}
+.rank_area .rank_list table td .team_tit em {display: block; font-size: 1.4rem; font-weight: 400; margin-top: .5rem; }
+.rank_area .rank_list table td .hit_tit {font-size: 1.4rem;}
+.rank_area .rank_list table td .hand_tit {font-size: 1.4rem;}
+.rank_area .rank_list table td .all_tit {font-size: 1.4rem;}
+.rank_area .rank_list table tr.my_rank td {background: #EFEFEF; }
+.rank_area .rank_list table tr:last-child td {border: none; }
+
+.rank_area .rank_list table tr.first td .no_tit::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; background: url(/images/rank_01.svg) no-repeat center;     background-size: contain; position: absolute; left: 1rem; top: 50%; margin-top: -1.2rem;  }
+.rank_area .rank_list table tr.second td .no_tit::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; background: url(/images/rank_02.svg) no-repeat center;     background-size: contain; position: absolute; left: 1rem; top: 50%; margin-top: -1.2rem; }
+.rank_area .rank_list table tr.third td .no_tit::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; background: url(/images/rank_03.svg) no-repeat center;     background-size: contain; position: absolute; left: 1rem; top: 50%; margin-top: -1.2rem; }
+
+.rank_area .rank_list table tr.first td .no_tit,
+.rank_area .rank_list table tr.first td .hit_tit,
+.rank_area .rank_list table tr.first td .hand_tit,
+.rank_area .rank_list table tr.first td .all_tit {color: #FF0000; }
+.all_kill_tit {position: relative; display: flex; align-items: center; justify-content: center; }
+.all_kill_tit span {font-size: 0; cursor: pointer; }
+
+
+.allkill_notice { margin-bottom: 1rem; }
+.allkill_notice .item { }
+.allkill_notice .item .btn {font-size: 1.4rem;}
+.allkill_notice .item .btn::after {content: ''; display: block; width: 2.4rem; height: 2.4rem; background: url(/images/noti_icon.svg) no-repeat center; background-size: 2rem;}
+.allkill_notice .item .txt {font-size: 1.2rem; max-width: 70%; }
+.allkill_notice .item:hover .txt {display: block; }
+
+
+
+
+/* 대학별 상세페이지 */
+
+.detail_area {overflow: hidden; padding-top: 1.8rem }
+.uteam_area {flex-direction: column; gap: 4rem; margin-bottom: 2rem; }
+.uteam_area .uteam_info {width: 100%;}
+.uteam_area .uteam_info02 {width: 100%; padding: 2rem 2.5rem 1.5rem 2.5rem; }
+.uteam_area .uteam_info .uteam_info_inner {gap: 1.5rem; margin-bottom: 2.5rem; }
+.uteam_area .uteam_info .uteam_info_inner .ranking {width: 5rem; height: 5rem; font-size: 2.1rem;}
+.uteam_area .uteam_info .uteam_info_inner .ranking.rank_01::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; right: -1rem; bottom: -.5rem;}
+.uteam_area .uteam_info .uteam_info_inner .ranking.rank_02::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; right: -1rem; bottom: -.5rem;}
+.uteam_area .uteam_info .uteam_info_inner .ranking.rank_03::before {content: ''; display: block; width: 2.6rem; height: 2.4rem; right: -1rem; bottom: -.5rem;}
+.uteam_area .uteam_info .uteam_info_inner .ut_name {text-align: left;}
+.uteam_area .uteam_info .uteam_info_inner .ut_name em {font-size: 1.4rem;}
+.uteam_area .uteam_info .uteam_info_inner .ut_name span {font-size: 1.6rem; margin-top: .5rem; }
+.uteam_area .uteam_info .t_txt_area {}
+.uteam_area .uteam_info .t_txt_area .t_txt {font-size: 1.4rem; line-height: 1.6;}
+.uteam_area .uteam_info .t_txt_area .more-btn-wrap {display: flex; margin-top: 1rem;}
+.uteam_area .uteam_info .t_txt_area .more-btn {font-size: 1.4rem; }
+
+.uteam_info02 {}
+.uteam_info02 .tit {font-size: 1.5rem; }
+.uteam_info02 .tit span {font-weight: 500;}
+.uteam_info02 .rank_tit {margin-bottom: 1rem; }
+.uteam_info02 .rank_tit span {font-size: 1.8rem; font-weight: 700; gap: 1rem;}
+.uteam_info02 .rank_tit.rank_01 span::before {content: ''; display: block; width: 2rem; height: 1.8rem;}
+.uteam_info02 .rank_tit.rank_02 span::before {content: ''; display: block; width: 2rem; height: 1.8rem;}
+.uteam_info02 .rank_tit.rank_03 span::before {content: ''; display: block; width: 2rem; height: 1.8rem;}
+
+
+.uteam_info02 .predict {margin-bottom: 1.7rem;  }
+.uteam_info02 .predict .p_item span {color: #fff; display: inline-block; font-size: 1.2rem; font-weight: 600; height: 2.5rem; line-height: 2.5rem; padding: 0 1rem; white-space: nowrap;}
+.uteam_info02 .predict .left.win {background-image: linear-gradient(116deg, #FE72D8 27.43%, #E11957 86.5%);}
+.uteam_info02 .predict .left.lose span {color: #454545;}
+.uteam_info02 .predict .right.win {background-image: linear-gradient(116deg, #FE72D8 27.43%, #E11957 86.5%);}
+.uteam_info02 .predict .right.lose span {color: #454545;}
+.uteam_info02 .predict .p_item.left {justify-content: start;}
+.uteam_info02 .predict .p_item.right {justify-content: flex-end;}
+
+.my_predict .item + .item {margin-top: 1.2rem; }
+.my_predict .item .txt01 {}
+.my_predict .item .txt01 span {font-size: 1.6rem; color: #414141; display: flex; align-items: center; gap: 1rem;  }
+.my_predict .item .txt01.type01 span::before {content: ''; display: block; width: 1.5rem; height: 1.5rem;}
+.my_predict .item .txt01.type02 span::before {content: ''; display: block; width: 1.5rem; height: 1.5rem;}
+.my_predict .item .txt01.type03 span::before {content: ''; display: block; width: 1.5rem; height: 1.5rem;}
+.my_predict .item .txt02 {font-size: 1.6rem; color: #414141;}
+.my_predict .item .txt02 span {font-size: 1.6rem; color: #414141; font-weight: 600;}
+
+
+.new_tit02 {font-size: 1.6rem; margin-bottom: 1rem; }
+.new_tit02 em {color: #F00;}
+.new_tit02 span {color: #F00;}
+
+.t_box01 {padding: 1.5rem .6rem; margin-bottom: 2.3rem; }
+.t_box01 .pick_items {}
+.t_box01 .pick_items .item {gap: 1rem; }
+.t_box01 .pick_items .item .pteam {width: 4.5rem; position: relative; flex: 0 0 4.5rem; }
+.t_box01 .pick_items .pick_no_txt {font-size: 1.6rem; }
+
+
+
+.uchart_area {margin-bottom: 3rem; }
+.uchart_area .box02 {display: flex;  flex-wrap: wrap; gap: 2rem; width: 100%;}
+.uchart_item {padding: 1.8rem .6rem; width: 100%; }
+.uchart_item .title {margin-bottom: 1rem;}
+.uchart_item .title span {color: #FF0000;  line-height: 1.9rem;}
+.uchart_item .title.icon01 span,
+.uchart_item .title.icon02 span {display: block; padding-left: 2.5rem; position: relative; }
+.uchart_item .title.icon01 span::before {content: ''; display: block; width: 1.5rem; height: 1.5rem;  position: absolute; left: .5rem; top: .1rem;}
+.uchart_item .title.icon02 span::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; position: absolute; left: .5rem; top: .1rem;}
+.uchart_item .chart_box {height: 20rem; }
+
+.result_ubox {}
+.result_ubox .tit {font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
+.result_ubox .tit span {display: block; padding-left: 2rem; position: relative;}
+.result_ubox .tit span::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; position: absolute; left: 0; top: .35rem;}
+
+
+.result_guide {display: flex; align-items: center; justify-content: center;}
+.result_guide .inner {display: inline-flex; align-items: center; justify-content: center; gap: 1rem; border-radius: 1.2rem; background: #FFF; padding: .8rem 4rem; }
+.result_guide .item {font-size: 1.2rem; line-height: 2.5rem; color: #E11956;}
+.result_guide .item em {font-weight: 600; color: #E11956;}
+.result_guide .item.type01,
+.result_guide .item.type01 em {color: #686868;}
+.result_guide .item.type02 {display: flex; align-items: center; gap: .7rem; color: #E11956;}
+.result_guide .item.type02::before {content: ''; display: block; width: 1.5rem; height: 1.5rem; background: url(/images/ak_icon.svg) no-repeat center; background-size: contain;}
+.result_guide .item.type02 em {color: #E11956;}
+
+.result_list {padding-top: 2.5rem; gap: 2.5rem 1rem; width: 100%; }
+.result_list .item {width: calc((100% - 1rem) / 2);}
+.result_list .item .tit {font-size: 1.5rem; line-height: 3rem; padding-top: 1rem; margin: 0; }
+.result_list .item .in_item {padding: .6rem 1.3rem;}
+.result_list .item .in_item .txt {width: auto; text-align: center; font-size: 1.2rem; color: #A4A4A4;}
+.result_list .item .in_item .score_info {display: flex; align-items: center; gap: .3rem; }
+.result_list .item .in_item .score_info .team {display: flex; align-items: center;}
+.result_list .item .in_item .score_info .team span {width: 2rem; height: 2rem; opacity: 0.2;}
+.result_list .item .in_item .score_info .team em {display: block; width: 2.5rem;font-size: 1.6rem;}
+.result_list .item .in_item .score_info .vs {width: 1.5rem; height: 1.5rem; background: url(/images/vs_icon.svg) no-repeat 0 0; background-size: cover; font-size: 0; }
+.result_list .item:nth-child(even) .inner {border: .1rem solid #999; }
+.result_list .item:nth-child(even) .tit {background: #999;}
+.result_list .item.all_kill .inner {border: .1rem solid #E11956; }
+.result_list .item.all_kill .tit {background: #E11956;}
+.result_list .item.all_kill::before {content: ''; display: block; width: 2.1rem; height: 2.1rem; background-size: cover; position: absolute; left: 50%; top: -1rem; transform: translateX(-50%); }
+
+/*경기취소*/
+.result_list .item .in_item.cancel .score_info {gap: 4rem;}
+.result_list .item .in_item.cancel::after {content: '경기취소'; font-size: 1.4rem; font-weight: 500; display: flex; align-items: center; justify-content: center; position: absolute; left: 0; top: 0; color: #fff; width: 100%; height: 100%;}
+
+
+/*예측성공시*/
+.result_list .item .in_item.success_ing {}
+.result_list .item .in_item.success_ing .txt {color: #E11956;}
+.result_list .item .in_item .txt span {display: none; }
+.result_list .item .in_item .score_info .team.win span {opacity: 1;}
+.result_list .item .in_item .score_info .team.win em {color: #E11956;}
+
+
+
+/* floating 메뉴 */
+.floating_wrap {right: 1rem;}
+.floating_wrap button {width: 4rem; height: 4rem; }
+.floating_wrap ul {display: none; position: absolute; left: -9rem;}
+.floating_wrap ul.show {display: block;}
+.floating_wrap ul li + li {margin-top: .4rem; }
+
+
+/* chartjs 스크롤 */
+.chart-scroll-container {width: 100%; overflow-x: auto; overflow-y: hidden;}
+.chart-inner {height: 15rem; min-width: 100%;}
+
+/* */
+.event_poparea {display: block; }
+.event_poparea .event_item {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+
+
+
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 361px) {
+	.select_div.active.whole01 .option_list {left:0; right:unset; }
+	.select_div.active.end01 .option_list {left: unset; right: -5rem;}
+	.top_category h2 {margin-right: 0rem;}
+	.top_category > div {margin-left: 1rem; display: flex; align-items: center; gap: .2rem;}
+}
