@@ -1,6 +1,7 @@
-#TODO: get  pitcher name 
-
 import time
+import re
+import os
+import html
 import requests
 import pandas as pd
 import logging
@@ -14,7 +15,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 TARGET_GAME_ID = "20260506HHHT02026"
-SAVE_PATH = r"C:\dev\Python_Projects\KBO_Stat_Analysis\data\game_data\\" + f"KBO_GameData_{TARGET_GAME_ID}.csv"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+SAVE_PATH = os.path.join(PROJECT_ROOT, "data", "game_data", f"KBO_GameData_{TARGET_GAME_ID}.csv")
+PLAYER_NAME_CACHE = {}
 
 def fetch_kbo_relay_json(game_id, inning):
     """네이버 스포츠 API에서 JSON 데이터를 가져옵니다."""
@@ -44,14 +47,56 @@ def get_batter_name_verbose(relay_data):
                 return text.split(":")[0].strip()
     return "N/A"
 
-def get_pitcher_name(relay_data):
-    """💡 currentPlayersInfo에서 투수 이름 추출"""
-    players = relay_data.get("currentPlayersInfo", {})
-    # home 또는 away 객체 안에서 playerType이 pitcher인 데이터를 찾습니다.
-    for team in ['home', 'away']:
-        player = players.get(team, {})
-        if player.get("playerType") == "pitcher":
-            return player.get("name", "알수없음")
+def build_player_name_map(text_relay_data):
+    """엔트리 정보에서 선수 코드 -> 이름 맵을 만듭니다."""
+    player_map = {}
+    for entry_key in ("homeEntry", "awayEntry"):
+        entry = text_relay_data.get(entry_key, {})
+        for group_key in ("pitcher", "batter"):
+            for player in entry.get(group_key, []):
+                pcode = str(player.get("pcode", "")).strip()
+                name = str(player.get("name", "")).strip()
+                if pcode and name:
+                    player_map[pcode] = name
+    return player_map
+
+def fetch_player_name_from_kbo(player_code):
+    """엔트리에 없는 선수 코드는 KBO 선수 페이지에서 보강합니다."""
+    player_code = str(player_code or "").strip()
+    if not player_code:
+        return ""
+    if player_code in PLAYER_NAME_CACHE:
+        return PLAYER_NAME_CACHE[player_code]
+
+    url = f"https://www.koreabaseball.com/Record/Player/PitcherDetail/Basic.aspx?playerId={player_code}"
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        text = html.unescape(re.sub(r"<[^>]+>", " ", response.text))
+        match = re.search(r"선수명:\s*([^\s]+)", text)
+        name = match.group(1).strip() if match else ""
+    except Exception as e:
+        logger.warning(f"⚠️ 투수 코드 {player_code} 이름 조회 실패: {e}")
+        name = ""
+
+    PLAYER_NAME_CACHE[player_code] = name
+    return name
+
+def get_pitcher_name(text_option, player_map):
+    """투구별 textOption의 currentGameState.pitcher 코드로 투수 이름을 찾습니다."""
+    game_state = text_option.get("currentGameState", {}) if text_option else {}
+    pitcher_code = str(game_state.get("pitcher", "")).strip()
+
+    if pitcher_code in player_map:
+        return player_map[pitcher_code]
+
+    name = fetch_player_name_from_kbo(pitcher_code)
+    if name:
+        player_map[pitcher_code] = name
+        return name
+
     return "알수없음"
 
 def extract_full_game_data(game_id):
@@ -68,20 +113,22 @@ def extract_full_game_data(game_id):
             logger.warning(f"⚠️ [{inning}회] 데이터 없음 -> 패스합니다.")
             continue
             
-        relays = data["result"].get("textRelayData", {}).get("textRelays", [])
+        text_relay_data = data["result"].get("textRelayData", {})
+        player_map = build_player_name_map(text_relay_data)
+        relays = text_relay_data.get("textRelays", [])
         inning_pitch_count = 0
         
         for relay in reversed(relays):
             inn = relay.get("inn")
             home_away = "Home" if relay.get("homeOrAway") == "1" else "Away"
             b_name = get_batter_name_verbose(relay)
-            p_name = get_pitcher_name(relay) # 💡 투수명 추출
             log_text = " ".join([opt.get("text", "") for opt in relay.get("textOptions", []) if opt.get("type") == 13])
             
             pts_options = relay.get("ptsOptions", [])
             for i, pts in enumerate(pts_options):
                 pitch_id = pts.get("pitchId")
                 text_opt = next((opt for opt in relay.get("textOptions", []) if opt.get("ptsPitchId") == pitch_id), {})
+                p_name = get_pitcher_name(text_opt, player_map) # 💡 투구별 투수명 추출
                 
                 row = {
                     "이닝": inn, 
@@ -110,12 +157,14 @@ def extract_full_game_data(game_id):
     if all_rows:
         df = pd.DataFrame(all_rows)
         df = df.sort_values(by=['이닝', '공격팀구분', '상대타석내구수']).reset_index(drop=True)
+        os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
         df.to_csv(SAVE_PATH, index=False, encoding="utf-8-sig")
         
-        print("\n" + "🎉" * 15)
-        logger.info(f"💾 저장이 완료되었습니다! 경로: {SAVE_PATH}")
+        print("\n" + "=" * 30)
+        logger.info(f"💾 저장이 완료되었습니다!")
+        logger.info(f"💾 경로: {SAVE_PATH}")
         logger.info(f"📊 최종 수집 데이터: {len(df)}행")
-        print("🎉" * 15 + "\n")
+        print("=" * 30 + "\n")
     else:
         logger.error("🛑 추출할 수 있는 데이터가 없습니다.")
 
