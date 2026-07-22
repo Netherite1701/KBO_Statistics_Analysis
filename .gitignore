@@ -179,3 +179,10 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Local crawler outputs
+data/kbo.sqlite
+data/kbo.sqlite-shm
+data/kbo.sqlite-wal
+data/raw/
+data/exports/

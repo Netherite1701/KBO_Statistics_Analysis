@@ -1,0 +1,236 @@
+{
+  "code": 200,
+  "success": true,
+  "result": {
+    "textRelayData": {
+      "category": "kbo",
+      "gameId": "20260506HHHT02026",
+      "no": 2,
+      "inn": 1,
+      "homeOrAway": "0",
+      "currentGameState": {
+        "homeScore": "0",
+        "awayScore": "1",
+        "pitcher": "11111",
+        "batter": "22222",
+        "strike": "0",
+        "ball": "0",
+        "out": "1",
+        "base1": "0",
+        "base2": "0",
+        "base3": "0"
+      },
+      "sourceOnlyTopField": {
+        "mustSurvive": true
+      },
+      "textRelays": [
+        {
+          "title": "2번타자 테스트둘",
+          "no": 2,
+          "inn": 1,
+          "homeOrAway": "0",
+          "statusCode": 0,
+          "metricOption": {
+            "homeTeamWinRate": 45.2,
+            "awayTeamWinRate": 54.8,
+            "wpaByPlate": 3.1
+          },
+          "textOptions": [
+            {
+              "seqno": 20,
+              "type": 8,
+              "text": "2번타자 테스트둘",
+              "currentGameState": {
+                "pitcher": "11111",
+                "batter": "22222",
+                "strike": "0",
+                "ball": "0",
+                "out": "1",
+                "base1": "0",
+                "base2": "0",
+                "base3": "0"
+              }
+            },
+            {
+              "seqno": 21,
+              "type": 1,
+              "pitchNum": 1,
+              "ptsPitchId": "260506_190100",
+              "pitchResult": "H",
+              "stuff": "직구",
+              "speed": "148",
+              "text": "1구 타격",
+              "currentGameState": {
+                "pitcher": "11111",
+                "batter": "22222",
+                "strike": "0",
+                "ball": "0",
+                "out": "1",
+                "base1": "0",
+                "base2": "0",
+                "base3": "0"
+              },
+              "unknownTextField": "preserved"
+            },
+            {
+              "seqno": 22,
+              "type": 23,
+              "text": "테스트둘 : 우익수 뒤 홈런",
+              "currentGameState": {
+                "pitcher": "11111",
+                "batter": "22222",
+                "strike": "0",
+                "ball": "0",
+                "out": "1",
+                "base1": "0",
+                "base2": "0",
+                "base3": "0"
+              }
+            }
+          ],
+          "ptsOptions": [
+            {
+              "pitchId": "260506_190100",
+              "inn": 1,
+              "ballcount": 1,
+              "crossPlateX": 0.25,
+              "crossPlateY": 0.7083,
+              "topSz": 3.4,
+              "bottomSz": 1.6,
+              "x0": 1.8,
+              "y0": 50.0,
+              "z0": 5.7,
+              "vx0": -6.1,
+              "vy0": -132.0,
+              "vz0": -7.2,
+              "ax": 18.1,
+              "ay": 22.2,
+              "az": -11.5,
+              "stance": "L",
+              "unknownPtsField": 99
+            }
+          ]
+        },
+        {
+          "title": "1번타자 테스트하나",
+          "no": 1,
+          "inn": 1,
+          "homeOrAway": "0",
+          "statusCode": 0,
+          "textOptions": [
+            {
+              "seqno": 10,
+              "type": 8,
+              "text": "1번타자 테스트하나",
+              "currentGameState": {
+                "pitcher": "33333",
+                "batter": "44444",
+                "strike": "0",
+                "ball": "0",
+                "out": "0",
+                "base1": "0",
+                "base2": "0",
+                "base3": "0"
+              }
+            },
+            {
+              "seqno": 11,
+              "type": 1,
+              "pitchNum": 1,
+              "ptsPitchId": "260506_190000",
+              "pitchResult": "B",
+              "stuff": "슬라이더",
+              "speed": "136",
+              "text": "1구 볼",
+              "currentGameState": {
+                "pitcher": "33333",
+                "batter": "44444",
+                "strike": "0",
+                "ball": "1",
+                "out": "0",
+                "base1": "0",
+                "base2": "0",
+                "base3": "0"
+              }
+            },
+            {
+              "seqno": 12,
+              "type": 1,
+              "pitchNum": 2,
+              "ptsPitchId": "260506_190010",
+              "pitchResult": "T",
+              "stuff": "직구",
+              "speed": "147",
+              "text": "2구 스트라이크",
+              "currentGameState": {
+                "pitcher": "33333",
+                "batter": "44444",
+                "strike": "1",
+                "ball": "1",
+                "out": "0",
+                "base1": "0",
+                "base2": "0",
+                "base3": "0"
+              }
+            },
+            {
+              "seqno": 13,
+              "type": 13,
+              "text": "테스트하나 : 볼넷",
+              "currentGameState": {
+                "pitcher": "33333",
+                "batter": "44444",
+                "strike": "1",
+                "ball": "4",
+                "out": "0",
+                "base1": "4",
+                "base2": "0",
+                "base3": "0"
+              }
+            }
+          ],
+          "ptsOptions": [
+            {
+              "pitchId": "260506_190000",
+              "inn": 1,
+              "ballcount": 1,
+              "crossPlateX": -0.5,
+              "crossPlateY": 0.7083,
+              "topSz": 3.5,
+              "bottomSz": 1.7,
+              "x0": -1.9,
+              "y0": 50.0,
+              "z0": 5.8,
+              "vx0": 5.0,
+              "vy0": -128.0,
+              "vz0": -6.0,
+              "ax": -10.0,
+              "ay": 20.0,
+              "az": -18.0,
+              "stance": "R"
+            },
+            {
+              "pitchId": "260506_tracking_only",
+              "inn": 1,
+              "ballcount": 3,
+              "crossPlateX": 0.1,
+              "crossPlateY": 0.7083,
+              "topSz": 3.5,
+              "bottomSz": 1.7,
+              "x0": -1.8,
+              "y0": 50.0,
+              "z0": 5.9,
+              "vx0": 4.5,
+              "vy0": -129.0,
+              "vz0": -6.5,
+              "ax": -9.5,
+              "ay": 20.5,
+              "az": -17.5,
+              "stance": "R"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
