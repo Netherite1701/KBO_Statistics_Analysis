@@ -179,3 +179,12 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# ===== 프로젝트 전용 규칙 (코드만 저장소에 유지) =====
+# 웹페이지 다운로드 부산물 (저장소에서 제거)
+html_files/
+# 데이터 파일 (공유 드라이브로 이동, 저장소에는 코드만)
+data/
+*.sqlite
+*.db
+*.csv
