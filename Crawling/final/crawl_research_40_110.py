@@ -580,6 +580,8 @@ def collect_full_pitches(collector: Collector, schedule: list[dict[str, str]], m
                 relay = None if collector.refresh else read_saved_relay(raw_file)
                 if relay is None and inning == 1 and not collector.refresh:
                     relay = read_saved_relay(RAW_ROOT / "games" / game_id / "naver_relay_inning_1.json")
+                    if relay is not None and not raw_file.exists():
+                        raw_file.write_text(json.dumps(relay, ensure_ascii=False, indent=2), encoding="utf-8")
                 if relay is None:
                     relay = collector.get_json(NAVER_RELAY_URL.format(game_id=f"{game_id}{season}"), {"inning": inning})
                     raw_file.write_text(json.dumps(relay, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -125,6 +125,8 @@ def build_relay_tables(data_root: Path, years: set[str], module: Any) -> tuple[i
                 for inning in range(1, last_inning + 1):
                     relay_file = raw / "pitches" / game_id / f"inning_{inning:02d}.json"
                     relay = module.read_saved_relay(relay_file)
+                    if relay is None and inning == 1:
+                        relay = module.read_saved_relay(raw / "games" / game_id / "naver_relay_inning_1.json")
                     if relay is None:
                         raise FileNotFoundError(f"missing or invalid inning {inning}")
                     relays.append(relay)
