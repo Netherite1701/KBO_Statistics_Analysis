@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import csv
+import argparse
 from collections import Counter
 from pathlib import Path
 
@@ -41,11 +42,24 @@ def add(results: list[dict[str, object]], name: str, result: str, count: int, de
     results.append({"check_name": name, "result": result, "count": count, "detail": detail})
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Validate the collected KBO CSV tables.")
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        help="Collection result folder to validate. Defaults to data/research_40_110.",
+    )
+    return parser.parse_args()
+
+
 def main() -> None:
+    args = parse_args()
+    table_root = args.data_root.resolve() / "tables" if args.data_root else TABLE_ROOT
+    log_root = args.data_root.resolve() / "logs" if args.data_root else LOG_ROOT
     results: list[dict[str, object]] = []
     loaded: dict[str, list[dict[str, str]]] = {}
     for filename, expected_columns in EXPECTED.items():
-        path = TABLE_ROOT / filename
+        path = table_root / filename
         if not path.exists():
             add(results, f"{filename}: 존재", "MISSING", 1, "수집기를 실행해 파일을 만든다.")
             continue
@@ -76,8 +90,8 @@ def main() -> None:
     for flag, count in sorted(flags.items()):
         add(results, f"품질 표시: {flag or '(빈 값)'}", "INFO", count, "값의 의미는 DATA_FORMAT_40_110.md를 따른다.")
 
-    LOG_ROOT.mkdir(parents=True, exist_ok=True)
-    output = LOG_ROOT / "validation_40_110.csv"
+    log_root.mkdir(parents=True, exist_ok=True)
+    output = log_root / "validation_40_110.csv"
     with output.open("w", newline="", encoding="utf-8-sig") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check_name", "result", "count", "detail"])
         writer.writeheader()

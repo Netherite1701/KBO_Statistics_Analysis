@@ -38,7 +38,7 @@
 | 4 | `away_team` | 원정 팀 |
 | 5 | `home_team` | 홈 팀 |
 | 6 | `stadium` | 경기장 |
-| 7 | `game_status` | `COMPLETE` 또는 `NO_REVIEW_ID` |
+| 7 | `game_status` | `COMPLETE`(정규시즌 분석에 넣은 경기), `EXCLUDED_ALL_STAR`(올스타전이라 분석에서 뺀 경기), 또는 `NO_REVIEW_ID`(KBO 검토 링크가 없는 일정 행) |
 | 8 | `kbo_review_url` | KBO 공식 경기 리뷰 주소 |
 | 9 | `quality_flag` | 자료 확인 상태 |
 | 10 | `issue_reason` | 확인이 필요한 이유 |
@@ -139,6 +139,12 @@ Naver 중계의 `textRelays.no`는 경기 안에서 증가하는 중계 사건 �
 
 ```powershell
 python Crawling/final/validate_research_40_110.py
+```
+
+과거 시즌을 기존 수집 결과와 섞지 않고 검사할 때는 아래처럼 별도 결과 폴더를 지정한다.
+
+```powershell
+python Crawling/final/validate_research_40_110.py --data-root data/research_80_backfill
 ```
 
 이 명령은 외부 사이트에 접속하지 않는다. 각 CSV의 열 순서, 경기 번호 중복, `player_id + game_id` 중복, 투구 번호 중복, 품질 표시 개수를 `logs/validation_40_110.csv`에 기록한다.

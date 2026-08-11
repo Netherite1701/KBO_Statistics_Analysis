@@ -76,7 +76,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-games", type=int, default=0, help="게임 단계의 최대 경기 수. 0은 제한 없음")
     parser.add_argument("--rate-seconds", type=float, default=0.6, help="요청 사이 대기 시간(초)")
     parser.add_argument("--refresh", action="store_true", help="이미 저장한 원본도 다시 받음")
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        help="결과를 저장할 폴더. 지정하지 않으면 data/research_40_110을 사용한다.",
+    )
     return parser.parse_args()
+
+
+def configure_data_root(data_root: Path | None) -> None:
+    """Keep a backfill run separate from an already verified collection."""
+    if data_root is None:
+        return
+    global DATA_ROOT, RAW_ROOT, TABLE_ROOT, LOG_ROOT
+    DATA_ROOT = data_root.resolve()
+    RAW_ROOT = DATA_ROOT / "raw"
+    TABLE_ROOT = DATA_ROOT / "tables"
+    LOG_ROOT = DATA_ROOT / "logs"
 
 
 class Collector:
@@ -199,13 +215,15 @@ def schedule_rows(payload: Any, season: int) -> list[dict[str, str]]:
             stadium = text(BeautifulSoup(raw_cells[stadium_index], "html.parser").get_text(" ", strip=True)) if len(raw_cells) > stadium_index else ""
             if not (game_date and (game_id or (away_team and home_team))):
                 continue
+            is_all_star = {away_team, home_team} == {"나눔", "드림"}
+            game_status = "EXCLUDED_ALL_STAR" if is_all_star else "COMPLETE" if game_id else "NO_REVIEW_ID"
             rows.append({
                 "game_id": game_id, "game_date": game_date, "season": str(season),
                 "away_team": away_team, "home_team": home_team, "stadium": stadium,
-                "game_status": "COMPLETE" if game_id else "NO_REVIEW_ID",
+                "game_status": game_status,
                 "kbo_review_url": f"{KBO_BASE}/Schedule/GameCenter/Main.aspx?gameDate={game_date.replace('-', '')}&gameId={game_id}&section=REVIEW" if game_id and game_date else "",
-                "quality_flag": "OK" if game_id and game_date and away_team and home_team else "CHECK",
-                "issue_reason": "" if game_id and game_date and away_team and home_team else "Could not read one or more schedule fields",
+                "quality_flag": "CHECK" if is_all_star or not (game_id and game_date and away_team and home_team) else "OK",
+                "issue_reason": "All-Star game is outside the regular-season research scope" if is_all_star else "" if game_id and game_date and away_team and home_team else "Could not read one or more schedule fields",
             })
         return rows
     candidates = payload if isinstance(payload, list) else payload.get("data", payload.get("list", []))
@@ -222,17 +240,20 @@ def schedule_rows(payload: Any, season: int) -> list[dict[str, str]]:
             game_date = datetime.strptime(game_date, "%Y%m%d").date().isoformat()
         teams = text(values.get("play") or values.get("team") or values.get("match"))
         split = re.split(r"\s*(?:vs|VS|:)\s*", teams)
+        away_team = split[0] if len(split) >= 2 else ""
+        home_team = split[1] if len(split) >= 2 else ""
+        is_all_star = {away_team, home_team} == {"나눔", "드림"}
         rows.append({
             "game_id": game_id,
             "game_date": game_date,
             "season": str(season),
-            "away_team": split[0] if len(split) >= 2 else "",
-            "home_team": split[1] if len(split) >= 2 else "",
+            "away_team": away_team,
+            "home_team": home_team,
             "stadium": text(values.get("stadium") or values.get("place")),
-            "game_status": "COMPLETE" if game_id else "NO_REVIEW_ID",
+            "game_status": "EXCLUDED_ALL_STAR" if is_all_star else "COMPLETE" if game_id else "NO_REVIEW_ID",
             "kbo_review_url": f"{KBO_BASE}{re.search(r'href=[\"\']([^\"\']+)', link_text).group(1)}" if game_id and re.search(r'href=[\"\']([^\"\']+)', link_text) else "",
-            "quality_flag": "OK" if game_id and game_date else "CHECK",
-            "issue_reason": "" if game_id and game_date else "KBO schedule row has no usable review link or date",
+            "quality_flag": "CHECK" if is_all_star or not (game_id and game_date) else "OK",
+            "issue_reason": "All-Star game is outside the regular-season research scope" if is_all_star else "" if game_id and game_date else "KBO schedule row has no usable review link or date",
         })
     return rows
 
@@ -314,14 +335,13 @@ def collect_roster(collector: Collector, schedule: list[dict[str, str]]) -> list
 def naver_lineup_rows(relay: dict[str, Any], game_id: str, game_date: str, away_team: str, home_team: str) -> list[dict[str, str]]:
     data = relay.get("result", {}).get("textRelayData", {})
     rows: list[dict[str, str]] = []
-    # 이 Naver 선수 명단 응답은 0인 타격 항목을 아예 보내지 않는 경우가
-    # 있다. 한 행에서 같은 항목이 생략된 것은 0으로 확인됐으므로, 단순한
-    # 문자열 빈 칸이 아니라 숫자 0으로 저장해 KBO 일별 기록과 비교한다.
+    # 시즌과 경기마다 Naver 선수 명단의 항목 제공 범위가 다르다. 실제로
+    # 2021년 원본에는 PA 항목이 비어 있는 선수가 있으므로, 비어 있는 값을
+    # 0으로 바꾸면 "타석이 없었다"는 잘못된 기록이 된다. 확인하지 못한 값은
+    # 빈칸으로 유지하고 quality_flag=CHECK로 표시한다.
     def stat(player: dict[str, Any], key: str) -> str:
         value = player.get(key)
-        # text()는 숫자 0을 빈 문자열로 바꾸므로, 타격 수치는 여기서
-        # 직접 문자열로 바꾼다.
-        return "0" if value in (None, "") else str(value).strip()
+        return "" if value in (None, "") else str(value).strip()
     for lineup_key, side in (("homeLineup", "HOME"), ("awayLineup", "AWAY")):
         for player in data.get(lineup_key, {}).get("batter", []):
             player_id, player_name = text(player.get("pcode")), text(player.get("name"))
@@ -338,7 +358,7 @@ def naver_lineup_rows(relay: dict[str, Any], game_id: str, game_date: str, away_
 
 
 def collect_games(collector: Collector, schedule: list[dict[str, str]], max_games: int) -> list[dict[str, str]]:
-    completed = [row for row in schedule if row["game_id"]]
+    completed = [row for row in schedule if row["game_id"] and row["game_status"] == "COMPLETE"]
     if max_games:
         completed = completed[:max_games]
     all_box: list[dict[str, str]] = []
@@ -514,7 +534,7 @@ def build_derived_tables(schedule: list[dict[str, str]], box: list[dict[str, str
         saved_counts[(row["game_id"], row["team"])] += 1
     schedule_counts = Counter()
     for row in schedule:
-        if row["game_id"]:
+        if row["game_id"] and row["game_status"] == "COMPLETE":
             schedule_counts[(row["season"], row["away_team"])] += 1
             schedule_counts[(row["season"], row["home_team"])] += 1
     saved_game_counts = Counter()
@@ -534,7 +554,7 @@ def build_derived_tables(schedule: list[dict[str, str]], box: list[dict[str, str
         "kbo_game_id": row["game_id"], "naver_game_id": f"{row['game_id']}{row['season']}", "game_date": row["game_date"],
         "matching_rule": "KBO game ID + season; Naver response game ID is checked when collected", "verification_status": "VERIFIED" if (RAW_ROOT / "games" / row["game_id"] / "naver_relay_inning_1.json").exists() else "NOT_COLLECTED",
         "issue_reason": "" if (RAW_ROOT / "games" / row["game_id"] / "naver_relay_inning_1.json").exists() else "Naver lineup has not been collected for this game",
-    } for row in schedule if row["game_id"]]
+    } for row in schedule if row["game_id"] and row["game_status"] == "COMPLETE"]
     write_csv(TABLE_ROOT / "game_id_crosswalk.csv", CROSSWALK_COLUMNS, crosswalk)
     pa_by_id: dict[tuple[str, str], list[dict[str, str]]] = {}
     for row in pitch:
@@ -565,6 +585,7 @@ def build_derived_tables(schedule: list[dict[str, str]], box: list[dict[str, str
 
 def main() -> None:
     args = parse_args()
+    configure_data_root(args.data_root)
     ensure_dirs()
     collector = Collector(args.rate_seconds, args.refresh)
     schedule = read_csv(TABLE_ROOT / "game_schedule.csv")
