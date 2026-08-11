@@ -66,6 +66,15 @@ PITCH_COLUMNS = [
     "batter_name", "pitcher_id", "pitcher_name", "pitch_number_in_pa", "pitch_type",
     "speed", "plate_x", "plate_y", "quality_flag", "issue_reason",
 ]
+PA_EVENT_COLUMNS = [
+    "game_id", "pa_id", "pa_sequence", "inning", "half_inning", "batter_id", "batter_name",
+    "pitcher_id", "pitcher_name", "pa_result", "score_difference", "outs", "base_state",
+    "quality_flag", "issue_reason",
+]
+INNING_COLLECTION_COLUMNS = [
+    "game_id", "season", "game_date", "inning", "expected_last_inning", "raw_file",
+    "relay_event_count", "collection_status", "issue_reason",
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -394,8 +403,8 @@ def collect_games(collector: Collector, schedule: list[dict[str, str]], max_game
     return result
 
 
-def pitch_rows(relay: dict[str, Any], game_id: str) -> list[dict[str, str]]:
-    out: list[dict[str, str]] = []
+def relay_context(relay: dict[str, Any]) -> tuple[dict[str, Any], dict[str, str]]:
+    """Return relay content and the player-number/name map carried by Naver."""
     text_relay = relay.get("result", {}).get("textRelayData", {})
     player_names: dict[str, str] = {}
     for entry_key in ("homeEntry", "awayEntry"):
@@ -404,6 +413,41 @@ def pitch_rows(relay: dict[str, Any], game_id: str) -> list[dict[str, str]]:
                 player_id, player_name = text(player.get("pcode")), text(player.get("name"))
                 if player_id and player_name:
                     player_names[player_id] = player_name
+    return text_relay, player_names
+
+
+def relay_pa_rows(relay: dict[str, Any], game_id: str) -> list[dict[str, str]]:
+    """Make one row per Naver relay batting event, including an event with no pitch."""
+    out: list[dict[str, str]] = []
+    text_relay, player_names = relay_context(relay)
+    for relay_item in reversed(text_relay.get("textRelays", [])):
+        relay_no = text(relay_item.get("no"))
+        options = relay_item.get("textOptions", [])
+        batter_option = next((option for option in options if option.get("batterRecord")), {})
+        batter_record = batter_option.get("batterRecord", {})
+        batter, batter_id = text(batter_record.get("name")), text(batter_record.get("pcode"))
+        if not relay_no or not batter_id:
+            continue
+        result_option = next((option for option in reversed(options) if batter and text(option.get("text")).startswith(f"{batter} :")), {})
+        result_text = text(result_option.get("text"))
+        pa_result = result_text.split(":", 1)[1].strip() if ":" in result_text else ""
+        state = next((option.get("currentGameState", {}) for option in reversed(options) if option.get("currentGameState")), {})
+        pitcher_id = text(state.get("pitcher"))
+        out.append({
+            "game_id": game_id, "pa_id": f"{game_id}_relay_{int(relay_no):04d}", "pa_sequence": "",
+            "inning": text(relay_item.get("inn")), "half_inning": "HOME" if text(relay_item.get("homeOrAway")) == "1" else "AWAY",
+            "batter_id": batter_id, "batter_name": batter, "pitcher_id": pitcher_id, "pitcher_name": player_names.get(pitcher_id, ""),
+            "pa_result": pa_result, "score_difference": text(state.get("scoreGap") or state.get("scoreDifference")),
+            "outs": text(state.get("outCount") or state.get("out")), "base_state": text(state.get("base") or state.get("baseState")),
+            "quality_flag": "OK" if pa_result else "CHECK", "issue_reason": "" if pa_result else "The Naver relay has a batter event but no final result text.",
+            "__relay_no": relay_no,
+        })
+    return out
+
+
+def pitch_rows(relay: dict[str, Any], game_id: str) -> list[dict[str, str]]:
+    out: list[dict[str, str]] = []
+    text_relay, player_names = relay_context(relay)
     for relay_item in reversed(text_relay.get("textRelays", [])):
         relay_no = text(relay_item.get("no"))
         options = relay_item.get("textOptions", [])
@@ -490,13 +534,103 @@ def collect_pitches(collector: Collector, schedule: list[dict[str, str]], max_ga
     return result
 
 
+def completed_innings(scoreboard_file: Path) -> int:
+    """Use the rightmost real official inning score, not the fixed table width."""
+    scoreboard = json.loads(scoreboard_file.read_text(encoding="utf-8"))
+    table = load_json(scoreboard.get("table2", {}))
+    played = [
+        index
+        for source_row in table.get("rows", [])
+        for index, cell in enumerate(source_row.get("row", []), start=1)
+        if text(cell.get("Text")) not in {"", "-"}
+    ]
+    if not played:
+        raise ValueError("Official scoreboard has no readable inning score.")
+    return max(played)
+
+
+def read_saved_relay(path: Path) -> dict[str, Any] | None:
+    try:
+        saved = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return saved if isinstance(saved, dict) else None
+
+
+def collect_full_pitches(collector: Collector, schedule: list[dict[str, str]], max_games: int, seasons: set[str]) -> list[dict[str, str]]:
+    """Collect every inning and persist each source response independently.
+
+    An existing, readable inning file is reused.  This makes an interrupted run
+    restart from the missing inning rather than request the whole game again.
+    """
+    games = [row for row in schedule if row["game_id"] and row["game_status"] == "COMPLETE" and row["season"] in seasons]
+    if max_games:
+        games = games[:max_games]
+    all_rows: list[dict[str, str]] = []
+    all_pa_rows: list[dict[str, str]] = []
+    inning_status_rows: list[dict[str, str]] = []
+    for game_number, row in enumerate(games, start=1):
+        game_id, season = row["game_id"], row["season"]
+        try:
+            last_inning = completed_innings(RAW_ROOT / "games" / game_id / "kbo_scoreboard.json")
+            game_dir = RAW_ROOT / "pitches" / game_id
+            game_dir.mkdir(parents=True, exist_ok=True)
+            for inning in range(1, last_inning + 1):
+                raw_file = game_dir / f"inning_{inning:02d}.json"
+                relay = None if collector.refresh else read_saved_relay(raw_file)
+                if relay is None and inning == 1 and not collector.refresh:
+                    relay = read_saved_relay(RAW_ROOT / "games" / game_id / "naver_relay_inning_1.json")
+                if relay is None:
+                    relay = collector.get_json(NAVER_RELAY_URL.format(game_id=f"{game_id}{season}"), {"inning": inning})
+                    raw_file.write_text(json.dumps(relay, ensure_ascii=False, indent=2), encoding="utf-8")
+                relay_count = len(relay.get("result", {}).get("textRelayData", {}).get("textRelays", []))
+                inning_status_rows.append({
+                    "game_id": game_id, "season": season, "game_date": row["game_date"], "inning": str(inning),
+                    "expected_last_inning": str(last_inning), "raw_file": str(raw_file.relative_to(DATA_ROOT)),
+                    "relay_event_count": str(relay_count), "collection_status": "COMPLETE",
+                    "issue_reason": "" if relay_count else "Saved response has no relay event; it remains an explicit empty inning.",
+                })
+                all_rows.extend(pitch_rows(relay, game_id))
+                all_pa_rows.extend(relay_pa_rows(relay, game_id))
+        except Exception as exc:
+            collector.errors.append({"phase": "pitches", "key": game_id, "error": str(exc)})
+        if game_number % 10 == 0 or game_number == len(games):
+            write_csv(LOG_ROOT / "inning_collection_progress.csv", INNING_COLLECTION_COLUMNS, inning_status_rows)
+            print(f"pitch collection: {game_number}/{len(games)} games, {len(inning_status_rows)} inning files", flush=True)
+    keys = {(row["game_id"], row["pitch_id"]): row for row in all_rows if row["pitch_id"]}
+    result = sorted(keys.values(), key=lambda row: (row["game_id"], int(row["__relay_no"]), int(row["pitch_number_in_pa"])))
+    seen_pa: dict[tuple[str, str], int] = {}
+    current_game, sequence = "", 0
+    for row in result:
+        key = (row["game_id"], row["pa_id"])
+        if key not in seen_pa:
+            if row["game_id"] != current_game:
+                current_game, sequence = row["game_id"], 0
+            sequence += 1
+            seen_pa[key] = sequence
+        row["pa_sequence"] = str(seen_pa[key])
+    write_csv(TABLE_ROOT / "game_pa_pitch_link.csv", PITCH_COLUMNS, result)
+    pa_keys = {(row["game_id"], row["pa_id"]): row for row in all_pa_rows}
+    pa_result = sorted(pa_keys.values(), key=lambda item: (item["game_id"], int(item["__relay_no"])))
+    current_game, sequence = "", 0
+    for item in pa_result:
+        if item["game_id"] != current_game:
+            current_game, sequence = item["game_id"], 0
+        sequence += 1
+        item["pa_sequence"] = str(sequence)
+    write_csv(TABLE_ROOT / "game_pa_event.csv", PA_EVENT_COLUMNS, pa_result)
+    write_csv(LOG_ROOT / "inning_collection_progress.csv", INNING_COLLECTION_COLUMNS, inning_status_rows)
+    return result
+
+
 def write_manifest(schedule: list[dict[str, str]], roster: list[dict[str, str]], box: list[dict[str, str]], pitch: list[dict[str, str]], collector: Collector) -> None:
     now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     build_derived_tables(schedule, box, pitch)
     files = [
         TABLE_ROOT / "game_schedule.csv", TABLE_ROOT / "roster_daily.csv", TABLE_ROOT / "player_game_boxscore.csv",
         TABLE_ROOT / "player_daily_official.csv", TABLE_ROOT / "missing_game_list.csv", TABLE_ROOT / "season_game_count_check.csv",
-        TABLE_ROOT / "game_id_crosswalk.csv", TABLE_ROOT / "game_pa_pitch_link.csv", TABLE_ROOT / "pa_sequence_check.csv", TABLE_ROOT / "pa_boxscore_count_check.csv",
+        TABLE_ROOT / "game_id_crosswalk.csv", TABLE_ROOT / "game_pa_pitch_link.csv", TABLE_ROOT / "game_pa_event.csv",
+        TABLE_ROOT / "pa_sequence_check.csv", TABLE_ROOT / "pa_boxscore_count_check.csv", LOG_ROOT / "inning_collection_progress.csv",
     ]
     rows = []
     for file in files:
@@ -571,14 +705,15 @@ def build_derived_tables(schedule: list[dict[str, str]], box: list[dict[str, str
     reconstructed = Counter((row["game_id"], row["batter_id"]) for row in pa_checks)
     pa_boxscore_checks = []
     for row in box:
-        expected = int(row["PA"] or 0)
+        pa_value = row["PA"]
         actual = reconstructed[(row["game_id"], row["player_id"])]
-        difference = actual - expected
+        expected = int(pa_value) if pa_value else None
+        difference = actual - expected if expected is not None else None
         pa_boxscore_checks.append({
             "game_id": row["game_id"], "player_id": row["player_id"], "player_name": row["player_name"],
-            "boxscore_PA": expected, "reconstructed_PA": actual, "difference": difference,
-            "quality_flag": "OK" if difference == 0 else "CHECK",
-            "issue_reason": "" if difference == 0 else "A plate appearance may have no tracked pitch or relay event; inspect raw relay before correction.",
+            "boxscore_PA": pa_value, "reconstructed_PA": actual, "difference": "" if difference is None else difference,
+            "quality_flag": "UNKNOWN" if expected is None else ("OK" if difference == 0 else "CHECK"),
+            "issue_reason": "Box score PA is blank; do not convert it to zero." if expected is None else ("" if difference == 0 else "A plate appearance may have no tracked pitch or relay event; inspect raw relay before correction."),
         })
     write_csv(TABLE_ROOT / "pa_boxscore_count_check.csv", PA_BOXSCORE_COLUMNS, pa_boxscore_checks)
 
@@ -601,7 +736,7 @@ def main() -> None:
     if "games" in args.phases:
         box = collect_games(collector, schedule, args.max_games)
     if "pitches" in args.phases:
-        pitch = collect_pitches(collector, schedule, args.max_games)
+        pitch = collect_full_pitches(collector, schedule, args.max_games, {str(year) for year in args.years})
     write_manifest(schedule, roster, box, pitch, collector)
     print((LOG_ROOT / "latest_run_summary.txt").read_text(encoding="utf-8"), end="")
 
