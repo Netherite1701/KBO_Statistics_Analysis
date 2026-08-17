@@ -14,7 +14,7 @@ st.markdown("모든 물리 공식과 3D 렌더링을 밑바닥부터 재설계�
 # ==========================================
 # 1. 파일 로드 및 데이터 전처리
 # ==========================================
-file_path = st.text_input("CSV 파일 경로를 입력하세요:", value=r"C:\dev\Python_Projects\KBO_Stat_Analysis\data\game_data\KBO_GameData_20260506HHHT02026.csv")
+file_path = st.text_input("CSV 파일 경로를 입력하세요:", value=r"C:\dev\Python_Projects\KBO_Stat_Analysis\data\game-data\KBO_GameData_20260506HHHT02026.csv")
 
 if not os.path.exists(file_path):
     st.error(f"❌ 파일을 찾을 수 없습니다: {file_path}")

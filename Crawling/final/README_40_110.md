@@ -34,7 +34,7 @@ python Crawling/final/crawl_research_40_110.py --years 2026 --months 5 --phases 
 
 ## 만들어지는 파일
 
-모든 결과는 Git에 올리지 않는 `data/research_40_110/`에 저장된다. 원본 응답은 `raw/`, 사람이 확인할 표는 `tables/`, 실패 기록은 `logs/`에 있다.
+모든 결과는 `data/research-40-110/`에 저장된다. 원본 응답은 `raw/`, 사람이 확인할 표는 `tables/`, 실패 기록은 `logs/`에 있다.
 
 | 파일 | 한 줄의 뜻 | 확인할 점 |
 |---|---|---|

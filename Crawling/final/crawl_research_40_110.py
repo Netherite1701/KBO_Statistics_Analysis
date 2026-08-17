@@ -2,8 +2,8 @@
 
 기존 저장소의 `crawling-game-test2.py`와
 `final/_crawling-pitch+game_final.py`가 사용하는 KBO/Naver 요청 방식을
-한 프로그램으로 정리했다.  원본 응답은 `data/research_40_110/raw/`에,
-분석용 표는 `data/research_40_110/tables/`에 저장한다.
+한 프로그램으로 정리했다.  원본 응답은 `data/research-40-110/raw/`에,
+분석용 표는 `data/research-40-110/tables/`에 저장한다.
 
 중요: 이 프로그램은 수집되지 않은 값을 0으로 만들지 않는다. 연결할 수
 없는 기록은 빈 값과 quality_flag / issue_reason으로 남긴다.
@@ -28,7 +28,7 @@ from bs4 import BeautifulSoup
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA_ROOT = ROOT / "data" / "research_40_110"
+DATA_ROOT = ROOT / "data" / "research-40-110"
 RAW_ROOT = DATA_ROOT / "raw"
 TABLE_ROOT = DATA_ROOT / "tables"
 LOG_ROOT = DATA_ROOT / "logs"
@@ -88,7 +88,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--data-root",
         type=Path,
-        help="결과를 저장할 폴더. 지정하지 않으면 data/research_40_110을 사용한다.",
+        help="결과를 저장할 폴더. 지정하지 않으면 data/research-40-110을 사용한다.",
     )
     return parser.parse_args()
 

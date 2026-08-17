@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 TARGET_GAME_ID = "20260506HHHT02026"
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-SAVE_PATH = os.path.join(PROJECT_ROOT, "data", "game_data", f"KBO_GameData_{TARGET_GAME_ID}.csv")
+SAVE_PATH = os.path.join(PROJECT_ROOT, "data", "game-data", f"KBO_GameData_{TARGET_GAME_ID}.csv")
 PLAYER_NAME_CACHE = {}
 
 def fetch_kbo_relay_json(game_id, inning):

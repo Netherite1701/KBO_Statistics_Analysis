@@ -6,14 +6,14 @@
 
 | 위치 | 형식 | 내용 |
 |---|---|---|
-| `data/research_40_110/raw/schedule/schedule_{시즌}_{월}.json` | JSON | KBO 공식 월별 일정 원본 응답 |
-| `data/research_40_110/raw/roster/roster_{날짜}.html` | HTML | KBO 공식 날짜별 전체 등록 현황 원본 |
-| `data/research_40_110/raw/games/{KBO경기번호}/kbo_scoreboard.json` | JSON | KBO 공식 경기 점수판 원본 |
-| `data/research_40_110/raw/games/{KBO경기번호}/kbo_boxscore.json` | JSON | KBO 공식 박스스코어 원본 |
-| `data/research_40_110/raw/games/{KBO경기번호}/naver_relay_inning_1.json` | JSON | Naver 경기 중계의 선수 명단·경기 기록 원본 |
-| `data/research_40_110/raw/pitches/naver_pitch_{KBO경기번호}.json` | JSON | Naver 이닝별 투구 중계 원본 목록 |
-| `data/research_40_110/tables/` | CSV | 아래의 분석·검사용 표 |
-| `data/research_40_110/logs/` | CSV, TXT, LOG | 수집 오류, 검사 결과, 실행 요약 |
+| `data/research-40-110/raw/schedule/schedule_{시즌}_{월}.json` | JSON | KBO 공식 월별 일정 원본 응답 |
+| `data/research-40-110/raw/roster/roster_{날짜}.html` | HTML | KBO 공식 날짜별 전체 등록 현황 원본 |
+| `data/research-40-110/raw/games/{KBO경기번호}/kbo_scoreboard.json` | JSON | KBO 공식 경기 점수판 원본 |
+| `data/research-40-110/raw/games/{KBO경기번호}/kbo_boxscore.json` | JSON | KBO 공식 박스스코어 원본 |
+| `data/research-40-110/raw/games/{KBO경기번호}/naver_relay_inning_1.json` | JSON | Naver 경기 중계의 선수 명단·경기 기록 원본 |
+| `data/research-40-110/raw/pitches/naver_pitch_{KBO경기번호}.json` | JSON | Naver 이닝별 투구 중계 원본 목록 |
+| `data/research-40-110/tables/` | CSV | 아래의 분석·검사용 표 |
+| `data/research-40-110/logs/` | CSV, TXT, LOG | 수집 오류, 검사 결과, 실행 요약 |
 
 `{날짜}`는 `YYYYMMDD`, `{시즌}`은 네 자리 연도, `{월}`은 두 자리 월이다. `KBO경기번호`는 KBO 경기 화면의 `gameId`다.
 
@@ -144,7 +144,7 @@ python Crawling/final/validate_research_40_110.py
 과거 시즌을 기존 수집 결과와 섞지 않고 검사할 때는 아래처럼 별도 결과 폴더를 지정한다.
 
 ```powershell
-python Crawling/final/validate_research_40_110.py --data-root data/research_80_backfill
+python Crawling/final/validate_research_40_110.py --data-root data/research-80-backfill
 ```
 
 이 명령은 외부 사이트에 접속하지 않는다. 각 CSV의 열 순서, 경기 번호 중복, `player_id + game_id` 중복, 투구 번호 중복, 품질 표시 개수를 `logs/validation_40_110.csv`에 기록한다.

@@ -20,7 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="선수×경기 표 한 행의 KBO 공식 일별 기록 대조")
     parser.add_argument("--game-id", help="검사할 KBO game_id. 생략하면 표의 첫 행")
     parser.add_argument("--player-id", help="검사할 선수 번호. game-id와 같이 쓴다.")
-    parser.add_argument("--data-root", type=Path, help="검사할 수집 결과 폴더. 기본값은 data/research_40_110.")
+    parser.add_argument("--data-root", type=Path, help="검사할 수집 결과 폴더. 기본값은 data/research-40-110.")
     return parser.parse_args()
 
 

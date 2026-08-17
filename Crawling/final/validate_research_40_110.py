@@ -1,7 +1,7 @@
 """연구순서 40~110 CSV의 형식과 기본 연결 규칙을 검사한다.
 
 수집기를 다시 호출하지 않는다. 이미 만들어진 CSV만 읽고
-`data/research_40_110/logs/validation_40_110.csv`를 만든다.
+`data/research-40-110/logs/validation_40_110.csv`를 만든다.
 """
 
 from __future__ import annotations
@@ -47,7 +47,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--data-root",
         type=Path,
-        help="Collection result folder to validate. Defaults to data/research_40_110.",
+        help="Collection result folder to validate. Defaults to data/research-40-110.",
     )
     return parser.parse_args()
 
